@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nexon.popup.dao.PopupDao">
+
+    <select id="selectPopupList" resultType="com.nexon.popup.dto.model.PopupListVO">
+        SELECT A.*
+        FROM (
+            SELECT
+                A.POPUP_SEQ
+                , A.POPUP_NM
+                , A.VIEW_YN
+                , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+                , DATE_FORMAT(A.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
+                , CASE WHEN VIEW_UNLIMIT_YN = 'Y' THEN 'Y'
+                    WHEN VIEW_UNLIMIT_YN = 'N' AND NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT THEN 'Y'
+                    ELSE 'N'
+                    END VIEW_CHECK
+                , A.VIEW_UNLIMIT_YN
+                , A.TARGET_URL
+                , A.TARGET_YN
+                , A.FILE_GRP_SEQ
+                , B.FILE_SEQ
+                , B.ORG_FILE_NM
+                , B.SYS_FILE_NM
+                , B.FILE_PATH
+            FROM
+                TB_POPUP A
+                LEFT OUTER JOIN TB_FILE B ON A.FILE_GRP_SEQ = B.FILE_GRP_SEQ AND IFNULL(B.DEL_YN, 'N') = 'N'
+            WHERE IFNULL(A.DEL_YN, 'N') = 'N'
+            AND A.VIEW_YN = 'Y'
+            ORDER BY A.CRE_DT DESC
+        ) A
+        WHERE A.VIEW_CHECK = 'Y'
+    </select>
+
+
+</mapper>

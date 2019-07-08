@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nexon.membership.dao.MemberTokenDao">
+
+    <select id="selectMemberToken" parameterType="java.lang.String" resultType="com.nexon.membership.dto.model.UserTokenVO">
+        SELECT USER_SEQ
+          , REFRESH_TOKEN
+        FROM TB_USER_TOKEN
+        WHERE REFRESH_TOKEN = #{value}
+    </select>
+
+    <update id="insertUserToken" parameterType="com.nexon.membership.dto.req.InsertMemberTokenReq">
+        INSERT INTO TB_USER_TOKEN (
+            USER_SEQ
+            , REFRESH_TOKEN
+            , CRE_ID
+            , CRE_DT
+        ) VALUES (
+            #{userSeq}
+            , #{refreshToken}
+            , #{creId}
+            , UTC_TIMESTAMP()
+        )
+        ON DUPLICATE KEY UPDATE REFRESH_TOKEN = #{refreshToken}
+    </update>
+
+</mapper>

@@ -1,0 +1,139 @@
+.write .table td {
+    padding-left: 15px;
+}
+.table td select,
+.table td input {
+    border: 1px solid #d7d7d7;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.table select {
+    font-size: 13px;
+    width: 187px;
+    height: 27px;
+}
+.table td label {
+    padding-right: 20px;
+}
+.table td label:last-child {
+    padding-right: 0;
+}
+.table td input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+.table td label,
+.table td input[type="radio"]  {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: normal;
+}
+.table .showTerm td > div {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.table .showTerm td > div:last-child {
+    margin-right: 0;
+}
+.table .showTerm input[type="text"] {
+    width: 98px;
+    border: 1px solid #d7d7d7;
+}
+.table .showTerm .icon {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #a0a0a0;
+    text-align: center;
+    width: 27px;
+    height: 27px;
+    margin-left: -4px;
+}
+.table .showTerm .fa-calendar-alt {
+    font-size: 16px;
+    line-height: 26px;
+    color: #fff;
+}
+.table .showTerm select {
+    width: 53px;
+}
+.table .showTerm span {
+    font-size: 14px;
+}
+.table .showTerm input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+}
+.table .showTerm .limitChk label {
+    margin-bottom: 2px;
+}
+.table label input {
+    margin-top: 0;
+}
+.table label span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.table label input {
+    width: 200px;
+    margin-top: 2px;
+}
+.table input[type="file"] {
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+.table button {
+    display: inline-block;
+    vertical-align: middle;
+}
+.table .fileRow label {
+    position: relative;
+}
+.table .fileRow span {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    text-align: center;
+    background-color: #a0a0a0;
+    color: #fff;
+}
+.table .fileRow .title {
+    position: absolute;
+    left: 0;
+    width: 85px;
+    height: 29px;
+    line-height: 29px;
+    cursor: pointer;
+}
+.table .fileRow .icon {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+}
+.content > .btnList {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 60px;
+}
+.content > .btnList .btn {
+    display: inline-block;
+    vertical-align: middle;
+    width: 120px;
+    margin-right: 6px;
+}
+.content > .btnList .btn:last-child {
+    margin-right: 0;
+}
+.table .contentRow td {
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+.table .contentRow textarea {
+    width: 100%;
+    height: 248px;
+    padding: 10px;
+}

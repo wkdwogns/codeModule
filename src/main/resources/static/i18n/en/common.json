@@ -1,0 +1,23 @@
+ {
+  "menu" : {
+    "intro" : "Introduction of Small Library"
+    ,"apply" : "Application"
+    ,"story" : "Story"
+    ,"board" : "News"
+    ,"notice" : "Announcement"
+    ,"faq" : "FAQ"
+    ,"qna" : "Q&A"
+    ,"apply2" : "Applying"
+    ,"logo_pc" : "<img src='/front/images/logo_en.png' alt='Nexon Small Library' />"
+    ,"logo_mobile" : "<img class='menu_logo' src='/front/images/logo2_en.png' alt='Nexon Small Library' />"
+  },
+   "footer" : {
+     "nexon" : "Nexon Small Library"
+     , "family" : "Family Site"
+     , "corp" : "Nexon Corporation Homepage"
+     , "foundation" : "Nexon Foundation"
+     , "nypc" : "NYPC"
+     , "museum" : "Nexon Computer Museum"
+     , "develop" : "Nexon Developer Conference"
+  }
+}

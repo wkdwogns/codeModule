@@ -1,0 +1,44 @@
+/* 
+* 300 : Light
+* 400 : Regular
+* 600 : Medium
+* 700 : Bold
+*/
+
+@font-face {
+    font-family:'SECGC';
+    font-style:normal;
+    font-weight:300;
+	src:local(※),
+		url(../font/SECGCL.ttf) format('truetype'),
+		url(../font/SECGCL.woff) format('woff');
+}
+
+@font-face {
+    font-family:'SECGC';
+    font-style:normal;
+    font-weight:400;
+	src:local(※),
+		url(../font/SECGCR.ttf) format('truetype'),
+		url(../font/SECGCR.woff) format('woff');
+}
+
+@font-face {
+    font-family:'SECGC';
+    font-style:normal;
+    font-weight:600;
+	src:local(※),
+		url(../font/SECGCM.ttf) format('truetype'),
+		url(../font/SECGCM.woff) format('woff');
+}
+
+@font-face {
+    font-family:'SECGC';
+    font-style:normal;
+    font-weight:700;
+	src:local(※),
+		url(../font/SECGCB.ttf) format('truetype'),
+		url(../font/SECGCB.woff) format('woff');
+}
+
+

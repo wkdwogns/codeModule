@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout">
+<head>
+    <script th:src="@{/front/js/page/notice.js}"></script>
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="container">
+
+        <section class="sub_visual notice">
+            <div class="txt_box">
+                <h2 class="tit">공지사항</h2>
+                환아 의료비 지원의 다양한 소식을 전해드립니다.
+            </div>
+        </section>
+
+        <section class="notice_list_wrap">
+            <div class="inner_box">
+                <div class="notice_list_box" id="list">
+                    <table cellpadding="0" cellspacing="0" class="notice_list">
+                        <colgroup>
+                            <col class="col_size1"/>
+                            <col class="col_size2"/>
+                            <col class="col_size3"/>
+                            <col class="col_size4"/>
+                        </colgroup>
+                        <thead class="title">
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">첨부파일</th>
+                            <th scope="col">등록일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="paging" class="pagination">
+                    <!--<a href="#self" class="btn_prev"><span class="blind">이전페이지</span></a>
+                    <span class="num">
+							<a href="#self" class="on">1</a>
+							<a href="#self">2</a>
+							<a href="#self">3</a>
+							<a href="#self">4</a>
+							<a href="#self">5</a>
+						</span>
+                    <a href="#self" class="btn_next"><span class="blind">다음페이지</span></a>-->
+                </div>
+            </div>
+        </section>
+
+    </div><!-- id : container -->
+</div>
+</body>
+</html>

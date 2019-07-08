@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/front/js/page/home.js}"></script>
+</head>
+<body>
+<div class="content" layout:fragment="contents">
+    <div id="main_container">
+
+        <div id="main_contents">
+
+            <div class="wing">
+                <div class="btn_move">
+                    <a href="#self" class="on"><span class="blind">첫번째</span></a>
+                    <a href="#self"><span class="name">환아 의료 지원 <br/>프로젝트란?</span></a>
+                    <a href="#self"><span class="name">감사인사 영상</span></a>
+                    <a href="#self"><span class="name">환아 스토리</span></a>
+                </div>
+            </div>
+
+            <div class="section_01">
+                <div class="slider"></div>
+                <div class="control">
+                    <a href="#self" class="btn_pause"><span class="blind">슬라이더 멈춤</span></a>
+                    <a href="#self" class="btn_play"><span class="blind">슬라이더 시작</span></a>
+                </div>
+                <div class="txt_box">
+                    <div class="txt">
+                        <span>여러분 본인 또는 주위에</span> 의료비 지원이 필요한 어린이가 있다면?<br/>
+                        어린이가 건강한 내일을 꿈꿀 수 있도록 사연을 신청해주세요.
+                    </div>
+                    <a href="/page/apply/info" class="btn_link">환아 사연 신청하기</a>
+                </div>
+            </div>
+
+            <div class="section_02">
+                <div class="inner_box">
+                    <h2 class="title"><span>삼성생명 FC</span><span class="m_br">삼성생명 임직원</span><br/>삼성생명이 함께 만나다</h2>
+                    <p class="txt">초록우산 어린이재단과 함께하는 환아 의료비 지원 프로젝트는 <br/>
+                        하트펀드 기부금 중 일부를 중증·희귀질환 등의 질병으로 인한 <br/>
+                        경제적 어려움을 겪고 있는 아동 및 가정에 의료비를 지원하는 사업입니다.</p>
+                    <div>
+                        <ul class="list">
+                            <li>환아 사연 접수</li>
+                            <li>1차 사연 선정 후 인터뷰</li>
+                            <li>선정 위원회의 최종 선정</li>
+                            <li>결과 발표 및 지원</li>
+                        </ul>
+                    </div>
+                    <div class="btn_box">
+                        <a href="/page/info/support" class="btn_link_01">사업 자세히 보기</a>
+                        <a href="/page/apply/info" class="btn_link_02">환아 사연 신청하기</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section_03">
+                <h2 class="title"><span>여러분의 도움으로 변화된 어린이들 이야기</span></h2>
+                <div class="video_box">
+                    <div class="in_box">
+                        <div class="btn_play">
+                            <p class="txt"><span>어린이들로부터 감사 인사 영상이 도착했습니다!</span></p>
+                            <img src="/front/images/main/sec_03.jpg" alt="" />
+                        </div>
+                        <div id="video" class="video">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/EXm9sYNhiLo?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <a href="#self" class="btn_close"><span class="blind">닫기</span></a>
+                            <div class="dim"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section_04">
+                <div class="inner_box">
+                    <div class="thumnail">
+                        <!--<div>
+                            <div class="img"><img src="/front/images/main/sec4_img_01.jpg" alt="" /></div>
+                            <p class="name">우리 가족에게 찾아온<br />희망의 끈</p>
+                        </div>
+                        <div>
+                            <div class="img"><img src="/front/images/main/sec4_img_02.jpg" alt="" /></div>
+                            <p class="name">우리 아이가 깨어나면 가장<br />말해주고 싶은 말이 있어요 </p>
+                        </div>
+                        <div>
+                            <div class="img"><img src="/front/images/main/sec4_img_03.jpg" alt="" /></div>
+                            <p class="name">달리지 못해도 괜찮아요</p>
+                        </div>
+                        <div>
+                            <div class="img"><img src="/front/images/main/sec4_img_04.jpg" alt="" /></div>
+                            <p class="name">아저씨, 감사합니다</p>
+                        </div>
+                        <div>
+                            <div class="img"><img src="/front/images/main/sec4_img_05.jpg" alt="" /></div>
+                            <p class="name">6번째 항암치료</p>
+                        </div>-->
+                    </div>
+                    <div class="slider">
+                        <!--<div>
+                            <div class="picture"><img src="/front/images/main/sec4_img_01.jpg" alt="" /></div>
+                            <div class="txt_box">
+                                <p class="txt_01"><span>이복남 컨설턴트님</span>박시엘 어린이</p>
+                                <p class="txt_02">우리 가족에게 찾아온<span>희망의 끈</span></p>
+                                <p class="txt_03">다시 돌아오기 싫었던 병원. <br/>
+                                    올해 3살 된 막내딸 시엘이의 백혈병 재발은 <br/>
+                                    우리 가족에게 또 다시 찾아온 힘겨운 순간이었습니다. <br/><br/>
+                                    하지만 저희에게 전달된 고마운 마음을 위해서라도 <br/>
+                                    이제 다시 희망의 끈을 잡아보려 합니다.</p>
+                                <a href="#self" class="btn_more"><span class="blind">자세히보기</span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="picture"><img src="/front/images/main/sec4_img_02.jpg" alt="" /></div>
+                            <div class="txt_box">
+                                <p class="txt_01"><span>이복남 컨설턴트님</span>박시엘 어린이</p>
+                                <p class="txt_02">우리 아이가 깨어나면 가장<span>말해주고 싶은 말이 있어요</span></p>
+                                <p class="txt_03">다시 돌아오기 싫었던 병원. <br/>
+                                    올해 3살 된 막내딸 시엘이의 백혈병 재발은 <br/>
+                                    우리 가족에게 또 다시 찾아온 힘겨운 순간이었습니다. <br/><br/>
+                                    하지만 저희에게 전달된 고마운 마음을 위해서라도 <br/>
+                                    이제 다시 희망의 끈을 잡아보려 합니다.</p>
+                                <a href="#self" class="btn_more"><span class="blind">자세히보기</span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="picture"><img src="/front/images/main/sec4_img_03.jpg" alt="" /></div>
+                            <div class="txt_box">
+                                <p class="txt_01"><span>이복남 컨설턴트님</span>박시엘 어린이</p>
+                                <p class="txt_02">달리지 못해도 괜찮아요</p>
+                                <p class="txt_03">다시 돌아오기 싫었던 병원. <br/>
+                                    올해 3살 된 막내딸 시엘이의 백혈병 재발은 <br/>
+                                    우리 가족에게 또 다시 찾아온 힘겨운 순간이었습니다. <br/><br/>
+                                    하지만 저희에게 전달된 고마운 마음을 위해서라도 <br/>
+                                    이제 다시 희망의 끈을 잡아보려 합니다.</p>
+                                <a href="#self" class="btn_more"><span class="blind">자세히보기</span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="picture"><img src="/front/images/main/sec4_img_04.jpg" alt="" /></div>
+                            <div class="txt_box">
+                                <p class="txt_01"><span>이복남 컨설턴트님</span>박시엘 어린이</p>
+                                <p class="txt_02">아저씨, 감사합니다</p>
+                                <p class="txt_03">다시 돌아오기 싫었던 병원. <br/>
+                                    올해 3살 된 막내딸 시엘이의 백혈병 재발은 <br/>
+                                    우리 가족에게 또 다시 찾아온 힘겨운 순간이었습니다. <br/><br/>
+                                    하지만 저희에게 전달된 고마운 마음을 위해서라도 <br/>
+                                    이제 다시 희망의 끈을 잡아보려 합니다.</p>
+                                <a href="#self" class="btn_more"><span class="blind">자세히보기</span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="picture"><img src="/front/images/main/sec4_img_05.jpg" alt="" /></div>
+                            <div class="txt_box">
+                                <p class="txt_01"><span>이복남 컨설턴트님</span>박시엘 어린이</p>
+                                <p class="txt_02">6번째 항암치료</p>
+                                <p class="txt_03">다시 돌아오기 싫었던 병원. <br/>
+                                    올해 3살 된 막내딸 시엘이의 백혈병 재발은 <br/>
+                                    우리 가족에게 또 다시 찾아온 힘겨운 순간이었습니다. <br/><br/>
+                                    하지만 저희에게 전달된 고마운 마음을 위해서라도 <br/>
+                                    이제 다시 희망의 끈을 잡아보려 합니다.</p>
+                                <a href="#self" class="btn_more"><span class="blind">자세히보기</span></a>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="btn_box">
+                        <a href="/page/story/list" class="btn_link">더 많은 이야기가 궁금하다면?</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- id : main_contents -->
+    </div><!-- id : main_container -->
+</div>
+
+</body>
+</html>

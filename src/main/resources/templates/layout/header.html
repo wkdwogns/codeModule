@@ -1,0 +1,38 @@
+<!-- START HEADER -->
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="headerFragement">
+	<div id="header" class="sub">
+		<div class="header_inner">
+			<h1 class="logo"><a href="/">환아 의료비 지원 프로젝트</a></h1>
+			<ul class="util_menu">
+				<li><a href="#self"> </a></li>
+			</ul>
+			<div id="gnb" class="gnb">
+				<ul>
+					<li><a href="#self">사업 소개</a>
+						<ul class="depth2">
+							<li><a href="/page/info/support"><span>환아 의료비 지원사업 소개</span></a></li>
+							<li><a href="/page/info/heart"><span>하트펀드 소개</span></a></li>
+						</ul>
+					</li>
+					<li><a href="/page/apply/info">환아 사연 신청하기</a></li>
+					<li><a href="/page/story/list">어린이들의 변화</a></li>
+					<li><a href="/page/faq/list">궁금해요</a></li>
+					<li><a href="/page/notice/list">공지사항</a></li>
+				</ul>
+				<a href="#self" class="gnb_close"><span class="blind">메뉴닫기</span></a>
+			</div>
+			<!-- 모바일 메뉴 버튼 -->
+			<a href="#self" class="btn_gnb">
+					<span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</span>
+			</a>
+			<!-- //모바일 메뉴 버튼 -->
+		</div><!-- class : header_inner -->
+	</div><!-- id : header -->
+</div>
+<!-- END HEADER -->

@@ -1,0 +1,197 @@
+{
+	"setting":{
+		"text":"Settings",
+		"title":"Setting",
+		"change":"Change",
+		"account":"Account",
+		"logout":"Log out",
+		"request":"Request for a quotation",
+
+		"edit":{
+			"profile":"Edit your profile",
+			"password":"Reset your password",
+			"lang":"Change language"
+		},
+
+		"info":{
+			"text" : "Instruction",
+			"why":"Why Ho Bien? User guide",
+			"provision1":"Terms and condition of service",
+			"provision2":"Privacy Policy",
+			"cs":"Customer Support Center"
+			
+		},
+
+		"provision1":{
+			"title":{
+				"a":"1. Hô Biến Services",
+				"b":"2. Our Data Policy and Your Privacy Choices",
+				"c":"3. Your Commitments to Hô Biến and Our Community",
+				"d":"4. Additional provisions"
+			},
+			"subtitle":{
+				"a1":"Provide a personalized experience for you:",
+				"a2":"Connect you with people and organizations you care about:",
+				"a3":"Empower you to express yourself and communicate about what matters to you:",
+				"a4":"Help you discover content, products, and services that may interest you:",
+				"a5":"Combat harmful conduct and protect and support our community:",
+				"a6":"Research ways to make our services better:",
+				"c1":"1. Who can use Hô Biến",
+				"c2":"2. What you can share and do on Hô Biến",
+				"c3":"3. The permissions you give us",
+				"c4":"4. Limits on using our intellectual property",
+				"d1":"1. Updating our Terms",
+				"d2":"2. Account suspension or termination",
+				"d3":"3. Limits on liability",
+				"d4":"4. Disputes",
+				"d5":"5. Other"
+			},
+			"date":"Date of Last Revision: April 19th, 2018",
+			"context":{
+				"a":"Welcome to Hô Biến! <br/><br/> These Terms govern your use of Hô Biến and the products, features, apps, services, technologies, and software we offer except where we expressly state that separate terms (and not these) apply.",
+				"a1":"Your experience on Hô Biến is unlike anyone else's: from the posts, stories, events, ads, and other content you see in News Feed or our video platform to the Pages you follow and other features you. We use the data we have - for example, about the connections you make, the choices and settings you select, and what you share and do on and off our Products - to personalize your experience.",
+				"a2":"We help you find and connect with people, groups, businesses, organizations, and others that matter to you across the Hô Biến Products you use. We use the data we have to make suggestions for you and others - for example, groups to join, events to attend, Pages to follow or send a message to, shows to watch, and people you may want to become friends with. Stronger ties make for better communities, and we believe our services are most useful when people are connected to people, groups, and organizations they care about.",
+				"a3":"There are many ways to express yourself on Hô Biến and to communicate with friends, family, and others about what matters to you - for example, sharing status updates, photos, videos, and stories across the Hô Biến Products you use, sending messages to a friend or several people, creating events or groups, or adding content to your profile. We also to continue to explore, new ways for people to use technology, such as augmented reality and 360 video to create and share more expressive and engaging content on Hô Biến.",
+				"a4":"We show you ads, offers, and other sponsored content to help you discover content, products, and services that are offered by the many businesses and organizations that use Hô Biến and other Hô Biến Products. Our partners pay us to show their content to you, and we design our services so that the sponsored content you see is as relevant and useful to you as everything else you see on our Products.",
+				"a5":"People will only build community on Hô Biến if they feel safe. We employ dedicated teams around the world and develop advanced technical systems to detect misuse of our Products, harmful conduct towards others, and situations where we may be able to help support or protect our community. If we learn of content or conduct like this, we will take appropriate action - for example, offering help, removing content, blocking access to certain features, disabling an account, or contacting law enforcement.",
+				"a6":"We engage in research and collaborate with others to improve our Products. One way we do this is by analyzing the data we have and understanding how people use our Products.",
+				"b":"To provide these services, we must collect and use your personal data. We detail our practices in the <a href='#self'>Privacy Policy,</a> which you must agree to in order to use our Products.",
+				"c":"We provide these services to you and others to help advance our mission. In exchange, we need you to make the following commitments:",
+				"c-10":"When people stand behind their opinions and actions, our community is safer and more accountable. For that reason, you must:",
+				"c-11":"<span class='num'>I.</span>Use the same name that you use in everyday life.",
+				"c-12":"<span class='num'>II.</span>Provide accurate information about yourself.",
+				"c-13":"<span class='num'>III.</span>Create only one account (your own) and use your timeline for personal purposes.",
+				"c-14":"<span class='num'>IIII.</span>Not share your password, give access to your Hô Biến account to others, or transfer your account to anyone else (without our permission).",
+				"c-15":"We try to make Hô Biến broadly available to everyone, but you cannot use Hô Biến if:",
+				"c-16":"<span class='num'>I.</span>You are under 13 years old (or the minimum legal age in your country to use our Products).",
+				"c-17":"<span class='num'>II.</span>You are a convicted sex offender.",
+				"c-18":"<span class='num'>III.</span>We previously disabled your account for violations of our terms or policies.",
+				"c-19":"<span class='num'>IIII.</span>You are prohibited from receiving our products, services, or software under applicable laws.",
+				"c2":"We want people to use Hô Biến to express themselves and to share content that is important to them, but not at the expense of the safety and well-being of others or the integrity of our community. You therefore agree not to engage in the conduct described below (or to facilitate or support others in doing so):",
+				"c-21":"<span class='num'>1.</span>You may not use our Products to do or share anything:",
+				"c-22":"<span class='num'>I.</span>That violates these Terms that apply to your use of Hô Biến.",
+				"c-23":"<span class='num'>II.</span>That is unlawful, misleading, discriminatory or fraudulent.",
+				"c-24":"<span class='num'>III.</span>That infringes or violates someone else's rights.",
+				"c-25":"<span class='num'>2.</span>You may not upload viruses or malicious code or do anything that could disable, overburden, or impair the proper working or appearance of our Products.",
+				"c-26":"<span class='num'>3.</span>You may not access or collect data from our Products using automated means (without our prior permission) or attempt to access data you do not have permission to access.",
+				"c-27":"We can remove content you share in violation of these provisions and, if applicable, we may take action against your account, for the reasons described below. We may also disable your account if you repeatedly infringe other people's intellectual property rights<br/>To help support our community, we encourage you to report content or conduct that you believe violates your rights or our terms and policies.",
+				"c3":"We need certain permissions from you to provide our services:",
+				"c-31":"<span class='num'>1.</span>Permission to use content you create and share: ",
+				"c-32":"You own the content you create and share on Hô Biến and the other Hô Biến Products you use, and nothing in these Terms takes away the rights you have to your own content. You are free to share your content with anyone else, wherever you want. To provide our services, though, we need you to give us some legal permissions to use that content.<br/>",
+				"c-33":"Specifically, when you share, post, or upload content that is covered by intellectual property rights (like photos or videos) on or in connection with our Products, you grant us a non-exclusive, transferable, sub-licensable, royalty-free, and worldwide license to host, use, distribute, modify, run, copy, publicly perform or display, translate, and create derivative works of your content (consistent with your <a href='#self'>Privacy Policy</a>). This means, for example, that if you share a photo on Hô Biến, you give us permission to store, copy, and share it with such as service providers that support our service or other Hô Biến Products you use.<br/>",
+				"c-34":"You can end this license any time by deleting your content or account. You should know that, for technical reasons, content you delete may persist for a limited period of time in backup copies (though it will not be visible to other users). In addition, content you delete may continue to appear if you have shared it with others and they have not deleted it.<br/>",
+				"c-35":"<span class='num'>2.</span>Permission to use your name, profile picture, and information about your actions with ads and sponsored content:",
+				"c-36":"You give us permission to use your name and profile picture and information about actions you have taken on Hô Biến next to or in connection with ads, offers, and other sponsored content that we display across our Products, without any compensation to you. For example, we may show your friends that you are interested in our contents or have liked a post created by a partner that has on Hô Biến.<br/>",
+				"c-37":"<span class='num'>3.</span>Permission to update software you use or download: ",
+				"c-38":"If you download or use our software, you give us permission to download and install upgrades, updates, and additional features to improve, enhance, and further develop it.<br/>",
+				"c4":"If you use content covered by intellectual property rights that we have and make available in our Products (for example, images, designs, videos, or sounds we provide that you add to content you create or share on Hô Biến), we retain all rights to that content (but not yours). You can only use our copyrights or trademarks (or any similar marks) as expressly permitted by our prior written permission. You must obtain our written permission (or permission under an open source license) to modify, create derivative works of, decompile, or otherwise attempt to extract source code from us.",
+				"d1":"We work constantly to improve our services and develop new features to make our Products better for you and our community. As a result, we may need to update these Terms from time to time to accurately reflect our services and practices. Unless otherwise required by law, we will notify you before we make changes to these Terms and give you an opportunity to review them before they go into effect. Once any updated Terms are in effect, you will be bound by them if you continue to use our Products. We hope that you will continue using our Products, but if you do not agree to our updated Terms and no longer want to be a part of the Hô Biến community, you can delete your account at any time.",
+				"d2":"We want Hô Biến to be a place where people feel welcome and safe to express themselves and share their thoughts and ideas. If we determine that you have violated our terms or policies, we may take action against your account to protect our community and services, including by suspending access to your account or disabling it. We may also suspend or disable your account if you create risk or legal exposure for us or when we are permitted or required to do so by law. Where appropriate, we will notify you about your account the next time you try to access it.If you delete or we disable your account, these Terms shall terminate as an agreement between you and us, but the following provisions will remain in place: 3, 4.2-4.5",
+				"d3":"We work hard to provide the best Products we can and to specify clear guidelines for everyone who uses them. Our Products, however, are provided \"as is,\" and we make no guarantees that they always will be safe, secure, or error-free, or that they will function without disruptions, delays, or imperfections. To the extent permitted by law, we also DISCLAIM ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. We do not control or direct what people and others do or say, and we are not responsible for their actions or conduct (whether online or offline) or any content they share (including offensive, inappropriate, obscene, unlawful, and other objectionable content). We cannot predict when issues might arise with our Products. Accordingly, our liability shall be limited to the fullest extent permitted by applicable law, and under no circumstance will we be liable to you for any lost profits, revenues, information, or data, or consequential, special, indirect, exemplary, punitive, or incidental damages arising out of or related to these Terms or the Hô Biến Products, even if we have been advised of the possibility of such damages.",
+				"d4":"We try to provide clear rules so that we can limit or hopefully avoid disputes between you and us. If a dispute does arise, however, it's useful to know up front where it can be resolved and what laws will apply. If you are a consumer, the laws of the country in which you reside will apply to any claim, cause of action, or dispute you have against us that arises out of or relates to these Terms or the Hô Biến Products (\"claim\"), and you may resolve your claim in any competent court in that country that has jurisdiction over the claim. ",
+				"d51":"<span class='num'>1.</span>These Terms (formerly known as the Statement of Rights and Responsibilities) make up the entire agreement between you and Hô Biến, Inc. regarding your use of our Products. They supersede any prior agreements.",
+				"d52":"<span class='num'>2.</span>Some of the Products we offer are also governed by supplemental terms. If you use any of those Products, supplemental terms will be made available and will become part of our agreement with you. To the extent any supplemental terms conflict with these Terms, the supplemental terms shall govern to the extent of the conflict.",
+				"d53":"<span class='num'>3.</span>If any portion of these Terms are found to be unenforceable, the remaining portion will remain in full force and effect. If we fail to enforce any of these Terms, it will not be considered a waiver. Any amendment to or waiver of these Terms must be made in writing and signed by us.",
+				"d54":"<span class='num'>4.</span>You will not transfer any of your rights or obligations under these Terms to anyone else without our consent.",
+				"d55":"<span class='num'>5.</span>These Terms do not confer any third-party beneficiary rights. All of our rights and obligations under these Terms are freely assignable by us in connection with a merger, acquisition, or sale of assets, or by operation of law or otherwise.",
+				"d56":"<span class='num'>6.</span>You should know that we may need to change the username for your account in certain circumstances (for example, if someone else claims the username and it appears unrelated to the name you use in everyday life).",
+				"d57":"<span class='num'>7.</span>We always appreciate your feedback and other suggestions about our products and services. But you should know that we may use them without any restriction or obligation to compensate you, and we are under no obligation to keep them confidential.",
+				"d58":"<span class='num'>8.</span>We reserve all rights not expressly granted to you."
+			}
+		},
+		
+		"provision2":{
+			"text":"Privacy Policy",
+			"title":"Privacy Policy",
+			"subtitle":{
+				"a":"A. About hobien"
+				,"b":"B. Processing of personal data"
+			},
+			"context":{
+				"a":"hobien is an online architecture and design portal (hereinafter 'Portal’) connecting companies offering goods and services (hereinafter 'professionals') and prospective users and buyers (hereinafter 'user') worldwide. It especially allows professionals to introduce, advertise and offer their services and products. Users can obtain information from the website, find inspiration and contact professionals. The portal therefore features various functions to display contents, contacting providers, and for members to communicate via the portal. Active participation of both professionals as well as users is required for the portal to work. In line with the portal and its services personal data of users is processed in this context. Below we would like to explain in detail how your data is handled in line with the portal. "
+				,"b":"I. General information about processing"
+			},
+			"detail":{
+				"b": "<h3 class='title1 mb20'>Privacy Policy</h3><div class='pl10'>This Privacy Policy (the 'Policy') explains the way of treatment of the information which is provided or collected in the websites & Mobile Apps on the Ho Bien (the 'Company'). In addition the Policy also explains the information which is provided or collected in the course of using the applications of the Company which exist in the websites or platforms of other company.<br/><br/>Through this Policy, the Company regards personal information of the users as important and inform them of the purpose and method of Company's using the personal information provided by the users and the measures taken by the Company for protection of those personal information.<br/><br/>This Policy will be effective on the 1th day of 10, 2018 and, in case of modification thereof, the Company will make public notice of it through posting it on the bulletin board of Company's website (or individual notice through sending mails, fax or e-mails).</div><h4 class='title2 mt30'>1. Information to be collected and method of collection</h4><div class='mt20'><strong>(1) Personal information items to be collected</strong>Personal information items to be collected by the Company are as follows:</div><div class='pl10 mt5'><p><Strong>Information provided by the users</Strong></p><p>The Company may collect the information directly provided by the users.</p><ul class='mt20'><li>- Name, email address, ID, telephone number, address, national information, address list (acquaintance)</li><li>- Information of place of taking pictures and date of creation of files</li><li>- Information of service use of members such as the type of contents watched or used by members, frequencies and period of activities of members</li></ul></div><p><Strong>Information provided by the users</Strong></p><div class='mt20'>Besides of information directly provided by the users, the Company may collect information in the course that the users use the service provided by the Company.</div><ul class='mt20'><li><strong>- Equipment information</strong>Equipment identifier, operation system, hardware version, equipment set-up and telephone number</li><li><strong>- Log information</strong>Log data, use time, search word input by users, internet protocol address, cookie and web beacon</li><li><strong>- Location information</strong>Information of device location including specific geographical location detected through GPS, Bluetooth or Wi-Fi (limited to the region permissible under the laws)</li><li><strong>- Other information</strong>Preference, advertisement environment, visited pages regarding service use of users</li></ul><div class='mt20'><strong>(1) Method of collection</strong>The Company collects the information of users in a way of the followings:<ul><li>- webpage, mobile Apps, written form, fax, telephone calling, e-mailing, tools for collection of created information</li><li>- provided by partner companies</li></ul></div><h4 class='title2 mt30 mb5'>2. Use of collected information</h4><div class='mt20'>The Company uses the collected information of users for the following purposes:</div><ul class='pl10 mt5'><li>- Member management and identification</li><li>- To detect and deter unauthorized or fraudulent use of or abuse of the Service</li><li>- Performance of contract and service fee settlement regarding provision of services demanded by the usersImprovement of existing services and development of new services</li><li>- Making notice of function of company sites or applications or matters on policy change</li><li>- To help you connect with other users you already know and, with your permission, allow other users to connect with you</li><li>- To make statistics on member’s service usage, to provide services and place advertisements based on statistical characteristics</li><li>- To provide information on promotional events as well as opportunity to participate</li><li>- To comply with applicable laws or legal obligation</li><li>- Use of information with prior consent of the users (for example, utilization of marketing advertisement)</li></ul><div class='mt10'>The Company agrees that it will obtain consent from the users, if the Company desires to use the information other than those expressly stated in this Policy.</div><h4 class='title2 mt30 mb5'>3. Sharing collected information</h4><div class='mt10'>Except for the following cases, the Company will not share personal information with a 3rd party:</div><div class='pl10 mt5'><ul><li><p><strong>when the Company shares the information with its affiliates, partners and service providers;</strong></p>When the Company's affiliates, partners and service providers carry out services such as bill payment, execution of orders, products delivery and dispute resolution (including disputes on payment and delivery) for and on behalf of the Company</li><li><strong>when the users consent the sharing in advance;</strong><ul><li>- when the user selects to be provided by the information of products and services of certain companies by sharing his or her personal information with those companies</li><li>- when the user selects to allow his or her personal information to be shared with the sites or platform of other companies such as social networking sites</li><li>- other cases where the user gives prior consent for sharing his or her personal information</li></ul></li><li><strong>when the sharing is required by the laws</strong><ul><li>- if required to be disclosed by the laws and regulations; or</li><li>- if required to be disclosed by the investigative agencies for detecting crimes in accordance with the procedure and method as prescribed in the laws and regulations</li></ul></li></ul></div><h4 class='title2 mt30 mb5'>4. Cookies, Beacons and Similar Technologies</h4><div class='mt10'>The Company may collect collective and impersonal information through 'cookies' or 'web beacons'.</div><div class='mt20'>Cookies are very small text files to be sent to the browser of the users by the server used for operation of the websites of the Company and will be stored in hard-disks of the users' computer.</div><div class='mt20'>Web beacon is a small quantity of code which exists on the websites and e-mails. By using web beacons, we may know whether a user has interacted with certain webs or the contents of email.</div><div class='mt20'>These functions are used for evaluating, improving services and setting-up users' experiences so that much improved services can be provided by the Company to the users</div><div class='mt20'>The items of cookies to be collected by the Company and the purpose of such collection are as follows:<ul class='mt5'><li><strong>Strictly necessary cookies</strong>This cookie is a kind of indispensable cookie for the users to use the functions of website of the Company. Unless the users allow this cookie, the services such as shopping cart or electronic bill payment cannot be provided. This cookie does not collect any information which may be used for marketing or memorizing the sites visited by the users<br><br>(Examples of necessary cookies)<ul><li>Memorize the information entered in an order form while searching other pages during web browser session</li><li>For the page of products and check-out, memorize ordered services</li><li>Check whether login is made on website</li><li>Check whether the users are connected with correct services of the website of the Company while the Company changes the way of operating its website</li><li>Connect the users with certain application or server of the services</li></ul></li><li><strong>Performance cookies</strong>This cookie collects information how the users use the website of the Company such as the information of the pages which are visited by the users most. This data helps the Company to optimize its website so that the users can search that website more comfortably. This cookie does not collect any information of the users. Any and all the information collected by this cookie will be processed collectively and the anonymity will be guaranteed.<br><br>(Examples of performance cookies)<ul><li>Web analysis: provide statistical data on the ways of using website</li><li>Advertisement response fee: check the effect of advertisement of the Company</li><li>Tracing affiliated companies; one of visitors of the Company provides anonymously feedback to the affiliated companies</li><li>Management of error: measure an error which may occur so as to give a help for improving website</li><li>Design testing: test other design of the website of Company</li></ul></li><li><strong>Functionality cookies</strong>This cookie is used for memorizing the set-ups so that the Company provides services and improves visit of users. Any information collected by this cookie does not identify the users individually.<br><br>(Examples of functionality cookies)<ul><li>Memorize set-ups applied such as layout, text size, basic set-up and colors</li><li>Memorize when the customer respond to a survey conducted by the Company</li></ul></li><li><strong>Targeting cookies or advertising cookies</strong>This cookie is connected with the services provided by a 3rd party such as the buttons of 'good' and 'share'. The 3rd party provides these services by recognizing that the users visit the website of the Company.<br><br>(Examples of targeting cookies or advertising cookies)<ul><li>carry out PR to the users as targets in other websites by connecting through social networks and these networks use the information of users' visit</li><li>provide the information of users' visit to ad agencies so that they can suggest an ad which may attract the interest of the users</li></ul></li></ul></div><div class='mt20'>The users have an option for cookie installation. So, they may either allow all cookies by setting option in web browser, make each cookie checked whenever it is saved, or refuses all cookies to be saved: Provided that, if the user rejects the installation of cookies, it may be difficult for that user to use the parts of services provided by the Company.</div><h4 class='title2 mt30 mb5'>5. Users' right to access and option</h4><div class='mt10'>The users or their legal representatives, as main agents of the information, may exercise the following options regarding the collection, use and sharing of personal information by the Company:<ul class='pl10 mt5'><li>exercise right to access to personal information;</li><li>make corrections or deletion;</li><li>make temporary suspension of treatment of personal information; or</li><li>request the withdrawal of their consent provided before</li></ul><br/><br/>If, in order to exercise the above options, you, as an user, use the menu of 'amendment of member information of webpage or contact the Company by using representative telephone or sending a document or e-mails, or using telephone to the responsible department (or person in charge of management of personal information), the Company will take measures without delay: Provided that the Company may reject the request of you only to the extent that there exists either proper cause as prescribed in the laws or equivalent cause.</div><h4 class='title2 mt30 mb5'>6. Security</h4><div class='mt10'>The Company regards the security of personal information of uses as very important. The company constructs the following security measures to protect the users' personal information from any unauthorized access, release, use or modification</div><div class='mt10 pl10'><ul><li><strong>Encryption of personal information</strong>- Transmit users' personal information by using encrypted communication zone 12Store important information such as passwords after encrypting it</li><li><strong>Countermeasures against hacking</strong>- Install a system in the zone the external access to which is controlled so as to prevent leakage or damage of users' personal information by hacking or computer virus</li><li>- Establish and execute internal management plan</li><li>- Install and operate access control system</li><li>- Take measures to prevent forging or alteration of access record</li></ul></div><h4 class='title2 mt30 mb5'>7. Modification of Privacy Protection Policy</h4><div class='mt10'>The Company has the right to amend or modify this Policy from time to time and, in such case, the Company will make a public notice of it through bulletin board of its website (or through individual notice such as written document, fax or e-mail) and obtain consent from the users if required by relevant laws.</div><h4 class='title2 mt30 mb5'>8. Others</h4><div class='mt10'><ul><li><strong>Data transmission</strong>Considering it engages in global businesses, the Company may provide the users' personal information to the companies located in other countries for the purpose as expressly stated in this Policy. For the places where the personal information is transmitted, retained or processed, the Company takes reasonable measures for protecting that personal information.</li><li><strong>3rd party's sites and services</strong>The website, product or service of the Company may include the links to the ones of a 3rd party and the privacy protection policy of the site of 3rd party may be different. Thus, it is required for the users to check additionally that policy of a 3rd party site linked to the site of the Company.</li></ul></div><h4 class='title2 mt30 mb5'>9. Responsible department of Company</h4><div class='mt10'>The Company designates the following department and person in charge of personal information in order to protect personal information of customers and deal with complaints from customers:<ul class='pl20 mt5'><li><strong>Department responsible for privacy protection and customer service :</strong>CS team</li><li><strong>Address :</strong>#17 9F, Cantavil An Phu Complex 01 Song Hanh st, An Phu Ward Dist.02, Ho Chi Minh City, Vietnam</li><li><strong>Tel. :</strong>028 66711155</li><li><strong>E-mail :</strong>cs.hobien@gmail.com</li></ul></div><div class='mt30'><strong>The latest update date: 01, 10, 2018</strong></div></div>"
+			}
+		},
+
+		"cs":{
+			"call":"Make a call",
+			"copy":"Copy",
+			"title":"Customer Support Center",
+			"subtitle":"<span>HOBIEN CS team<span> will always try to understand <br/>from the customers' perspective"
+			,"label": {
+				"a": "Hours of operation",
+				"b": "Contact number of customer service's representative",
+				"c": "Email of  customer service's representative",
+				"d": "Address"
+			}
+		},
+
+		"why":{
+			"title":"Why Ho Bien? User guide",
+			"subtitle":{
+				"a":"<span>With Ho Bien,</span> your interior design process is much easier than ever",
+				"b":"HO BIEN will assist you from planning till the completiton of interior design"
+			},
+			"tab":{
+				"a":{
+					"title":"Service procedure",
+					"step":{
+						"1":"<strong class=\"num\">01</strong> <p class=\"title\"><strong>Interior design sketch</strong>Collect interior design ideas!</p>Design your own space by seeing nice designs posted by other users on our Ho Bien Service"
+						,"2":"<strong class=\"num\">02</strong> <p class=\"title\"><strong>Let's start designing</strong>Just Request your ideal quotation and we will contact you.</p> This quick step will help us consult and find your suitable partners."
+						,"3":"<strong class=\"num\">03</strong> <p class=\"title\"><strong>Interior Design Construction contract</strong>Construction contract! It's not as difficult as you think when customers are with HO BIEN!</p> It is easy for you to keep track of the contract and quotation through our standardized process.<br /> Please contact Ho Bien now to solve all your interior issues"
+						,"4":"<strong class=\"num\">04</strong> <p class=\"title\"><strong>From the beginning to the end of the interior work</strong>Don't worry about the construction progress.</p> Our Ho Bien men will visit the construction site to to examine the construction process and materials. <br />Do not worry about the payment process becuase Ho Bien will fully manage it until the end of your project "
+						,"5":"<strong class=\"num\">05</strong> <p class=\"title\"><strong>Even after the construction is finished</strong>Ho BIEN always cares even after your project is finished .</p> 공HO BIEN partner will provide A/S with the security deposit for repairing construction defects"
+					},
+					"end":"Building your own interior design and<br /><span>Ho Bien</span>will be here to support you"
+				},
+
+				"b":{
+					"title":"Special offers",
+					"benefit":{
+						"title":{
+							"a":"<span><strong>Special offers</strong><br/>from HO BIEN</span>",
+							"b":"<span><strong>Great systems provided </strong>for customers in order to avoid unpleasant situation<br/></span>"
+						},
+						"content":{
+							"a":"<strong>Provide the most suitable Partners</strong> Based on your information, we will recommend you two suitable and trustful partners. If you want more, we will recommend few more"
+							,"b":"<strong>One year warraty Guranteed</strong> HO BIEN partner will provide A/S with the security deposit for repairing construction defects"
+							,"c":"<strong>Loan service with preferential interest rate</strong>Don't worry if you are currently running low of money. Banks affiliated with Hobien will offer you better rates of interest for loan"
+							,"d":"<strong>Secure payment service</strong> Ho Bien will confirm the cost needed for each procedure of construction and inform you in detail. Once you agree, the payment transaction will be proceeded. "
+							,"e":"<strong>Construction site management service</strong> When construction begins, Ho Bien men will frequently  visit the site during process, in order to supervise and manage the project. The client will be informed by a field report from HO BIEN "
+							,"f":"<strong>Provide various designs</strong>Ho Bien has a variety of trustworthy partners. Anyone can suggest own unique design. Try to find your own style"
+							,"g":"<strong>Prevent payment issues</strong> The case of receiving money and then running away can't be occured with the bank guarantee system of Ho Bien"
+							,"h":"<strong>Warranty Prevent non-performance issues</strong> Ensure there is no problem with defrayment due to the warranty clause stated in the contract."
+							,"i":"<strong>Prevent material fraud</strong>At the beginning of construction, Ho Bien management team will directly certify the material lists in the standard process sheet."
+							,"j":"<strong>Prevent delays in construction progress</strong> HO BIEN management team will supervise the construction process based on the standard schedule. If there is any issue arises, we will notify the customers immediately as well as solve the problem "
+						},
+						"end":"The interior design process begins<br/> with great partners we carefully selected"
+					}
+				},
+
+				"c":{
+					"title":"Website guide ",
+					"subtitle":{
+						"a":"Interior design? Easy, right?",
+						"b":"Just think of your ideas and leave everything to us!"
+					},
+					"service":{
+						"a":"<span class=\"t_tit\">Design <strong>Report</strong></span>Interior photography specialization SNS"
+						,"b":"<span class=\"t_tit\">Photo information <strong>Report</strong></span> Share about photo information on Phototalk"
+						,"c":"<span class=\"t_tit\">Ask each other</span> Not only viewing, but you can also leave your questions"
+						,"d":"<span class=\"t_tit\">Easy and convenient  <strong>request for a quotation</strong></span> Easy consultation through simple quotation request"
+					},
+					"end":"Many features will be available for customers.<br /> <span>More convenient interior design service<span> will come to you."
+				}
+			}
+		},
+
+		"alert":{
+			"msg1":"Are you sure you want to log out?",
+			"msg2":"Copied",
+			"msg3":"Please try again after logging in"
+		}
+	}
+}

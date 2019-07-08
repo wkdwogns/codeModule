@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nexon.notice.dao.NoticeDao">
+
+    <select id="selectNoticeImportantList" resultType="com.nexon.notice.dto.model.NoticeListVO">
+            SELECT
+                n.NOTICE_SEQ
+                ,n.TITLE
+                ,n.IMPORTANT_YN
+                ,n.VIEW_YN
+                ,n.VIEW_UNLIMIT_YN
+                ,n.NOTICE_TYPE
+                ,n.FILE_GRP_SEQ
+                ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+                ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
+                ,DATE_FORMAT(n.CRE_DT, '%Y.%m.%d') CRE_DT
+            FROM
+                TB_NOTICE n
+            WHERE IFNULL(n.DEL_YN, 'N') ='N'
+              AND n.VIEW_YN = 'Y'
+              AND n.IMPORTANT_YN = 'Y'
+              AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
+            ORDER BY n.CRE_DT DESC
+    </select>
+
+    <select id="selectNotice" parameterType="com.nexon.notice.dto.req.SelectNoticeReq" resultType="com.nexon.notice.dto.model.NoticeListVO">
+        SELECT @rownum:=@rownum+1 no
+          , A.*
+        FROM (
+            SELECT
+                n.NOTICE_SEQ
+                ,n.TITLE
+                ,n.IMPORTANT_YN
+                ,n.VIEW_YN
+                ,n.VIEW_UNLIMIT_YN
+                ,n.NOTICE_TYPE
+                ,n.FILE_GRP_SEQ
+                ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+                ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
+                ,DATE_FORMAT(n.CRE_DT, '%Y.%m.%d') CRE_DT
+            FROM
+                TB_NOTICE n
+            WHERE IFNULL(n.DEL_YN, 'N') ='N'
+              AND n.VIEW_YN = 'Y'
+              AND IFNULL(n.IMPORTANT_YN, 'N') = 'N'
+              AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
+            ORDER BY n.CRE_DT DESC
+        ) A,
+        (SELECT @rownum:=0) rn
+        ORDER BY no
+        LIMIT ${startRow}, ${cntPerPage}
+    </select>
+
+    <select id="selectNoticeCnt" parameterType="com.nexon.notice.dto.req.SelectNoticeReq" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            TB_NOTICE n
+        WHERE IFNULL(n.DEL_YN, 'N') ='N'
+          AND n.VIEW_YN = 'Y'
+          AND IFNULL(n.IMPORTANT_YN, 'N') = 'N'
+          AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
+    </select>
+
+    <select id="selectNoticeDetail" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.res.SelectNoticeDetailRes">
+        SELECT
+            n.NOTICE_SEQ
+            ,n.TITLE
+            ,n.IMPORTANT_YN
+            ,n.VIEW_YN
+            ,n.CONTENTS
+            ,n.FILE_GRP_SEQ
+            ,n.VIEW_UNLIMIT_YN
+            ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+            ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
+            ,DATE_FORMAT(n.CRE_DT, '%Y.%m.%d') CRE_DT
+        FROM
+            TB_NOTICE n
+        WHERE
+            n.NOTICE_SEQ=#{seq}
+    </select>
+
+    <select id="selectPrevNotice" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.model.NoticeDetailPrevNextVO">
+        SELECT A.NOTICE_SEQ
+          , A.TITLE
+          , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
+        FROM TB_NOTICE A
+        WHERE A.NOTICE_SEQ <![CDATA[ < ]]> #{seq}
+          AND IFNULL(A.DEL_YN, 'N') ='N'
+          AND A.VIEW_YN = 'Y'
+          AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
+        ORDER BY A.NOTICE_SEQ DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectNextNotice" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.model.NoticeDetailPrevNextVO">
+        SELECT A.NOTICE_SEQ
+          , A.TITLE
+          , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
+        FROM TB_NOTICE A
+        WHERE A.NOTICE_SEQ <![CDATA[ > ]]> #{seq}
+          AND IFNULL(A.DEL_YN, 'N') ='N'
+          AND A.VIEW_YN = 'Y'
+          AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
+        ORDER BY A.NOTICE_SEQ
+        LIMIT 1
+    </select>
+
+</mapper>

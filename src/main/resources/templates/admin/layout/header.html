@@ -1,0 +1,68 @@
+<!-- START HEADER -->
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="headerFragement">
+	<!-- header -->
+	<div class="header">
+		<!-- container -->
+		<div class="container">
+			<h1>
+				<a href="/page/admin/bannerT/list">삼성환아재단 관리자</a>
+			</h1>
+			<nav>
+				<ul>
+					<li><a href="/page/admin/bannerT/list" class="banner">메인 관리</a></li>
+					<li><a href="/page/admin/notice/list" class="notice">공지사항 관리</a></li>
+					<li><a href="/page/admin/story/list" class="libStory">수혜아동 스토리</a></li>
+				</ul>
+			</nav>
+			<ul class="utilLog floatRight">
+				<li class="profile" style="position: relative">
+					<button id="uName" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="uName">
+						<li role="presentation"><a href="/page/admin/myPage/add">비밀번호 변경 ></a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#self" class="btn whiteBtn logoutBtn">로그아웃</a>
+				</li>
+			</ul>
+		</div>
+		<!-- //container -->
+		<style>
+			.header .utilLog .profile li:first-child{
+				display: block;
+				color: black;
+				padding: 10px;
+			}
+			#uName {
+				color: white;
+				font-size: 15px;
+			}
+		</style>
+		<script>
+            $('.notYet').click(function () {
+                alert('준비중입니다.');
+                return ;
+            });
+			$('.logoutBtn').click(function () {
+				tms.ajaxPostHelper('/mapi/logout',null,null,function (rs) {
+					if(rs.code==0){
+					    location.reload();
+					}
+                });
+            });
+
+
+            tms.ajaxGetHelper('/membership/session',{accessToken:'ac'},null,function (rs) {
+				if(rs.code==0){
+                    window.globalUserId=rs.data.userId;
+					$('#uName').text(rs.data.userName+' 님');
+                }
+            });
+
+		</script>
+	</div>
+	<!-- //header -->
+</div>
+<!-- END HEADER -->

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout">
+<head>
+	<script th:src="@{/front/js/page/info.js}"></script>
+</head>
+<body>
+<div layout:fragment="contents">
+	<div id="container">
+
+		<section class="sub_visual request">
+			<div class="txt_box">
+				<h2 class="tit">환아 사연 신청하기</h2>
+				여러분 본인 또는 주위에 의료비 지원이 필요한 어린이가 있다면?
+			</div>
+		</section>
+
+		<div class="sub_request">
+			<div class="inner_box">
+				<div class="section_01">
+					<p class="txt_01">HEART FUND</p>
+					<h3 class="title">어린이가 건강한 내일을 <br/><span class="blue">꿈꿀 수 있도록 신청해주세요.</span></h3>
+					<p class="txt_02">어린이들의 사연 중 선정을 통해 경제적 어려움을 겪고 있는 <br/><span class="blue">아동 및 가정에 의료비를 지원</span>하고 있습니다.</p>
+				</div><!-- section_01 -->
+
+				<div class="section_02">
+					<div class="txt_box_01">
+						<div>
+							<h4 class="tit"><span>신청기간</span></h4>
+							<p class="txt">1월, 3월, 5월, 7월, 9월, 11월 10일까지 사례 접수 (홀수 달)</p>
+							<p class="txt_gray">지원비는 짝수 달 초에 지급</p>
+						</div>
+						<div>
+							<h4 class="tit"><span>신청자격</span></h4>
+							<ul>
+								<li>중위소득 80% 이하 가정</li>
+								<li>국민기초생활수급 가정 및 차상위 가정, 일반 저소득 가정</li>
+								<li>소외계층 및 사각지대 환아 가장 (한부모, 조손, 다문화 가정 등)<p class="txt_gray">단, 만 19세 초과한 경우라도 초·중·고 재학 중인 경우 지원 가능</p></li>
+								<li>1년 이내 후원금 사용 가능 대상 (최대 2년까지 연장 가능)</li>
+							</ul>
+						</div>
+					</div>
+					<div class="txt_box_02">
+						<div>
+							<h4 class="tit"><span>신청방법 및 선정방법</span></h4>
+							<ul>
+								<li>어린이 사연과 상황에 대해 작성한 신청서 제출</li>
+								<li>어린이재단 1차 검증 이후 사례선정 추천</li>
+								<li>삼성생명 최종 사례 선정 후 지원 결정</li>
+							</ul>
+						</div>
+						<div>
+							<h4 class="tit"><span>지원내용</span></h4>
+							<p class="txt">4대 중증질환·화상·백혈병·이식 등</p>
+							<ul>
+								<li>수술비, 치료비, 입원비</li>
+								<li>보장구, 약제 구입비<p class="txt_gray">단, 선 집행된 처리 비용과 진단 및 수술 여부를 위한 사전검사비, <br/>진단비는 지원 불가합니다.</p></li>
+							</ul>
+						</div>
+					</div>
+					<div class="txt_box_03">
+						<div>
+							<h4 class="tit"><span>지원기간</span></h4>
+							<ul>
+								<li>지원결정 후 1년 간 사용 (최대 2년 연장 가능)</li>
+							</ul>
+						</div>
+						<div>
+							<h4 class="tit"><span>지원문의</span></h4>
+							<ul>
+								<li style="word-break: keep-all;">유선문의 070-4219-6881 / 070-4219-6858 (<span>월~금</span> 09:00 ~ 18:00)</li>
+								<li>메일문의 samsunglife@childfund.or.kr</li>
+							</ul>
+							<a href="#down" class="btn_down" onclick="downFile('1')"><span>안내문 다운로드</span></a>
+						</div>
+					</div>
+				</div><!-- section_02 -->
+
+				<div class="section_03">
+					<div class="btn_box">
+						<div><a href="#self"><span>직접 서류 신청하기</span></a></div>
+						<div><a href="#self"><span>네이버폼으로 신청하기</span></a></div>
+					</div>
+					<div class="request_box">
+						<div class="request">
+							<div>
+								<div>
+									<p class="tit"><span>직접서류 신청방법</span></p>
+									<p class="txt">
+										<span class="pc">신청서와 개인정보수집 및 이용동의서를 FAX 또는 메일로 보내주세요.</span>
+										<span class="mo">PC에서 신청서와 개인정보수집 및 이용동의서를 <br/>FAX 또는 메일로 보내주세요.</span>
+									</p>
+									<p class="contact">팩스 070-7966-3330 | 전화 070-4219-6881 <span class="mo">|</span> <span>이메일 samsunglife@childfund.or.kr</span></p>
+									<div class="file_box">
+										<a href="#self" onclick="downFile('4')"><span>임직원용 신청서</span></a>
+										<a href="#self" onclick="downFile('5')"><span>컨설턴트용 신청서</span></a>
+										<a href="#self" onclick="downFile('3')"><span>개인정보수집 및 이용동의서</span></a>
+									</div>
+									<div class="mo_file_box">
+										<a href="#self" onclick="downFile('4')">임직원용 신청서 미리보기</a>
+										<a href="#self" onclick="downFile('5')">컨설턴트용 신청서 미리보기</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="request">
+							<div>
+								<div>
+									<iframe src='https://naver.me/5Gb9I0BH' frameborder='0' scrolling='auto' style="width: 100%;height: 2000px;"></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- section_03 -->
+			</div><!-- inner_box -->
+		</div><!-- sub_request -->
+	</div><!-- id : container -->
+</div>
+</body>
+</html>

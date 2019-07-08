@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout">
+<head>
+    <script th:src="@{/front/js/page/storyDetail.js}"></script>
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="container">
+
+        <section class="sub_visual story_article1">
+            <div class="txt_box">
+                <h2 class="tit" data-mapping="title"></h2>
+                <span data-mapping="storyNm"></span>
+            </div>
+        </section>
+
+        <section class="story_view_wrap">
+            <div class="inner_box">
+                <div class="view_section2" data-mapping="contents">
+                    <!--<p class="txt1">HEART FUND</p>
+                    <p class="txt2">시엘이네는 제 딸<br /><span>친구의 가족입니다.</span></p>
+                    <p class="txt3">
+                        시엘이의 사연을 신청해주신 이복남 FC 님은 둘째 친구의 엄마입니다.<br />
+                        딸에게 시엘이의 사정을 듣고 <span>‘삼성생명 하트펀드의 환아 의료비 지원’</span>을 신청해주셨습니다.
+                    </p>-->
+                </div>
+                <div class="preview_list">
+                    <a href="#self" class="btn_prev" id="prevStory">
+                        <!--<strong>이전 이야기 보기</strong>
+                        <span>이복남 FC님 X 박시엘 어린이 이야기</span>-->
+                    </a>
+                    <a href="/page/story/list" class="btn_list"><span class="blind">목록으로</span></a>
+                    <a href="#self" class="btn_next" id="nextStory">
+                        <!--<strong>다음 이야기 보기</strong>
+                        <span>이복남 FC님 X 박시엘 어린이 이야기</span>-->
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- id : container -->
+</div>
+</body>
+</html>

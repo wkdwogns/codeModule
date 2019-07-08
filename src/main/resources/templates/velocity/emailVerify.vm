@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>투도스</title>
+<meta name="generator" content="">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=yes, maximum-scale=1.0, width=980" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<body>
+	<div style="margin:0; padding:0; max-width:850px; margin: 0 auto; padding: 14px; background-color:#f2f2f2;  font-size:12px; line-height:18px; color:#333;">
+		<div style="border: solid 1px #d6d6d6; background-color:#fff; padding: 15px;">
+			<div style="border-bottom: solid 1px #e0e0e0; padding-bottom: 20px; position:relative; ">
+				<h1>TODOS</h1>
+				<a target="_blank" href="#self" style=" right:0px; top:0px; color:#c1c1c1; text-decoration:none">비밀번호 찾기</a>
+			</div>
+			<div style="font-size:12px; line-height:18px; color:#858585; padding-top: 30px; padding-bottom: 30px; border-bottom: solid 1px #e0e0e0;">
+				<p style="font-size:13px; line-height:20px; color:#333333;  margin-bottom: 5px; ">회원가입을 위한 <span style="color:#ed1846; ">이메일 인증 단계</span>입니다.</p>
+				<div style="text-align:center; padding: 25px 0;">
+					<a target="_blank" href=${emailVerify} style="display:inline-block; padding: 0 20px; height: 36px; background-color:#ed1846; text-align:center; font-size:12px; color:#fff; line-height:36px; text-decoration:none; border-radius: 6px;">이메일 인증</a>
+				</div>
+				<p>계정을 안전하게 보호하려면 본 이메일을 누구에게도 전달하지 마세요.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

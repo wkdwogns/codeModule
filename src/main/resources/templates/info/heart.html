@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout">
+<head>
+    <!--<script th:src="@{/front/js/page/home.js}"></script>-->
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="container">
+
+        <div class="sub_visual about">
+            <div class="txt_box">
+                <h2 class="tit">사업소개</h2>
+            </div>
+        </div>
+
+        <div class="sub_about_02">
+            <div class="inner_box">
+                <div class="section_01">
+                    <div class="tab_box">
+                        <a href="/page/info/support">환아 의료비 지원</a>
+                        <a href="/page/info/heart" class="on">하트펀드</a>
+                    </div>
+                </div><!-- section_01 -->
+
+                <div class="section_02">
+                    <div class="in_box">
+                        <div class="img"><img src="/front/images/sub/about_02_01.jpg" alt="" /></div>
+                        <div class="txt_box">
+                            <h3 class="title"><span>HEART FUND</span>하트펀드</h3>
+                            <p class="txt">타의가 아닌 자발적으로 참여하는 <br/>
+                                하트펀드는 어려운 이웃을 돕기 위한<br/>
+                                삼성생명 FC와 임직원 그리고 삼성생명의<br/>
+                                따뜻한 마음이 담긴 기부금입니다.</p>
+                        </div>
+                    </div>
+                </div><!-- section_02 -->
+
+                <div class="section_03">
+                    <div class="in_box">
+                        <p class="txt">HEART FUND</p>
+                        <h4 class="title">1989년부터 차곡차곡 쌓인 따뜻한 마음 <br/><span>삼성생명 하트펀드</span></h4>
+                        <div class="list">
+                            <ul>
+                                <li>
+                                    <p class="name">집행금액</p>
+                                    <p class="count"><strong id="count_01">0</strong>원</p>
+                                </li>
+                                <li>
+                                    <p class="name">수혜자</p>
+                                    <p class="count"><strong id="count_02">0</strong>원</p>
+                                </li>
+                                <!--<li>
+                                    <p class="name">FC / 임직원 참여</p>
+                                    <p class="count"><strong><span id="count_03">0</span>%</strong></p>
+                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- section_03 -->
+
+                <div class="section_04">
+                    <div class="in_box">
+                        <div class="txt_box">
+                            <div class="txt_01">
+                                <div class="txt_bg">
+                                    <p class="tit">컨설턴트 하트펀드</p>
+                                    <p class="txt"><span>보험 계약 1건을 </span><span>체결할 때마다 <br/>일정 금액을 </span>적립하여 조성된 기부금</p>
+                                </div>
+                            </div>
+                            <div class="txt_02">
+                                <div class="txt_bg">
+                                    <p class="tit">임직원 하트펀드</p>
+                                    <p class="txt"><span>매월 자발적으로 </span><br/><span>일정 금액 기부를 통해 </span>조성된 기부금</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- section_04 -->
+
+                <div class="section_05">
+                    <div class="in_box">
+                        <h4 class="title"><span class="blue">FC</span>와 <span class="blue">임직원</span>분들이 함께 만들어낸<br/>더불어 사는 사회</h4>
+                        <div class="list">
+                            <ul>
+                                <li>
+                                    <div class="img"><img src="/front/images/sub/about_02_03.jpg" alt="" /></div>
+                                    <div class="txt_box">
+                                        <p class="txt_01">FC·임직원</p>
+                                        <p class="txt_02">환아 의료비 지원</p>
+                                        <p class="txt_03">병마와 싸우는 중증질환 환아들과 가족들에게 의료비 지원</p>
+                                        <p class="txt_04">2019년 1월, 6천 8백여만 원 지원</p>
+                                        <a href="/page/apply/info" class="btn_more"><span class="blind">더보기</span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="img"><img src="/front/images/sub/about_02_04.jpg" alt="" /></div>
+                                    <div class="txt_box">
+                                        <p class="txt_01">FC</p>
+                                        <p class="txt_02">사람, 사랑 공동육아 나눔터</p>
+                                        <p class="txt_03">부모의 양육 부담해소와 어린이들이 쾌적한 공간에서 성장할 수<br/>있도록 공간조성과 다양한 교육기자재 지원</p>
+                                        <p class="txt_04">전국 47개소 지원</p>
+                                        <!--<a href="#self" class="btn_more"><span class="blind">더보기</span></a>-->
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="img"><img src="/front/images/sub/about_02_05.jpg" alt="" /></div>
+                                    <div class="txt_box">
+                                        <p class="txt_01">임직원</p>
+                                        <p class="txt_02">세로토닌 드럼클럽</p>
+                                        <p class="txt_03">청소년들의 건강한 성장을 위해 전국 총 230개 학교에 <br/>모둠북을 지원</p>
+                                        <p class="txt_04">3,500여 명 청소년에게 32억여만 원 지원</p>
+                                        <!--<a href="#self" class="btn_more"><span class="blind">더보기</span></a>-->
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="img"><img src="/front/images/sub/about_02_06.jpg" alt="" /></div>
+                                    <div class="txt_box">
+                                        <p class="txt_01">임직원</p>
+                                        <p class="txt_02">은퇴한 임직원, 컨설턴트 지원</p>
+                                        <p class="txt_03">지난해부터 은퇴 후 질환 또는 생활고를 겪는 임직원, 컨설턴트 <br/>대상 생계비 지원</p>
+                                        <p class="txt_04">임원들이 모은 1억 천여만 원의 성금 전액 지원</p>
+                                        <!--<a href="#self" class="btn_more"><span class="blind">더보기</span></a>-->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- section_05 -->
+            </div><!-- inner_box -->
+        </div><!-- sub_about_02 -->
+
+    </div><!-- id : container -->
+</div>
+</body>
+</html>

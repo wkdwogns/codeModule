@@ -1,0 +1,20 @@
+<html lang="ko">
+<script th:src="@{/tds/js/tms.util.js}"></script>
+<div id="content" class="content">
+
+    <script>
+        var getParams = new URLSearchParams(location.search);
+        var info = getParams.get("info");
+        if(info==null||info==''){
+
+        }else{
+            var img = document.createElement("img");
+            img.src=info;
+            img.style.width='500px';
+            var x = document.getElementById("content");
+            x.appendChild(img);
+        }
+    </script>
+
+</div>
+</html>

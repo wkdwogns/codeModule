@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+@import "font.css";
+
+* 	 		{margin:0; padding:0;}
+
+body		{font-size:14px; font-weight:600; line-height:1.5; color:#666;}
+ul,ol,li	{list-style:none;}
+img,hr		{border:none;}
+img			{vertical-align:top; border:0px;}
+
+table 			{width:100%; border-spacing:0; table-layout:fixed;}
+table td img	{vertical-align:middle;}
+
+a			{vertical-align:top; color:#666;}
+a:link		{text-decoration:none; color:inherit;}
+a:visited	{text-decoration:none; color:inherit;}
+a:active	{text-decoration:none; color:inherit;}
+a:hover		{text-decoration:none; color:inherit;}
+
+article,aside,bdi,details,dialog,figcaption,figure,footer,header,main,mark,menuitem,meter,nav,progress,rp,rt,ruby,section,summary,time,wbr,
+body,p,div,ul,li,dl,dt,dd,ol,fieldset,textarea,input,select,table,th,td,address,cite,h1,h2,h3,h4,h5,h6,strong,b,label,pre {font-family:'SECGC', dotum, Arial, sans-serif;}
+strong,h1,h2,h3,h4,h5,h6,th,b,dt {font-family:'SECGC'; font-weight:700; font-size:inherit; color:inherit;}
+
+input,select			{vertical-align:top; outline:none;}
+input[type=text],
+input[type=password]	{display:inline-block; width:100%; height:30px; padding:5px; border:1px solid #ccc; background-color:#fff; font-size:14px; color:#666; box-sizing:border-box;}
+select					{display:inline-block; width:100%; height:30px; padding:0 0 0 5px; border:1px solid #ccc; background-color:#fff; font-size:14px; color:#666; box-sizing:border-box;}
+textarea				{display:inline-block; width:100%; padding:5px; border:solid 1px #ccc; background-color:#fff; font-size:14px; color:#666; box-sizing:border-box;}
+input[type=file],input[type=image],input[type=reset],input[type=button],input[type=submit] {cursor:pointer;}
+
+hr, caption		{position:absolute; left:-9999px; top:-9999px;}
+legend			{position:absolute; height:0; font-size:0px; line-height:0; overflow:hidden; text-indent:-9999px;}
+address,cite,em	{font-style:normal;}
+fieldset,iframe	{border:0;}
+label			{cursor:pointer;}
+sup,sub         {line-height:1em;}
+
+.blind	{position:absolute; left:-9999px; top:-9999px;}
+
+

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nexon.admin.banner.dao.AdminBannerDao">
+
+    <select id="selectBanner" parameterType="com.nexon.admin.banner.req.SelectBannerReq" resultType="com.nexon.admin.banner.model.BannerListVO">
+        SELECT @rownum:=@rownum+1 no
+            , b.BANNER_SEQ
+            , b.BANNER_NM
+            , b.CATEGORY
+            , b.BANNER_TYPE
+            , (select DTL_NM FROM TB_COM_DTL WHERE MST_CD=#{mstCd} AND DTL_CD = b.BANNER_TYPE) AS typeNm
+            , b.VIEW_UNLIMIT_YN
+            , b.TARGET_URL
+            , b.VIDEO_URL
+            , b.FILE_GRP_SEQ
+            , b.THUMBNAIL_NM
+            , b.TOP_TEXT
+            , b.TITLE
+            , b.CONTENTS
+            , b.SORT_NO
+            , DATE_FORMAT(b.VIEW_ST_DT, '%Y-%m-%d') VIEW_ST_DT
+            , DATE_FORMAT(b.VIEW_END_DT, '%Y-%m-%d') VIEW_END_DT
+            , (SELECT F.FILE_PATH from TB_FILE F WHERE F.FILE_GRP_SEQ = b.FILE_GRP_SEQ AND F.DEL_YN = 'N') FILE_PATH
+        FROM TB_BANNER b, (SELECT @rownum:=0) rn
+        WHERE b.DEL_YN = 'N'
+          AND b.CATEGORY = #{category}
+        <if test="@com.nexon.common.CheckData@isNotEmpty(keyWord)">
+            AND b.BANNER_NM LIKE concat('%',#{keyWord},'%')
+        </if>
+        <if test="@com.nexon.common.CheckData@isNotEmpty(viewYn)">
+            AND b.VIEW_YN = #{viewYn}
+            ORDER BY b.SORT_NO
+        </if>
+        <if test="@com.nexon.common.CheckData@isEmpty(viewYn) || viewYn.equals('N') ">
+        ORDER BY no DESC
+        LIMIT ${startRow}, ${cntPerPage}
+        </if>
+    </select>
+
+    <select id="selectBannerCnt" parameterType="com.nexon.admin.banner.req.SelectBannerReq" resultType="int">
+        SELECT
+            count(*)
+        FROM TB_BANNER b
+        WHERE b.DEL_YN = 'N'
+          AND b.CATEGORY = #{category}
+            <if test="@com.nexon.common.CheckData@isNotEmpty(keyWord)">
+                and b.BANNER_NM LIKE concat('%',#{keyWord},'%')
+            </if>
+    </select>
+
+    <select id="selectBannerDetail" parameterType="com.nexon.admin.banner.req.SelectBannerDetailReq" resultType="com.nexon.admin.banner.res.SelectBannerDetailRes">
+        SELECT b.BANNER_SEQ
+            , b.BANNER_NM
+            , b.CATEGORY
+            , b.BANNER_TYPE
+            , b.VIEW_UNLIMIT_YN
+            , b.TARGET_URL
+            , b.VIDEO_URL
+            , b.FILE_GRP_SEQ
+            , b.THUMBNAIL_NM
+            , b.TOP_TEXT
+            , b.TITLE
+            , b.CONTENTS
+            , b.SORT_NO
+            , DATE_FORMAT(b.VIEW_ST_DT, '%Y-%m-%d %H:%i') VIEW_ST_DT
+            , DATE_FORMAT(b.VIEW_END_DT, '%Y-%m-%d %H:%i') VIEW_END_DT
+        FROM TB_BANNER b
+        WHERE b.BANNER_SEQ=#{bannerSeq}
+          and b.DEL_YN = 'N'
+    </select>
+
+    <insert id="insertBanner" parameterType="com.nexon.admin.banner.req.InsertBannerReq">
+        INSERT INTO TB_BANNER
+        (     BANNER_NM
+            , CATEGORY
+            , BANNER_TYPE
+            , VIEW_UNLIMIT_YN
+            , TARGET_URL
+            , VIDEO_URL
+        <if test="@com.nexon.common.CheckData@isNotEmpty(fileGrpSeq)">
+            , FILE_GRP_SEQ
+        </if>
+            , THUMBNAIL_NM
+            , TOP_TEXT
+            , TITLE
+            , CONTENTS
+            , SORT_NO
+            , VIEW_ST_DT
+            , VIEW_END_DT
+            , VIEW_YN
+            , DEL_YN
+            , CRE_DT
+            , CRE_ID
+            , UPD_DT
+            , UPD_ID
+        ) VALUES (
+              #{bannerNm}
+            , #{category}
+            , #{bannerType}
+            , #{viewUnlimitYn}
+            , #{targetUrl}
+            , #{videoUrl}
+        <if test="@com.nexon.common.CheckData@isNotEmpty(fileGrpSeq)">
+            , #{fileGrpSeq}
+        </if>
+            , #{thumbnailNm}
+            , #{topText}
+            , #{title}
+            , #{contents}
+            , #{sortNo}
+            , #{viewStDt}
+            , #{viewEndDt}
+            , #{viewYn}
+            , 'N'
+            , now()
+            , #{userSeq}
+            , now()
+            , #{userSeq}
+        )
+    </insert>
+
+    <update id="updateBanner" parameterType="com.nexon.admin.banner.req.UpdateBannerReq">
+        UPDATE TB_BANNER
+           SET UPD_DT = now()
+            , UPD_ID = #{userSeq}
+            , BANNER_NM = #{bannerNm}
+            , BANNER_TYPE = #{bannerType}
+            , VIEW_UNLIMIT_YN = #{viewUnlimitYn}
+            , TARGET_URL = #{targetUrl}
+            , VIDEO_URL = #{videoUrl}
+        <if test="@com.nexon.common.CheckData@isNotEmpty(fileGrpSeq)">
+            , FILE_GRP_SEQ = #{fileGrpSeq}
+        </if>
+            , THUMBNAIL_NM = #{thumbnailNm}
+            , TOP_TEXT = #{topText}
+            , TITLE = #{title}
+            , CONTENTS = #{contents}
+        <if test="@com.nexon.common.CheckData@isNotEmpty(viewYn)">
+            , VIEW_YN = #{viewYn}
+        </if>
+            , VIEW_ST_DT = #{viewStDt}
+            , VIEW_END_DT = #{viewEndDt}
+        WHERE BANNER_SEQ=#{bannerSeq}
+    </update>
+
+    <update id="deleteBanner" parameterType="com.nexon.admin.banner.req.DeleteBannerReq">
+        UPDATE TB_BANNER
+        SET DEL_YN = #{delYn}
+        WHERE BANNER_SEQ = #{bannerSeq}
+    </update>
+
+    <update id="allUpdateViewN" parameterType="com.nexon.admin.banner.req.UpdateBannerSortReq">
+        UPDATE TB_BANNER
+          SET VIEW_YN = 'N'
+        WHERE DEL_YN = 'N'
+          AND VIEW_YN = 'Y'
+          AND CATEGORY = #{category}
+    </update>
+
+    <update id="updateSortBanner" parameterType="com.nexon.admin.banner.model.UpdateBannerSortVO">
+          UPDATE TB_BANNER
+          SET UPD_DT = now()
+          , UPD_ID = #{userSeq}
+          , SORT_NO = #{sortNo}
+          , VIEW_YN = #{viewYn}
+          WHERE BANNER_SEQ = #{bannerSeq}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,144 @@
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/admin/layout/layout">
+<div class="content" layout:fragment="contents">
+
+    <div id="list">
+        <table class="table writeTable">
+            <caption>
+                수혜아동 스토리
+                <div class="searchBox floatRight">
+                    <input type="hidden" name="page" id="devIdHdnPage" value="1">
+                    <select id="devIdSelKeyField" name="sKeyfield" style="margin-right: 5px">
+                        <option value="">선택</option>
+                        <option value="storyNm">성명</option>
+                        <option value="title">제목</option>
+                    </select>
+                    <label>
+                        <input id="sKeyword" name="sKeyword" type="text" maxlength="100" value="" placeholder="" style="margin-right: 10px">
+                        <button type="button" class="btn blackBtn devCssBtnSearch" onclick="list(1)">검색</button>
+                    </label>
+                </div>
+                <div class="searchBox">
+                    <span style="font-size:10pt;"></span>
+                </div>
+            </caption>
+
+            <colgroup>
+                <col style="width: 80px;"/>
+                <col style="width: 60px;"/>
+                <col style="width: 120px;"/>
+                <col />
+                <col style="width: 180px;"/>
+                <col style="width: 70px;"/>
+                <col style="width: 120px;"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>중요</th>
+                <th>성명</th>
+                <th>제목</th>
+                <th>노출기간</th>
+                <th>노출여부</th>
+                <th>관리</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="btnList">
+        <div id="paging" class="paging"></div>
+        <button type="button" class="btn mainBtn floatRight devCssBtnAdd">새 스토리 등록</button>
+    </div>
+    <script>
+        $('.devCssBtnAdd').click(function () {
+            location.href='/page/admin/story/add';
+        });
+
+        $(document).on('keyup','#sKeyword',function (e) {
+            e.preventDefault();
+            if(e.keyCode==13){
+                list(1);
+                return ;
+            }
+        });
+
+        function list(no){
+            $('.main').addClass('list');
+
+            var colsInfo = [
+                {no: 1, col: 'no', name: '번호'}
+                , {no: 2, col: 'importantYn', name: '중요',custom:function(obj){
+                    var rs = (obj.importantYn=="Y")?'Y':'';
+                    return rs;
+                }}
+                , {no: 3, col: 'storyNm', name: '성명'}
+                , {no: 4, col: 'title', name: '제목', width:"220px;",custom: function(obj){
+                    return "<a href='/page/admin/story/add?info="+obj.storySeq+"'>"+obj.title+"</a>";
+                }}
+                , {no: 5, col: 'viewStDt', name: '노출기간', width:"400px;",custom:function(obj){
+                    var viewUnlimitYn = obj.viewUnlimitYn;
+                    var viewStDt = obj.viewStDt;
+                    var viewEndDt = obj.viewEndDt;
+                    var rs = (viewUnlimitYn=='N')?viewStDt+'~'+viewEndDt:'무제한';
+                    return rs;
+                }}
+                , {no: 6, col: 'viewYn', name: '노출여부'}
+                , {no: 7, col: 'createDt', name: '관리',custom:function (obj) {
+                    return '<button type="button" class="btn grayBtn" onclick="goT('+obj.storySeq+');">미리보기</button>';
+                }}
+            ];
+
+            var params = {
+                cntPerPage: 10
+                ,currentPage:no
+                ,keyField : $('#devIdSelKeyField').val()
+                ,keyword : $('#sKeyword').val()
+            };
+
+            if($("#sKeyfield").val()=='AgencyName'){
+                params.agencyName=$("#sKeyword").val();
+            }
+
+            tms.ajaxGetHelper('/mapi/story', params, null, function(result) {
+                var paging = {
+                    id: '#paging',
+                    pageNo: no,
+                    totalCnt: 0,
+                    countPerPage: 10,
+                    fn: 'list',
+                    activeClass: 'link on',
+                    type: 'type1'
+                };
+
+                var info = {
+                    colsInfo: colsInfo,
+                    paging: paging
+                };
+
+                if(result.code == "0") {
+                    var totalCnt = result.data.totalCnt;
+                    paging.totalCnt = totalCnt;
+
+                    if(totalCnt == 0){
+                        tableType1("#list", null, info );
+                    } else {
+                        tableType1("#list", result.data.list, info);
+                    }
+                } else {
+                    tableType1("#list", null, info );
+                }
+
+                $('.searchBox span').text('총 '+ totalCnt +'건의 데이터가 검색되었습니다');
+            }, function(){
+
+            });
+        }
+        list(1);
+
+        function goT(t){
+            window.open('/page/story/detail?preview=Y&seq='+t,'미리보기','width=600, height=400, menubar=no, status=no, toolbar=no');
+        }
+    </script>
+
+</div>
+</html>
