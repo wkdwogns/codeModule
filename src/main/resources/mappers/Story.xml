@@ -9,6 +9,7 @@
         FROM (
             SELECT
                 A.STORY_SEQ
+                , A.CATEGORY
                 , A.STORY_NM
                 , A.TITLE
                 , A.IMPORTANT_YN
@@ -38,6 +39,7 @@
         FROM (
             SELECT
                 A.STORY_SEQ
+                , A.CATEGORY
                 , A.STORY_NM
                 , A.TITLE
                 , A.IMPORTANT_YN
@@ -63,6 +65,7 @@
         FROM (
             SELECT
                 A.STORY_SEQ
+                , A.CATEGORY
                 , A.STORY_NM
                 , A.TITLE
                 , A.IMPORTANT_YN
@@ -90,15 +93,16 @@
     <select id="selectStoryDetail" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.res.SelectStoryDetailRes">
         SELECT
             STORY_SEQ
-            ,STORY_NM
-            ,TITLE
-            ,IMPORTANT_YN
-            ,VIEW_YN
-            ,VIEW_UNLIMIT_YN
-            ,DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
-            ,DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
-            ,FILE_GRP_SEQ
-            ,CONTENTS
+            , CATEGORY
+            , STORY_NM
+            , TITLE
+            , IMPORTANT_YN
+            , VIEW_YN
+            , VIEW_UNLIMIT_YN
+            , DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+            , DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
+            , FILE_GRP_SEQ
+            , CONTENTS
         FROM
             TB_STORY
         WHERE
@@ -112,29 +116,35 @@
     </select>
 
     <select id="selectPrevStory" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.model.StoryDetailPrevNextVO">
-        SELECT A.STORY_SEQ
-          , A.TITLE
-          , A.STORY_NM
-          , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
-        FROM TB_STORY A
-        WHERE A.STORY_SEQ <![CDATA[ < ]]> #{seq}
-          AND IFNULL(A.DEL_YN, 'N') = 'N'
-          AND A.VIEW_YN = 'Y'
-          AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
+        SELECT
+            A.STORY_SEQ
+            , A.TITLE
+            , A.STORY_NM
+            , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
+        FROM
+            TB_STORY A
+        WHERE
+            A.STORY_SEQ <![CDATA[ < ]]> #{seq}
+            AND IFNULL(A.DEL_YN, 'N') = 'N'
+            AND A.VIEW_YN = 'Y'
+            AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
         ORDER BY A.STORY_SEQ DESC
         LIMIT 1
     </select>
 
     <select id="selectNextStory" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.model.StoryDetailPrevNextVO">
-        SELECT A.STORY_SEQ
-          , A.TITLE
-          , A.STORY_NM
-          , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
-        FROM TB_STORY A
-        WHERE A.STORY_SEQ <![CDATA[ > ]]> #{seq}
-          AND IFNULL(A.DEL_YN, 'N') = 'N'
-          AND A.VIEW_YN = 'Y'
-          AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
+        SELECT
+            A.STORY_SEQ
+            , A.TITLE
+            , A.STORY_NM
+            , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
+        FROM
+            TB_STORY A
+        WHERE
+            A.STORY_SEQ <![CDATA[ > ]]> #{seq}
+            AND IFNULL(A.DEL_YN, 'N') = 'N'
+            AND A.VIEW_YN = 'Y'
+            AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
         ORDER BY A.STORY_SEQ
         LIMIT 1
     </select>

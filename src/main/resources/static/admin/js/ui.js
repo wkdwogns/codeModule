@@ -24,7 +24,7 @@ $(function(){
         story:{
             bigMenu:[
                 {
-                    name:'수혜아동 스토리'
+                    name:' 스토리'
                     ,url:mainPath+'/story/list'
                 }
             ]

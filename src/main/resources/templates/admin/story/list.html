@@ -4,7 +4,7 @@
     <div id="list">
         <table class="table writeTable">
             <caption>
-                수혜아동 스토리
+                 스토리
                 <div class="searchBox floatRight">
                     <input type="hidden" name="page" id="devIdHdnPage" value="1">
                     <select id="devIdSelKeyField" name="sKeyfield" style="margin-right: 5px">
@@ -35,6 +35,7 @@
             <tr>
                 <th>번호</th>
                 <th>중요</th>
+                <th>카테고리</th>
                 <th>성명</th>
                 <th>제목</th>
                 <th>노출기간</th>
@@ -71,19 +72,27 @@
                     var rs = (obj.importantYn=="Y")?'Y':'';
                     return rs;
                 }}
-                , {no: 3, col: 'storyNm', name: '성명'}
-                , {no: 4, col: 'title', name: '제목', width:"220px;",custom: function(obj){
+                , {no: 3, col: 'category', name: '카테고리',custom:function(obj){
+                    var rs ='';
+                    if(obj.category=="1"){rs ='IT';}
+                    if(obj.category=="2"){rs ='CULTURE';}
+                    if(obj.category=="3"){rs ='PLAY';}
+                    if(obj.category=="4"){rs='HEALTH';}
+                    return rs;
+                }}
+                , {no: 4, col: 'storyNm', name: '성명'}
+                , {no: 5, col: 'title', name: '제목', width:"220px;",custom: function(obj){
                     return "<a href='/page/admin/story/add?info="+obj.storySeq+"'>"+obj.title+"</a>";
                 }}
-                , {no: 5, col: 'viewStDt', name: '노출기간', width:"400px;",custom:function(obj){
+                , {no: 6, col: 'viewStDt', name: '노출기간', width:"400px;",custom:function(obj){
                     var viewUnlimitYn = obj.viewUnlimitYn;
                     var viewStDt = obj.viewStDt;
                     var viewEndDt = obj.viewEndDt;
                     var rs = (viewUnlimitYn=='N')?viewStDt+'~'+viewEndDt:'무제한';
                     return rs;
                 }}
-                , {no: 6, col: 'viewYn', name: '노출여부'}
-                , {no: 7, col: 'createDt', name: '관리',custom:function (obj) {
+                , {no: 7, col: 'viewYn', name: '노출여부'}
+                , {no: 8, col: 'createDt', name: '관리',custom:function (obj) {
                     return '<button type="button" class="btn grayBtn" onclick="goT('+obj.storySeq+');">미리보기</button>';
                 }}
             ];

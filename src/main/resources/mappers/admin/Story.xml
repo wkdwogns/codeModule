@@ -4,18 +4,20 @@
 <mapper namespace="com.nexon.admin.story.dao.AstoryDao">
 
     <select id="selectStory" parameterType="com.nexon.admin.story.req.SelectStoryReq" resultType="com.nexon.admin.story.model.StoryListVO">
-        SELECT A.*
-        , @rownum:=@rownum+1 no
+        SELECT
+            A.*
+            , @rownum:=@rownum+1 no
         FROM (
             SELECT
                 s.STORY_SEQ
-                ,s.STORY_NM
-                ,s.TITLE
-                ,s.IMPORTANT_YN
-                ,s.VIEW_UNLIMIT_YN
-                ,s.VIEW_YN
-                ,DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-                ,DATE_FORMAT(s.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
+                , s.CATEGORY
+                , s.STORY_NM
+                , s.TITLE
+                , s.IMPORTANT_YN
+                , s.VIEW_UNLIMIT_YN
+                , s.VIEW_YN
+                , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+                , DATE_FORMAT(s.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
             FROM TB_STORY s
             WHERE IFNULL(s.DEL_YN, 'N') = 'N'
             <if test="keyField=='title'">
@@ -49,15 +51,16 @@
     <select id="selectStoryDetail" parameterType="com.nexon.admin.story.req.SelectStoryDetailReq" resultType="com.nexon.admin.story.res.SelectStoryDetailRes">
         SELECT
             STORY_SEQ
-            ,STORY_NM
-            ,TITLE
-            ,IMPORTANT_YN
-            ,VIEW_YN
-            ,VIEW_UNLIMIT_YN
-            ,DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
-            ,DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
-            ,FILE_GRP_SEQ
-            ,CONTENTS
+            , CATEGORY
+            , STORY_NM
+            , TITLE
+            , IMPORTANT_YN
+            , VIEW_YN
+            , VIEW_UNLIMIT_YN
+            , DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+            , DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
+            , FILE_GRP_SEQ
+            , CONTENTS
         FROM
             TB_STORY
         WHERE
@@ -68,31 +71,33 @@
     <insert id="insertStory" parameterType="com.nexon.admin.story.req.InsertStoryReq">
         INSERT INTO TB_STORY
         (
-            STORY_NM
-            ,TITLE
-            ,IMPORTANT_YN
-            ,VIEW_YN
-            ,VIEW_UNLIMIT_YN
-            ,VIEW_ST_DT
-            ,VIEW_END_DT
-            ,FILE_GRP_SEQ
-            ,CONTENTS
-            ,DEL_YN
-            ,CRE_DT
-            ,CRE_ID
+            CATEGORY
+            , STORY_NM
+            , TITLE
+            , IMPORTANT_YN
+            , VIEW_YN
+            , VIEW_UNLIMIT_YN
+            , VIEW_ST_DT
+            , VIEW_END_DT
+            , FILE_GRP_SEQ
+            , CONTENTS
+            , DEL_YN
+            , CRE_DT
+            , CRE_ID
         ) VALUES (
-            #{storyNm}
-            ,#{title}
-            ,#{importantYn}
-            ,#{viewYn}
-            ,#{viewUnlimitYn}
-            ,#{viewStDt}
-            ,#{viewEndDt}
-            ,#{fileGrpSeq}
-            ,#{contents}
-            ,'N'
-            ,now()
-            ,#{creId}
+            #{category}
+            , #{storyNm}
+            , #{title}
+            , #{importantYn}
+            , #{viewYn}
+            , #{viewUnlimitYn}
+            , #{viewStDt}
+            , #{viewEndDt}
+            , #{fileGrpSeq}
+            , #{contents}
+            , 'N'
+            , now()
+            , #{creId}
         )
     </insert>
 
@@ -100,17 +105,18 @@
         UPDATE
             TB_STORY
         SET
-            STORY_NM=#{storyNm}
-            ,TITLE=#{title}
-            ,IMPORTANT_YN=#{importantYn}
-            ,VIEW_YN=#{viewYn}
-            ,VIEW_UNLIMIT_YN=#{viewUnlimitYn}
-            ,VIEW_ST_DT=#{viewStDt}
-            ,VIEW_END_DT=#{viewEndDt}
+            CATEGORY=#{category}
+            , STORY_NM=#{storyNm}
+            , TITLE=#{title}
+            , IMPORTANT_YN=#{importantYn}
+            , VIEW_YN=#{viewYn}
+            , VIEW_UNLIMIT_YN=#{viewUnlimitYn}
+            , VIEW_ST_DT=#{viewStDt}
+            , VIEW_END_DT=#{viewEndDt}
             <if test="fileGrpSeq!=null and fileGrpSeq!=''">
-                ,FILE_GRP_SEQ=#{fileGrpSeq}
+                , FILE_GRP_SEQ=#{fileGrpSeq}
             </if>
-            ,CONTENTS=#{contents}
+            , CONTENTS=#{contents}
         WHERE
             STORY_SEQ=#{seq}
     </update>
@@ -125,11 +131,14 @@
     </update>
 
     <select id="selectViewLimitCnt" resultType="int">
-        SELECT COUNT(*)
-        FROM TB_STORY A
-        WHERE IFNULL(A.DEL_YN, 'N') = 'N'
-          AND A.VIEW_YN = 'Y'
-          AND A.IMPORTANT_YN = 'Y'
+        SELECT
+            COUNT(*)
+        FROM
+            TB_STORY A
+        WHERE
+            IFNULL(A.DEL_YN, 'N') = 'N'
+            AND A.VIEW_YN = 'Y'
+            AND A.IMPORTANT_YN = 'Y'
     </select>
 
 </mapper>

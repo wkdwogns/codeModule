@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 public class SelectStoryDetailRes {
     private Integer no;
+    private Integer category;
     private String storyNm;
     private String title;
     private String importantYn;

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 @Data
 public class UpdateStoryReq {
     private String seq;
+    private Integer category;
     private String storyNm;
     private String title;
     private String importantYn;

@@ -4,8 +4,26 @@
         <input type="hidden" id="devIdHdnSEQ" value="">
 
         <table class="table writeTable">
-            <caption>수혜아동 스토리 등록</caption>
+            <caption> 스토리 등록</caption>
             <tbody>
+
+            <tr>
+                <th>카테고리<span class="required">*</span></th>
+                <td>
+                    <input type="radio" id="cate1" name="category" value="1" class="devCssRdoIsView" checked="checked">
+                    <label for="cate1">IT</label>
+
+                    <input type="radio" id="cate2" name="category" value="2" class="devCssRdoIsView">
+                    <label for="cate2">CULTURE</label>
+
+                    <input type="radio" id="cate3" name="category" value="3" class="devCssRdoIsView">
+                    <label for="cate3">PLAY</label>
+
+                    <input type="radio" id="cate4" name="category" value="4" class="devCssRdoIsView">
+                    <label for="cate4">HEALTH</label>
+                </td>
+            </tr>
+
             <tr>
                 <th>성명<span class="required">*</span></th>
                 <td>
@@ -215,6 +233,7 @@
             });
 
             var data = new FormData();
+            data.append("category", $(":input:radio[name=category]:checked").val() );
             data.append("storyNm", $('#devIdTxtStoryNm').val() );
             data.append("title", $('#devIdTxtTitle').val() );
             data.append("viewYn", $(":input:radio[name=viewYn]:checked").val() );
@@ -289,6 +308,7 @@
                 if(rs.code==0){
                     var d = rs.data;
 
+                    $('input:radio[name=category]:input[value=' + d.category + ']').attr("checked", true);
                     $('#devIdTxtStoryNm').val(tms.convertHtml(d.storyNm));
                     $('#devIdTxtTitle').val(tms.convertHtml(d.title));
                     $('input:radio[name=viewYn]:input[value=' + d.viewYn + ']').attr("checked", true);
@@ -307,7 +327,7 @@
                         for(var i in fl){
                             $('#devIdTxtImg').after('<br>' +
                                 '<input type="hidden" id="thumbnailSeq" value="'+fl[i].fileSeq+'"/>'+
-                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=3">'+fl[i].orgFileNm+'</a>');
+                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=4">'+fl[i].orgFileNm+'</a>');
                         }
                     }
 

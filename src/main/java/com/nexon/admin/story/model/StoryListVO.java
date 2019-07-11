@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class StoryListVO {
     private String no;
+    private Integer category;
     private Integer storySeq;
     private String storyNm;
     private String title;
