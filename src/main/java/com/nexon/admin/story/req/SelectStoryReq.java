@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 public class SelectStoryReq {
     private String keyField;
     private String keyword;
+    private Integer category;
 
     @ApiParam(value = "페이지 조회 개수", required = true)
     private int currentPage;

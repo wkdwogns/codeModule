@@ -26,6 +26,9 @@
             <if test="keyField=='storyNm'">
                 and s.STORY_NM LIKE concat('%',#{keyword},'%')
             </if>
+            <if test="category!=null and category!=''">
+                and s.CATEGORY = #{category}
+            </if>
             ORDER BY s.CRE_DT DESC
         ) A,
         (SELECT @rownum:=0) rn
@@ -45,6 +48,9 @@
             </if>
             <if test="keyField=='storyNm'">
                 and s.STORY_NM LIKE concat('%',#{keyword},'%')
+            </if>
+            <if test="category!=null and category!=''">
+                and s.CATEGORY = #{category}
             </if>
     </select>
 
