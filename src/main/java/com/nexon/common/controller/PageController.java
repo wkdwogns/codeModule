@@ -1,6 +1,7 @@
 package com.nexon.common.controller;
 
 import com.nexon.common.config.ConfigCommon;
+import com.nexon.common.util.CookieUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,9 @@ public class PageController {
         if(domain.equals(configCommon.getDomain().getAdmin())) {
             return "/admin/login.html";
         } else {
-            return "/home.html";
+            String lang = CookieUtil.getCookie(request,"lang");
+            String url = (lang.equals("eng"))?"/homeEng.html":"/home.html";
+            return url;
         }
     }
 

@@ -26,10 +26,20 @@
             FROM TB_STORY A
               LEFT OUTER JOIN TB_FILE B ON A.FILE_GRP_SEQ = B.FILE_GRP_SEQ AND IFNULL(B.DEL_YN, 'N') = 'N'
             WHERE IFNULL(A.DEL_YN, 'N') = 'N'
-              AND A.VIEW_YN = 'Y'
+                AND A.VIEW_YN = 'Y'
+                <if test="category!=null and category!=''">
+                    AND A.CATEGORY = #{category}
+                </if>
+                <if test="keyField=='title'">
+                    AND A.TITLE like concat('%',#{keyWord},'%')
+                </if>
+                <if test="keyField=='contents'">
+                    AND A.CONTENTS like concat('%',#{keyWord},'%')
+                </if>
         ) A
           , (SELECT @rownum:=0) RN
         WHERE A.VIEW_CHECK = 'Y'
+
         ORDER BY A.CRE_DT DESC
         LIMIT ${startRow}, ${cntPerPage}
     </select>
@@ -52,10 +62,22 @@
                         ELSE 'N'
                         END VIEW_CHECK
                 , B.FILE_PATH
-            FROM TB_STORY A
-              LEFT OUTER JOIN TB_FILE B ON A.FILE_GRP_SEQ = B.FILE_GRP_SEQ AND IFNULL(B.DEL_YN, 'N') = 'N'
-            WHERE IFNULL(A.DEL_YN, 'N') = 'N'
-              AND A.VIEW_YN = 'Y'
+            FROM
+                TB_STORY A
+                LEFT OUTER JOIN TB_FILE B ON A.FILE_GRP_SEQ = B.FILE_GRP_SEQ AND IFNULL(B.DEL_YN, 'N') = 'N'
+            WHERE
+                IFNULL(A.DEL_YN, 'N') = 'N'
+                AND A.VIEW_YN = 'Y'
+                <if test="category!=null and category!=''">
+                    AND A.CATEGORY = #{category}
+                </if>
+                <if test="keyField=='title'">
+                    AND A.TITLE like concat('%',#{keyWord},'%')
+                </if>
+                <if test="keyField=='contents'">
+                    AND A.CONTENTS like concat('%',#{keyWord},'%')
+                </if>
+
         ) A
         WHERE A.VIEW_CHECK = 'Y'
     </select>
@@ -103,6 +125,7 @@
             , DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
             , FILE_GRP_SEQ
             , CONTENTS
+            , DATE_FORMAT(CRE_DT, '%Y.%m.%d') CRE_DT
         FROM
             TB_STORY
         WHERE

@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class StoryListReq {
+    private String category;
+    private String keyField;
+    private String keyWord;
 
     @ApiParam(value = "페이지 조회 개수", required = true)
     private int currentPage;

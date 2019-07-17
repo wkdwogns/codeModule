@@ -163,7 +163,7 @@ function tableType2More(id, data, contents, info) {
     //paging
     if (info.paging != null && info.paging != undefined) {
         var type = info.paging.type;
-        pagingMore(info.paging);
+        pagingType1(info.paging);
     }
 
 }

@@ -2,37 +2,44 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="headerFragement">
-	<div id="header" class="sub">
+	<header id="header">
 		<div class="header_inner">
-			<h1 class="logo"><a href="/">환아 의료비 지원 프로젝트</a></h1>
+			<h1 class="logo"><a href="/"><span class="blind">넥슨재단</span></a></h1>
+			<a href="#self" class="btn_menu"><span class="blind">전체메뉴</span></a>
 			<ul class="util_menu">
-				<li><a href="#self"> </a></li>
+				<li class="on"><a href="#self" onclick="setLang('kor')">KOR</a></li>
+				<li><a href="#self" onclick="setLang('eng')">ENG</a></li>
 			</ul>
 			<div id="gnb" class="gnb">
+				<div class="gnb_top">
+					<img class="menu_logo" src="/front/images/common/logo.png" alt="넥슨재단" />
+					<a href="#self" class="btn_close"><span class="blind">전체메뉴닫기</span></a>
+				</div>
 				<ul>
-					<li><a href="#self">사업 소개</a>
+					<li><a href="#self"><span>재단소개</span></a>
 						<ul class="depth2">
-							<li><a href="/page/info/support"><span>환아 의료비 지원사업 소개</span></a></li>
-							<li><a href="/page/info/heart"><span>하트펀드 소개</span></a></li>
+							<li><a href="/page/kor/intro1"><span>소개</span></a></li>
+							<li><a href="/page/kor/intro2"><span>연혁</span></a></li>
+							<li><a href="/page/kor/intro3"><span>오시는 길</span></a></li>
 						</ul>
 					</li>
-					<li><a href="/page/apply/info">환아 사연 신청하기</a></li>
-					<li><a href="/page/story/list">어린이들의 변화</a></li>
-					<li><a href="/page/faq/list">궁금해요</a></li>
-					<li><a href="/page/notice/list">공지사항</a></li>
+					<li><a href="#self"><span>활동사업</span></a>
+						<ul class="depth2">
+							<li><a href="/page/kor/business1"><span>IT</span></a></li>
+							<li><a href="/page/kor/business2"><span>CURTURE</span></a></li>
+							<li><a href="/page/kor/business3"><span>PLAY</span></a></li>
+							<li><a href="/page/kor/business4"><span>HEALTH</span></a></li>
+						</ul>
+					</li>
+					<li><a href="#self"><span>새소식</span></a>
+						<ul class="depth2">
+							<li><a href="/page/kor/story_list"><span>스토리</span></a></li>
+							<li><a href="/page/kor/notice_list"><span>공지사항</span></a></li>
+						</ul>
+					</li>
 				</ul>
-				<a href="#self" class="gnb_close"><span class="blind">메뉴닫기</span></a>
 			</div>
-			<!-- 모바일 메뉴 버튼 -->
-			<a href="#self" class="btn_gnb">
-					<span>
-						<span class="bar"></span>
-						<span class="bar"></span>
-						<span class="bar"></span>
-					</span>
-			</a>
-			<!-- //모바일 메뉴 버튼 -->
 		</div><!-- class : header_inner -->
-	</div><!-- id : header -->
+	</header><!-- id : header -->
 </div>
 <!-- END HEADER -->

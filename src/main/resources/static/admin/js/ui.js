@@ -2,17 +2,7 @@ $(function(){
     var mainPath = '/page/admin';
 
     var h ={
-        banner:{
-            name:'메인관리'
-            ,bigMenu:[{name:'노출 관리'
-                    ,midMenu:[
-                        {name:'최상단 배너',url:mainPath+'/bannerT/list'}
-                        ,{name:'콘텐츠 배너',url:mainPath+'/bannerC/list'}
-                    ]
-                },
-                {name:'팝업창관리',url:mainPath+'/popup/list'}
-            ]
-        },
+
         notice:{
             bigMenu:[
                 {
@@ -61,15 +51,7 @@ $(function(){
 
     var pN = location.pathname;
     $('.header nav a').removeClass('on')
-    if(pN.indexOf('banner')!=-1){
-        $('.header nav a.banner').addClass('on');
-        setMenu(h.banner);
-    }
 
-    if(pN.indexOf('popup')!=-1){
-        $('.header nav a.banner').addClass('on');
-        setMenu(h.banner);
-    }
 
     if(pN.indexOf('notice')!=-1){
         $('.header nav a.notice').addClass('on');

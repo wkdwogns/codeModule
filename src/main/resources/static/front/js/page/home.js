@@ -1,9 +1,41 @@
 $(function(){
-    getPopup();
-    getBanner();
-    getContentsBanner();
+    setLangUI();
 });
 
+var setLang = function (lang) {
+    tms.ajaxPostHelper('/api/lang',JSON.stringify({lang:lang}), null, function(rs) {
+        setLangUI();
+
+        var ln = tms.getCookie('lang');
+        var pNm = location.pathname;
+        var pLink = (ln == 'eng')?pNm.replace('kor','eng'):pNm.replace('eng','kor');
+        location.href=pLink;
+    });
+}
+
+var setLangUI = function () {
+    var ln = tms.getCookie('lang');
+    var mLi = $('#header .util_menu li');
+    mLi.removeClass('on')
+    if(ln == 'eng'){
+        mLi.eq(1).addClass('on')
+    }else{
+        mLi.eq(0).addClass('on')
+    }
+    $.each($('#header .depth2 a'),function () {
+        var attr = $(this).attr('href');
+        var link = (ln == 'eng')?attr.replace('kor','eng'):attr.replace('eng','kor');
+        $(this).attr('href',link);
+    })
+
+    $.each($('.mobild_sub_tabs a'),function () {
+        var attr = $(this).attr('href');
+        var link = (ln == 'eng')?attr.replace('kor','eng'):attr.replace('eng','kor');
+        $(this).attr('href',link);
+    })
+
+
+}
 
 var getList = function(no) {
     var params = {

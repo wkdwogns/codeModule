@@ -9,6 +9,7 @@ import java.util.List;
 public class SelectStoryDetailRes {
     private Integer no;
     private String storyNm;
+    private String category;
     private String title;
     private String importantYn;
     private String viewYn;
@@ -16,6 +17,7 @@ public class SelectStoryDetailRes {
     private String contents;
     private String viewStDt;
     private String viewEndDt;
+    private String creDt;
 
     private Integer fileGrpSeq;
     private List fList;

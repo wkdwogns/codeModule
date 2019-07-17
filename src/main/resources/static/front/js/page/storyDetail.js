@@ -14,28 +14,35 @@ var getDetail = function() {
     };
 
     tms.ajaxGetHelper(detailUrl, params, null, function(res) {
+        console.log(res)
         if(res.code == 0){
             var obj =res.data;
-            tmsInput.detailMapping(obj);
+            var c = obj.category;
+            if(c=='1'){c='IT'}
+            if(c=='2'){c='CULTURE'}
+            if(c=='3'){c='PLAY'}
+            if(c=='4'){c='HEALTH'}
+
+            $('.story_view_wrap .story_top .cate').text(c);
+            $('.story_view_wrap .story_top .part').text(obj.storyNm);
+            $('.story_view_wrap .story_top .title').text(obj.title);
+            $('.story_view_wrap .story_top .date').text(obj.creDt);
+            $('.story_view_wrap .story_article').html( obj.contents );
 
             var prevStory = res.data.prevStory;
             var nextStory = res.data.nextStory;
 
             if(prevStory != null) {
-                var prevHtml = '<strong>이전 이야기 보기</strong>';
-                prevHtml += '<span>'+prevStory.storyNm+'</span>';
-                $("#prevStory").attr("href", "/page/story/detail?seq=" + prevStory.storySeq);
-
+                var prevHtml = '이전글<span>'+prevStory.storyNm+'</span>';
+                $("#prevStory").attr("href", location.pathname +'?seq='+ prevStory.storySeq);
                 $("#prevStory").html(prevHtml);
             } else {
                 $("#prevStory").hide();
             }
 
             if(nextStory != null) {
-                var nextHtml = '<strong>다음 이야기 보기</strong>';
-                nextHtml += '<span>'+nextStory.storyNm+'</span>';
-                $("#nextStory").attr("href", "/page/story/detail?seq=" + nextStory.storySeq);
-
+                var nextHtml = '다음글<span>'+nextStory.storyNm+'</span>';
+                $("#nextStory").attr("href", location.pathname +'?seq='+ nextStory.storySeq);
                 $("#nextStory").html(nextHtml);
             } else {
                 $("#nextStory").hide();
