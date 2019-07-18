@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div class="content" layout:fragment="contents">
+    <div id="container">
+
+        <div class="mobild_sub_tabs">
+            <ul>
+                <li><a href="#self"><em>소개</em></a></li>
+                <li><a href="#self"><em>연혁</em></a></li>
+                <li class="on"><a href="#self"><em>오시는 길</em></a></li>
+            </ul>
+        </div>
+
+        <section class="sub_visual_wrap intro3">
+            <div class="txt_box">
+                <h3 class="tit">오시는 길</h3>
+            </div>
+        </section>
+
+        <div class="intro3_wrap">
+            <div class="img_box"><img src="/front/images/sub/img_intro3.jpg" alt="" /></div>
+            <div class="txt_box">
+                <h4 class="tit">위치</h4>
+                <h5 class="sub_tit">주소</h5>
+                <p class="pb1">서울특별시 강남구 도산대로 313, 313빌딩 6층<br />(구 : 서울특별시 강남구 신사동 630-31)</p>
+
+                <h4 class="tit">연락처</h4>
+                <h5 class="sub_tit">E-MAIL</h5>
+                <p class="pb2"><a href="mailto:nexon@nexonfoundation.org">nexon@nexonfoundation.org</a></p>
+                <h5 class="sub_tit">전화</h5>
+                <p class="pb1"><a href="tel: 02-512-1994">02-512-1994</a></p>
+
+                <a href="#self" class="btn_map">지도 자세히 보기<em></em></a>
+            </div>
+        </div>
+
+    </div><!-- id : main_container -->
+</div>
+
+</body>
+</html>

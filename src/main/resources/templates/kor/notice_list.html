@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/front/js/page/notice.js}"></script>
+</head>
+<body>
+<div class="content" layout:fragment="contents">
+    <div id="container">
+
+        <div class="mobild_sub_tabs">
+            <ul class="two">
+                <li><a href="/page/kor/story_list"><em>스토리</em></a></li>
+                <li class="on"><a href="/page/kor/notice_list"><em>공지사항</em></a></li>
+            </ul>
+        </div>
+
+        <section class="sub_visual_wrap new2">
+            <div class="txt_box">
+                <h3 class="tit">공지사항</h3>
+            </div>
+        </section>
+
+        <section class="notice_list_wrap">
+            <div class="inner_box">
+                <div class="serach_box">
+                    <select id="keyField" name="">
+                        <option value="" selected="selected">전체</option>
+                        <option value="title">제목</option>
+                        <option value="contents">내용</option>
+                    </select>
+                    <span class="btn_search">
+                        <input type="text" id="keyWord" class="it"/>
+                        <a href="#self" onclick="getList(1)"><span class="blind">찾기</span></a>
+                    </span>
+                </div>
+
+                <div class="notice_list_box"></div>
+
+                <div id="paging" class="pagination"></div>
+            </div>
+        </section>
+
+    </div><!-- id : main_container -->
+</div>
+
+</body>
+</html>

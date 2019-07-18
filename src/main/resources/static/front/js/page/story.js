@@ -49,7 +49,6 @@ var setCate = function (bar) {
 var getList = function(params) {
 
     tms.ajaxGetHelper('/api/story', params, null, function(result) {
-        console.log(result.data.totalCnt);
         $('.story_list').html('');
         var paging = {
             id: '#paging',

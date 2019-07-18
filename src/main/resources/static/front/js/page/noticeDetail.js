@@ -9,9 +9,13 @@ var getDetail = function() {
     };
 
     tms.ajaxGetHelper('/api/notice/detail', params, null, function(res) {
+
         if(res.code == 0){
             var obj = res.data;
-            tmsInput.detailMapping(obj);
+
+            $('.story_view_wrap .story_top .title').text(obj.title);
+            $('.story_view_wrap .story_top .date').html(obj.creDt+'<em class="count">'+obj.viewCnt+'</em>');
+            $('.story_view_wrap .story_article').html( obj.contents );
 
             var files = obj.flist;
             if(tms.isNotEmpty(files)){
@@ -25,19 +29,21 @@ var getDetail = function() {
             var prevNotice = res.data.prevNotice;
             var nextNotice = res.data.nextNotice;
 
-            if(prevNotice != null) {
-                var prevHtml = '<span class="up">이전 글</span>';
-                prevHtml += '<a href="/page/notice/detail?seq='+prevNotice.noticeSeq+'">'+prevNotice.title+'</a>';
+            var ln = tms.getCookie('lang');
+            var next = (ln=='eng')?'next':'다음글';
+            var prev = (ln=='eng')?'prev':'이전글';
 
+            if(prevNotice != null) {
+                var prevHtml = prev+'<span>'+prevNotice.title+'</span>';
+                $("#prevNotice").attr("href", location.pathname +'?seq='+ prevNotice.noticeSeq);
                 $("#prevNotice").html(prevHtml);
             } else {
                 $("#prevNotice").hide();
             }
 
             if(nextNotice != null) {
-                var nextHtml = '<span class="down">다음 글</span>';
-                nextHtml += '<a href="/page/notice/detail?seq='+nextNotice.noticeSeq+'">'+nextNotice.title+'</a>';
-
+                var nextHtml = next+'<span>'+nextNotice.title+'</span>';
+                $("#nextNotice").attr("href", location.pathname +'?seq='+ nextNotice.noticeSeq);
                 $("#nextNotice").html(nextHtml);
             } else {
                 $("#nextNotice").hide();

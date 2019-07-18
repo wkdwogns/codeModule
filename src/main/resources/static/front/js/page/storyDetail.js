@@ -14,7 +14,8 @@ var getDetail = function() {
     };
 
     tms.ajaxGetHelper(detailUrl, params, null, function(res) {
-        console.log(res)
+
+
         if(res.code == 0){
             var obj =res.data;
             var c = obj.category;
@@ -32,8 +33,12 @@ var getDetail = function() {
             var prevStory = res.data.prevStory;
             var nextStory = res.data.nextStory;
 
+            var ln = tms.getCookie('lang');
+            var next = (ln=='eng')?'next':'다음글';
+            var prev = (ln=='eng')?'prev':'이전글';
+
             if(prevStory != null) {
-                var prevHtml = '이전글<span>'+prevStory.storyNm+'</span>';
+                var prevHtml = prev+'<span>'+prevStory.storyNm+'</span>';
                 $("#prevStory").attr("href", location.pathname +'?seq='+ prevStory.storySeq);
                 $("#prevStory").html(prevHtml);
             } else {
@@ -41,7 +46,7 @@ var getDetail = function() {
             }
 
             if(nextStory != null) {
-                var nextHtml = '다음글<span>'+nextStory.storyNm+'</span>';
+                var nextHtml = next+'<span>'+nextStory.storyNm+'</span>';
                 $("#nextStory").attr("href", location.pathname +'?seq='+ nextStory.storySeq);
                 $("#nextStory").html(nextHtml);
             } else {

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/front/js/page/story.js}"></script>
+    <style>
+        .story_list_wrap .story_list_box .story_list li img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="content" layout:fragment="contents">
+    <div id="container">
+
+        <div class="mobild_sub_tabs">
+            <ul class="two">
+                <li class="on"><a href="/page/kor/story_list"><em>스토리</em></a></li>
+                <li><a href="/page/kor/notice_list"><em>공지사항</em></a></li>
+            </ul>
+        </div>
+
+        <section class="sub_visual_wrap new1">
+            <div class="txt_box">
+                <h3 class="tit">스토리</h3>
+            </div>
+        </section>
+
+        <section class="story_list_wrap">
+            <div class="inner_box">
+                <ul class="story_tab">
+                    <li class="on"><a href="#self" onclick="barList('')"><em>전체</em></a></li>
+                    <li><a href="#self" onclick="barList(1)"><em>IT</em></a></li>
+                    <li><a href="#self" onclick="barList(2)"><em>CULTURE</em></a></li>
+                    <li><a href="#self" onclick="barList(3)"><em>PLAY</em></a></li>
+                    <li><a href="#self" onclick="barList(4)"><em>HEALTH</em></a></li>
+                </ul>
+
+                <div class="search_box">
+                    <span class="se1">
+                        <select id="category" title="">
+                            <option value="" selected="selected">사업분류</option>
+                            <option value="1">IT</option>
+                            <option value="2">CULTURE</option>
+                            <option value="3">PLAY</option>
+                            <option value="4">HEALTH</option>
+                        </select>
+                    </span>
+                    <span class="se2">
+                        <select id="keyField">
+                            <option value="" selected="selected">전체</option>
+                            <option value="title">제목</option>
+                            <option value="contents">내용</option>
+                        </select>
+                    </span>
+                    <span class="se3">
+                        <input type="text" id="keyWord"/>
+                        <a href="#self" class="btn_search" onclick="basicList(1)"><span class="blind">검색</span></a>
+                    </span>
+                </div>
+
+                <div class="story_list_box">
+                    <ul class="story_list"></ul>
+                </div>
+
+                <div id="paging" class="pagination"></div>
+            </div>
+        </section>
+
+    </div><!-- id : main_container -->
+</div>
+
+</body>
+</html>

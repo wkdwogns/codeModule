@@ -23,10 +23,10 @@ UI = {
 		var screen_width = $(window).width();
 		if (screen_width <= 750){
 			UI.SV.screenFlag = 1;//MO
-			console.log("모바일");
+			//console.log("모바일");
 		}else {
 			UI.SV.screenFlag = 2;//PC
-			console.log("피시");
+			//console.log("피시");
 		}
 	},
 

@@ -12,6 +12,7 @@ public class SelectNoticeDetailRes {
     private String title;
     private String importantYn;
     private String viewYn;
+    private String viewCnt;
     private String viewStDt;
     private String viewEndDt;
     private String viewUnlimit;

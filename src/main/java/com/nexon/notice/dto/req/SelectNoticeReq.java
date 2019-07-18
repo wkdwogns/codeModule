@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class SelectNoticeReq {
+    private String keyField;
+    private String keyWord;
 
     @ApiParam(value = "페이지 조회 개수", required = true)
     private int currentPage;

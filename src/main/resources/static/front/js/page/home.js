@@ -9,7 +9,8 @@ var setLang = function (lang) {
         var ln = tms.getCookie('lang');
         var pNm = location.pathname;
         var pLink = (ln == 'eng')?pNm.replace('kor','eng'):pNm.replace('eng','kor');
-        location.href=pLink;
+        console.log(location.search);
+        location.href=pLink+location.search;
     });
 }
 

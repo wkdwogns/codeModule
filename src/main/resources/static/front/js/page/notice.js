@@ -6,7 +6,24 @@ $(function() {
 var getList = function(no) {
     var colsInfo = [
           {no: 1, col: 'no', name: '번호'}
-        , {no: 2, col: 'title', name: '제목', width:"400px;", class: function(){return "article"}, custom:function(obj){
+        , {no: 2, col: 'title', name: '제목', width:"400px;"
+            , class: function(obj){
+                var creDt = obj.creDt;
+                var creDtArr = creDt.split(".");
+                var date = new Date();
+                date.setFullYear(creDtArr[0], (Number(creDtArr[1])-1), creDtArr[2]);
+                date.setDate(date.getDate() + 30);
+
+                var cl = "article";
+                if(obj.fileGrpSeq != null && obj.fileGrpSeq != 0) {
+                    cl += ' file';
+                }
+                if(today.getTime() < date.getTime()) { //30일전
+                    cl += ' new';
+                }
+                return cl
+            },
+            custom:function(obj){
                 var creDt = obj.creDt;
                 var creDtArr = creDt.split(".");
 
@@ -14,43 +31,38 @@ var getList = function(no) {
                 date.setFullYear(creDtArr[0], (Number(creDtArr[1])-1), creDtArr[2]);
                 date.setDate(date.getDate() + 30);
 
-                var html = '<a href="/page/notice/detail?seq='+obj.noticeSeq+'">'+obj.title+'</a>';
-                if(obj.importantYn == "Y"){
-                    html += '<span class="important"><em class="blind">important</em></span>';
-                }
-                if(obj.noticeType == noticeTypeCode.type2) { //공지사항
-                    html += '<span class="notice"><em class="blind">notice</em></span>';
+                var nw = '';
+                var f = '';
+                if(obj.fileGrpSeq != null && obj.fileGrpSeq != 0) {
+                    f='<span class="ico_file"><em class="blind">file</em></span>';
                 }
 
                 if(today.getTime() < date.getTime()) { //30일전
-                    html += '<span class="new"><em class="blind">new</em></span>';
+                    nw='<span class="ico_new"><em class="blind">new</em></span>';
                 }
 
+                var url = location.pathname.replace('list','view')+'?seq='+obj.noticeSeq;
+                var html = '<a href="#self" onclick="viewCnt('+obj.noticeSeq+')">'+obj.title+nw+f+'</a>';
                 return html;
             }
         }
-        , {no: 3, col: 'fileGrpSeq', name: '첨부파일', custom: function(obj){
-                if(obj.fileGrpSeq != null && obj.fileGrpSeq != 0) {
-                    return '<img src="/front/images/common/ico_file.gif" alt="첨부파일" />';
-                } else {
-                    return "";
-                }
-            }
-        }
-        , {no: 4, col: 'creDt', name: '등록일'}
-
+        , {no: 3, col: 'creDt', name: '등록일', class: function(){return "date"}}
+        , {no: 4, col: 'viewCnt', name: '조회수', class: function(){return "count"}}
     ];
 
     var params = {
         cntPerPage: 10
         ,currentPage:no
+        ,keyField:$('#keyField').val()
+        ,keyWord:$('#keyWord').val()
     };
 
     tms.ajaxGetHelper('/api/notice', params, null, function(result) {
+
         var paging = {
             id: '#paging',
             pageNo: no,
-            totalCnt: 0,
+            totalCnt: result.data.totalCnt,
             countPerPage: 10,
             pageCount: 10,
             fn: 'getList',
@@ -63,7 +75,7 @@ var getList = function(no) {
             paging: paging
         };
 
-        var listObj = "#list";
+        var listObj = ".notice_list_box";
 
         if(result.code == 0) {
             var totalCnt = result.data.totalCnt;
@@ -82,4 +94,15 @@ var getList = function(no) {
 
     });
 
+}
+
+var viewCnt = function(no){
+
+    tms.ajaxPutHelper('/api/notice/viewCnt', JSON.stringify({no:no}), null, function(rs) {
+
+        if(rs.code==0){
+            var url = location.pathname.replace('list','view')+'?seq='+no;
+            location.href=url;
+        }
+    });
 }

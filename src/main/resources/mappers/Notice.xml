@@ -9,6 +9,7 @@
                 ,n.TITLE
                 ,n.IMPORTANT_YN
                 ,n.VIEW_YN
+                ,n.VIEW_CNT
                 ,n.VIEW_UNLIMIT_YN
                 ,n.NOTICE_TYPE
                 ,n.FILE_GRP_SEQ
@@ -33,6 +34,7 @@
                 ,n.TITLE
                 ,n.IMPORTANT_YN
                 ,n.VIEW_YN
+                ,n.VIEW_CNT
                 ,n.VIEW_UNLIMIT_YN
                 ,n.NOTICE_TYPE
                 ,n.FILE_GRP_SEQ
@@ -45,6 +47,12 @@
               AND n.VIEW_YN = 'Y'
               AND IFNULL(n.IMPORTANT_YN, 'N') = 'N'
               AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
+                <if test="keyField=='title'">
+                    AND n.TITLE like concat('%',#{keyWord},'%')
+                </if>
+                <if test="keyField=='contents'">
+                    AND n.CONTENTS like concat('%',#{keyWord},'%')
+                </if>
             ORDER BY n.CRE_DT DESC
         ) A,
         (SELECT @rownum:=0) rn
@@ -61,6 +69,12 @@
           AND n.VIEW_YN = 'Y'
           AND IFNULL(n.IMPORTANT_YN, 'N') = 'N'
           AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
+            <if test="keyField=='title'">
+                AND n.TITLE like concat('%',#{keyWord},'%')
+            </if>
+            <if test="keyField=='contents'">
+                AND n.CONTENTS like concat('%',#{keyWord},'%')
+            </if>
     </select>
 
     <select id="selectNoticeDetail" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.res.SelectNoticeDetailRes">
@@ -69,6 +83,7 @@
             ,n.TITLE
             ,n.IMPORTANT_YN
             ,n.VIEW_YN
+            ,n.VIEW_CNT
             ,n.CONTENTS
             ,n.FILE_GRP_SEQ
             ,n.VIEW_UNLIMIT_YN
@@ -106,5 +121,17 @@
         ORDER BY A.NOTICE_SEQ
         LIMIT 1
     </select>
+
+    <update id="putViewCnt" parameterType="com.nexon.notice.dto.req.PutNoticeReq">
+        UPDATE
+          TB_NOTICE
+        SET
+            VIEW_CNT = (SELECT a.VIEW_CNT FROM (
+            SELECT VIEW_CNT+1 VIEW_CNT FROM TB_NOTICE WHERE NOTICE_SEQ=#{no}
+            ) a
+            )
+        WHERE
+            NOTICE_SEQ=#{no}
+    </update>
 
 </mapper>

@@ -11,6 +11,7 @@ public class NoticeListVO {
     private String noticeType;
     private String fileGrpSeq;
     private String viewYn;
+    private String viewCnt;
     private String viewStDt;
     private String viewEndDt;
     private String viewUnlimit;

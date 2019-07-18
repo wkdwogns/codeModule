@@ -345,9 +345,19 @@ function tableType3(id, data, info, colspan, noMessage, tableWidth) {
     if ($(id).find('table').length == 0) {
         var tableTemplate = "";
         if(tms.isEmpty(tableWidth)) {
-            tableTemplate = $('<table cellpadding="0" cellspacing="0" class="notice_list"><thead><tr scope="col"></tr></thead><tbody></tbody></table>');
+            tableTemplate = $('<table cellpadding="0" cellspacing="0" class="notice_list"><colgroup>' +
+                '                            <col class="col_size1"/>' +
+                '                            <col class="col_size2"/>' +
+                '                            <col class="col_size3"/>' +
+                '                            <col class="col_size4"/>' +
+                '                        </colgroup><tbody></tbody></table>');
         } else {
-            tableTemplate = $("<table cellpadding='0' cellspacing='0' class='notice_list' style='width:"+tableWidth+"'><thead><tr scope='col'></tr></thead><tbody></tbody></table>");
+            tableTemplate = $("<table cellpadding='0' cellspacing='0' class='notice_list' style='width:"+tableWidth+"'><colgroup>" +
+                "                            <col class='col_size1'/>" +
+                "                            <col class='col_size2'/>" +
+                "                            <col class='col_size3'/>" +
+                "                            <col class='col_size4'/>" +
+                "                        </colgroup><tbody></tbody></table>");
         }
 
         $.each(cols, function (k, v) {
@@ -359,9 +369,9 @@ function tableType3(id, data, info, colspan, noMessage, tableWidth) {
             }
 
             if(tms.isEmpty(width)) {
-                tableTemplate.find('thead tr').append("<th scope='col' style='text-align:center;'>" + value + '</th>');
+                //tableTemplate.find('thead tr').append("<th scope='col' style='text-align:center;'>" + value + '</th>');
             } else {
-                tableTemplate.find('thead tr').append("<th scope='col' style='text-align:center;width:"+width+"'>" + value + '</th>');
+                //tableTemplate.find('thead tr').append("<th scope='col' style='text-align:center;width:"+width+"'>" + value + '</th>');
             }
 
         });
@@ -391,7 +401,7 @@ function tableType3(id, data, info, colspan, noMessage, tableWidth) {
                 if (typeof val == 'object') {
                     var col = obj[val.col]; //컴럼에 일치하는 값
                     if (val.class != null && typeof val.class == 'function') {
-                        td.addClass(val.class(col));
+                        td.addClass(val.class(obj));
                     }
 
                     var html = '';

@@ -3,6 +3,7 @@ package com.nexon.notice.dao;
 
 import com.nexon.notice.dto.model.NoticeDetailPrevNextVO;
 import com.nexon.notice.dto.model.NoticeListVO;
+import com.nexon.notice.dto.req.PutNoticeReq;
 import com.nexon.notice.dto.req.SelectNoticeDetailReq;
 import com.nexon.notice.dto.req.SelectNoticeReq;
 import com.nexon.notice.dto.res.SelectNoticeDetailRes;
@@ -27,4 +28,5 @@ public interface NoticeDao {
 
     NoticeDetailPrevNextVO selectNextNotice(SelectNoticeDetailReq req);
 
+    void putViewCnt(PutNoticeReq req);
 }

@@ -1,14 +1,13 @@
 package com.nexon.notice.controller;
 
 import com.nexon.common.dto.res.ResponseHandler;
+import com.nexon.notice.dto.req.PutNoticeReq;
 import com.nexon.notice.dto.req.SelectNoticeDetailReq;
 import com.nexon.notice.dto.req.SelectNoticeReq;
 import com.nexon.notice.service.NoticeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/notice")
@@ -35,6 +34,13 @@ public class NoticeController {
     @GetMapping("/prevNext")
     public ResponseHandler<?> selectNoticeDetailPrevNext(SelectNoticeDetailReq req) {
         ResponseHandler<?> result = noticeService.selectNoticeDetailPrevNext(req);
+        return  result;
+    }
+
+    @ApiOperation(value = "조회수")
+    @PutMapping("/viewCnt")
+    public ResponseHandler<?> putViewCnt(@RequestBody PutNoticeReq req) {
+        ResponseHandler<?> result = noticeService.putViewCnt(req);
         return  result;
     }
 

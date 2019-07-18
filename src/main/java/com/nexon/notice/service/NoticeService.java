@@ -8,6 +8,7 @@ import com.nexon.common.type.ReturnType;
 import com.nexon.notice.dao.NoticeDao;
 import com.nexon.notice.dto.model.NoticeDetailPrevNextVO;
 import com.nexon.notice.dto.model.NoticeListVO;
+import com.nexon.notice.dto.req.PutNoticeReq;
 import com.nexon.notice.dto.req.SelectNoticeDetailReq;
 import com.nexon.notice.dto.req.SelectNoticeReq;
 import com.nexon.notice.dto.res.SelectNoticeDetailPrevNextRes;
@@ -139,6 +140,21 @@ public class NoticeService {
             res.setNextNotice(nextVo);
 
             result.setData(res);
+            result.setReturnCode(ReturnType.RTN_TYPE_OK);
+        } catch (Exception e) {
+            result.setReturnCode(ReturnType.RTN_TYPE_NG);
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public ResponseHandler<?> putViewCnt(PutNoticeReq req) {
+        ResponseHandler<SelectNoticeDetailPrevNextRes> result = new ResponseHandler<>();
+
+        try{
+
+            noticeDao.putViewCnt(req);
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
         } catch (Exception e) {
             result.setReturnCode(ReturnType.RTN_TYPE_NG);
