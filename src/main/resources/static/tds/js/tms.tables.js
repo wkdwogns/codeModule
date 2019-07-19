@@ -317,7 +317,7 @@ function pagingType2(info) {
         if (currentPage == i) {
             html += '<a href="#self" class="' + activeClass + '">' + i + '</a>';
         } else {
-            html += '<a href="#self">' + aTag + '</a>';
+            html += aTag;
         }
     }
 
@@ -488,7 +488,7 @@ function pagingType3(info) {
         if (currentPage == i) {
             html += '<a href="#self" class="' + activeClass + '">' + i + '</a>';
         } else {
-            html += '<a href="#self"' + aTag + '</a>';
+            html += aTag;
         }
     }
     html += '</span>';
