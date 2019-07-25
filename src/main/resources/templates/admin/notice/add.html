@@ -97,7 +97,7 @@
             <tr>
                 <th>첨부파일</th>
                 <td>
-                    <input type="file" id="devIdTxtAttach" name="Attach" value="" accept="image/*">
+                    <input type="file" id="devIdTxtAttach" name="Attach">
                 </td>
             </tr>
 
@@ -219,16 +219,11 @@
 
             var f1 = $('#devIdTxtAttach')[0].files[0];
             if(f1 != null && f1 != ''){
-                if(!tms.checkFileExtensionImage(f1.name)) {
-                    alert("이미지 파일만 업로드 가능합니다.");
-                    return;
-                }
                 data.append("file", f1 );
             }
 
             var url = "/mapi/notice";
-            var getParams = new URLSearchParams(location.search);
-            var info = getParams.get("info");
+            var info = tms.getParameterByName("info");
 
             if(tms.isNotEmpty(info)){
                 url = "/mapi/notice/edit";
@@ -285,7 +280,7 @@
             var params = { seq:info };
 
             tms.ajaxGetHelper('/mapi/notice/detail', params, null, function(rs) {
-console.log(rs);
+
                 if(rs.code==0){
                     var d = rs.data;
 
@@ -348,8 +343,8 @@ console.log(rs);
                 }
             });
 
-            var getParams = new URLSearchParams(location.search);
-            var info = getParams.get("info");
+
+            var info = tms.getParameterByName("info");
 
             if(info!=null&&info!=''){
                 detail(info);
@@ -358,8 +353,7 @@ console.log(rs);
                 $('#btnList .deleteBtn').click(function(e){
                     e.preventDefault();
                     if(confirm('삭제하시겠습니까?')){
-                        var getParams = new URLSearchParams(location.search);
-                        var info = getParams.get("info");
+                        var info = tms.getParameterByName("info");
                         var data ={};
                         if(tms.isEmpty(info)){return ;}
                         data.seq=info;

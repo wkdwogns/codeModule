@@ -11,13 +11,26 @@
 				<p>02-512-1994</p>
 			</div>
 			<div class="select">
-				<select name="" title="">
+				<select onchange="familySite(this.value)">
 					<option value="" selected="selected">Family Site</option>
-					<option value="">사이트</option>
-					<option value="">사이트</option>
-					<option value="">사이트</option>
+					<option value="1">넥슨기업홈페이지</option>
+					<option value="2">넥슨청소년프로그래밍챌린지</option>
+					<option value="3">넥슨작은책방</option>
+					<option value="4">넥슨컴퓨터박물관</option>
+					<option value="5">넥슨개발자컨퍼런스</option>
 				</select>
 			</div>
+			<script>
+                function familySite(no) {
+                    var path = '';
+                    if(no=='1'){path = 'http://company.nexon.com/';}
+                    if(no=='2'){path = 'https://www.nypc.co.kr/main/main.do';}
+                    if(no=='3'){path = 'https://nexonlibrary.com/';}
+                    if(no=='4'){path = 'http://www.nexoncomputermuseum.org/';}
+                    if(no=='5'){path = 'https://ndc.nexon.com/main';}
+                    window.open(path, '_blank');
+                }
+			</script>
 		</div><!-- class : footer_inner -->
 	</footer><!-- id : footer -->
 </div>

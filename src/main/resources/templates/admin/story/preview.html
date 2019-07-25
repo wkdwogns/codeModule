@@ -2,8 +2,7 @@
 <div id="content" class="content">
 
     <script>
-        var getParams = new URLSearchParams(location.search);
-        var info = getParams.get("info");
+        var info = tms.getParameterByName("info");
         if(info==null||info==''){
 
         }else{

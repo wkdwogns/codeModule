@@ -123,8 +123,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
     <script>
-        var getParams = new URLSearchParams(location.search);
-
         /* 서머노트 초기화 함수 */
         var setSummernote = function(){
             $('#summernote').summernote({
@@ -149,7 +147,7 @@
         $('.devCssBtnDel').click(function () {
            if( confirm('삭제하시겠습니까?') ){
 
-               var info = getParams.get("info");
+               var info = tms.getParameterByName("info");
                var params = {
                    seq:info
                }
@@ -173,7 +171,7 @@
                 return;
             }
 
-            var info = getParams.get("info");
+            var info = tms.getParameterByName("info");
 
             if(tms.isEmpty($('#devIdTxtTitle').val())){
                 alert('제목을 입력해 주세요.');
@@ -355,7 +353,7 @@
                 }
             });
 
-            var info = getParams.get("info");
+            var info = tms.getParameterByName("info");
 
             if(info!=null&&info!=''){
                 detail(info);
