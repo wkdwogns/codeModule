@@ -25,4 +25,6 @@ public interface AstoryDao {
     SelectStoryDetailRes selectStoryDetail(SelectStoryDetailReq req);
 
     int selectViewLimitCnt();
+
+    void deleteFile(DeleteStoryImgReq req);
 }

@@ -147,4 +147,13 @@
             AND A.IMPORTANT_YN = 'Y'
     </select>
 
+    <update id="deleteFile" parameterType="com.nexon.admin.story.req.DeleteStoryImgReq">
+        UPDATE
+            TB_STORY
+        SET
+            FILE_GRP_SEQ=null
+        WHERE
+            STORY_SEQ=#{seq}
+    </update>
+
 </mapper>

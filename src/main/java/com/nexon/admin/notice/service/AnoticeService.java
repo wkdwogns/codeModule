@@ -174,4 +174,22 @@ public class AnoticeService {
 
         return check;
     }
+
+    public ResponseHandler<?> deleteFile(DeleteNoticeImgReq req) {
+        ResponseHandler<?> result = new ResponseHandler<>();
+
+        try{
+            FileDeleteReq fr = adminFileService.setDeleteFile(req.getFileSeq(),configFile.getSelectCategory3());
+            fileService.deleteFiles(fr);
+
+            adminNoticeDao.deleteFile(req);
+
+            result.setReturnCode(ReturnType.RTN_TYPE_OK);
+        } catch (Exception e) {
+            result.setReturnCode(ReturnType.RTN_TYPE_NG);
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

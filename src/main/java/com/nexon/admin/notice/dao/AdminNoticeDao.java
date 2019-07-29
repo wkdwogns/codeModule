@@ -25,4 +25,6 @@ public interface AdminNoticeDao {
     SelectNoticeDetailRes selectNoticeDetail(SelectNoticeDetailReq req);
 
     int selectViewLimitCnt();
+
+    void deleteFile(DeleteNoticeImgReq req);
 }

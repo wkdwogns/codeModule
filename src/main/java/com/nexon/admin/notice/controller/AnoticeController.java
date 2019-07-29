@@ -50,4 +50,11 @@ public class AnoticeController {
         ResponseHandler<?> result = aNoticeService.deleteNotice(req);
         return  result;
     }
+
+    @ApiOperation(value = "이미지 삭제")
+    @DeleteMapping("/deleteFile")
+    public ResponseHandler<?> deleteFile(@RequestBody(required = false) DeleteNoticeImgReq req) {
+        ResponseHandler<?> result = aNoticeService.deleteFile(req);
+        return  result;
+    }
 }

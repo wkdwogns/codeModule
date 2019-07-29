@@ -137,4 +137,15 @@
           AND A.IMPORTANT_YN = 'Y'
     </select>
 
+    <update id="deleteFile" parameterType="com.nexon.admin.notice.req.DeleteNoticeImgReq">
+        UPDATE
+            TB_NOTICE
+        SET
+            FILE_GRP_SEQ=null
+        WHERE
+            NOTICE_SEQ=#{seq}
+    </update>
+
+
+
 </mapper>

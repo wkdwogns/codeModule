@@ -1,17 +1,20 @@
 package com.nexon.admin.AdminFile;
 
+import com.nexon.common.dto.res.ResponseHandler;
 import com.nexon.common.file.config.ConfigFile;
 import com.nexon.common.file.dto.model.FileDeleteInfo;
 import com.nexon.common.file.dto.req.FileDeleteReq;
 import com.nexon.common.file.dto.req.FileSaveReq;
 import com.nexon.common.file.dto.res.FileInfoRes;
 import com.nexon.common.file.service.FileService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminFileService {
@@ -26,7 +29,7 @@ public class AdminFileService {
         FileSaveReq fileSaveReq = new FileSaveReq();
         fileSaveReq.setCategory(cate);
         fileSaveReq.setIsSaveInfos(true);
-        fileSaveReq.setCheckExtCategory(configFile.getExtCategory1());
+        fileSaveReq.setCheckExtCategory(configFile.getExtCategory3());
         FileInfoRes fileInfoRes = fileService.storeFiles(files, fileSaveReq);
         return fileInfoRes.getFileGrpSeq();
     }
@@ -49,20 +52,19 @@ public class AdminFileService {
     public void setDeleteFileByEditor(ArrayList<String> EditorDelImg,int cate){
         //3. 공지사항 삭제된 이미지 물리 삭제
 
+        List<FileDeleteInfo> fileDelInfoList = new ArrayList<>();
 
-            List<FileDeleteInfo> fileDelInfoList = new ArrayList<>();
+        ArrayList<String> imgs = EditorDelImg;
+        for(String nm : imgs){
+            FileDeleteInfo fileDeleteInfo = new FileDeleteInfo();
+            fileDeleteInfo.setFileName(nm);
+            fileDelInfoList.add(fileDeleteInfo);
+        }
 
-            ArrayList<String> imgs = EditorDelImg;
-            for(String nm : imgs){
-                FileDeleteInfo fileDeleteInfo = new FileDeleteInfo();
-                fileDeleteInfo.setFileName(nm);
-                fileDelInfoList.add(fileDeleteInfo);
-            }
-
-            FileDeleteReq fileDeleteReq = new FileDeleteReq();
-            fileDeleteReq.setCategory(cate);
-            fileDeleteReq.setIsSaveInfos(false);
-            fileDeleteReq.setFileDeleteInfos(fileDelInfoList);
+        FileDeleteReq fileDeleteReq = new FileDeleteReq();
+        fileDeleteReq.setCategory(cate);
+        fileDeleteReq.setIsSaveInfos(false);
+        fileDeleteReq.setFileDeleteInfos(fileDelInfoList);
 
         try {
             fileService.deleteFiles(fileDeleteReq);
@@ -71,4 +73,5 @@ public class AdminFileService {
         }
 
     }
+
 }

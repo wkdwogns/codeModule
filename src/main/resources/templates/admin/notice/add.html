@@ -304,9 +304,10 @@
                     if(d.flist!=null){
                         var fl =d.flist;
                         for(var i in fl){
-                            $('#devIdTxtAttach').after('<br>' +
+                            $('#devIdTxtAttach').after('<div id="fileNo'+fl[i].fileSeq+'">' +
                                 '<input type="hidden" id="devIdFileSeq" value="'+fl[i].fileSeq+'"/>'+
-                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=3">'+fl[i].orgFileNm+'</a>');
+                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=3" style="margin-right: 30px;">'+fl[i].orgFileNm+'</a>' +
+                                '<a onclick="deleteFile('+fl[i].fileSeq+')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a></div>');
                         }
                     }
 
@@ -316,6 +317,25 @@
 
             });
 
+        }
+
+        function deleteFile(no) {
+            if(confirm('삭제하시겠습니까?')){
+                var info = tms.getParameterByName("info");
+                var params = {
+                    seq : info
+                    ,fileSeq:no
+                }
+
+                tms.ajaxDeleteHelper('/mapi/notice/deleteFile', JSON.stringify(params), null, function(rs) {
+                    if(rs.code==0){
+                        alert('삭제되었습니다.');
+                        $('#fileNo'+no).remove();
+                    }else{
+                        alert('오류가 있습니다..')
+                    }
+                });
+            }
         }
 
         $(document).ready(function () {

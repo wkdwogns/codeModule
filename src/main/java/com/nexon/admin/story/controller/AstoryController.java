@@ -1,5 +1,6 @@
 package com.nexon.admin.story.controller;
 
+import com.nexon.admin.notice.req.DeleteNoticeImgReq;
 import com.nexon.admin.story.req.*;
 import com.nexon.admin.story.req.SelectStoryDetailReq;
 import com.nexon.admin.story.res.SelectStoryDetailRes;
@@ -53,6 +54,13 @@ public class AstoryController {
     @DeleteMapping
     public ResponseHandler<?> deleteStory(@RequestBody(required = false) DeleteStoryReq req) {
         ResponseHandler<?> result = aStoryService.deleteStory(req);
+        return  result;
+    }
+
+    @ApiOperation(value = "이미지 삭제")
+    @DeleteMapping("/deleteFile")
+    public ResponseHandler<?> deleteFile(@RequestBody(required = false) DeleteStoryImgReq req) {
+        ResponseHandler<?> result = aStoryService.deleteFile(req);
         return  result;
     }
 }

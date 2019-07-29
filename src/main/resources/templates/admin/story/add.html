@@ -92,7 +92,7 @@
             <tr>
                 <th>대표 이미지<span class="required">*</span></th>
                 <td>
-                    <input type="file" id="devIdTxtImg" name="Img">
+                    <input type="file" id="devIdTxtImg" name="Img" accept="image/*">
                 </td>
             </tr>
 
@@ -248,6 +248,10 @@
 
             var f = $('#devIdTxtImg')[0].files[0];
             if(f!=null&&f!=''){
+                if(!tms.checkFileExtensionImage(f.name)) {
+                    alert("이미지 파일만 업로드 가능합니다.");
+                    return;
+                }
                 data.append("image", f );
             }
 
@@ -323,9 +327,10 @@
                     if(d.flist!=null){
                         var fl =d.flist;
                         for(var i in fl){
-                            $('#devIdTxtImg').after('<br>' +
+                            $('#devIdTxtImg').after('<div id="fileNo'+fl[i].fileSeq+'">' +
                                 '<input type="hidden" id="thumbnailSeq" value="'+fl[i].fileSeq+'"/>'+
-                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=4">'+fl[i].orgFileNm+'</a>');
+                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=4" style="margin-right: 30px;">'+fl[i].orgFileNm+'</a>'+
+                                '<a onclick="deleteFile('+fl[i].fileSeq+')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a></div>');
                         }
                     }
 
@@ -338,6 +343,25 @@
 
             });
 
+        }
+
+        function deleteFile(no) {
+            if(confirm('삭제하시겠습니까?')){
+                var info = tms.getParameterByName("info");
+                var params = {
+                    seq : info
+                    ,fileSeq:no
+                }
+
+                tms.ajaxDeleteHelper('/mapi/story/deleteFile', JSON.stringify(params), null, function(rs) {
+                    if(rs.code==0){
+                        alert('삭제되었습니다.');
+                        $('#fileNo'+no).remove();
+                    }else{
+                        alert('오류가 있습니다..')
+                    }
+                });
+            }
         }
 
 
