@@ -41,7 +41,7 @@
             <thead>
             <tr>
                 <th>번호</th>
-                <th>중요</th>
+                <!--<th>중요</th>-->
                 <th>카테고리</th>
                 <th>성명</th>
                 <th>제목</th>
@@ -75,10 +75,10 @@
 
             var colsInfo = [
                 {no: 1, col: 'no', name: '번호'}
-                , {no: 2, col: 'importantYn', name: '중요',custom:function(obj){
+                /*, {no: 2, col: 'importantYn', name: '중요',custom:function(obj){
                     var rs = (obj.importantYn=="Y")?'Y':'';
                     return rs;
-                }}
+                }}*/
                 , {no: 3, col: 'category', name: '카테고리',custom:function(obj){
                     var rs ='';
                     if(obj.category=="1"){rs ='IT';}

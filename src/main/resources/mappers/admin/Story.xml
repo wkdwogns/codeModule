@@ -63,8 +63,8 @@
             , IMPORTANT_YN
             , VIEW_YN
             , VIEW_UNLIMIT_YN
-            , DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
-            , DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
+            , DATE_FORMAT(VIEW_ST_DT, '%Y-%m-%d %H:%i') VIEW_ST_DT
+            , DATE_FORMAT(VIEW_END_DT, '%Y-%m-%d %H:%i') VIEW_END_DT
             , FILE_GRP_SEQ
             , CONTENTS
         FROM

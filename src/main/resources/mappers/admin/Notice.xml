@@ -55,8 +55,8 @@
             ,n.FILE_GRP_SEQ
             ,n.VIEW_UNLIMIT_YN
             ,n.NOTICE_TYPE
-            ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
-            ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
+            ,DATE_FORMAT(n.VIEW_ST_DT, '%Y-%m-%d %H:%i') VIEW_ST_DT
+            ,DATE_FORMAT(n.VIEW_END_DT, '%Y-%m-%d %H:%i') VIEW_END_DT
         FROM
             TB_NOTICE n
         WHERE

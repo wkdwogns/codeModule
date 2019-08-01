@@ -71,10 +71,11 @@ var getList = function(params) {
             if(cate==3){cate='PLAY'}
             if(cate==4){cate='HEALTH'}
 
+            var fPath = (obj.filePath==null)?'/front/images/sub/exp1.jpg':obj.filePath;
 
             var html = "";
-            html += '<a href="#self" data-seq="'+obj.storySeq+'">';
-            html += '   <span class="img_box"><img src="'+obj.filePath+'" alt=""/></span>';
+            html += '<a href="#self" data-seq="'+fPath+'">';
+            html += '   <span class="img_box"><img src="'+fPath+'" alt=""/></span>';
             html += '   <span class="infor_box">';
             html += '       <span class="cate">'+cate+'</span>';
             html += '       <span class="tit">'+obj.storyNm+'</span>';
