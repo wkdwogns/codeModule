@@ -23,9 +23,9 @@
             </caption>
             <colgroup>
                 <col style="width: 80px;"/>
-                <col style="width: 80px;"/>
-                <col style="width: 80px;"/>
-                <col />
+                <!--<col style="width: 80px;"/>-->
+                <col style="width: 200px;"/>
+                <!--<col />-->
                 <col style="width: 200px;"/>
                 <col style="width: 70px;"/>
                 <col style="width: 70px;"/>
@@ -33,8 +33,8 @@
             <thead>
             <tr>
                 <th>번호</th>
-                <th>중요</th>
-                <th>공지</th>
+                <!--<th>중요</th>-->
+                <!--<th>공지</th>-->
                 <th>제목</th>
                 <th>노출기간</th>
                 <th>파일여부</th>
@@ -67,14 +67,14 @@
 
             var colsInfo = [
                 {no: 1, col: 'no', name: '번호'}
-                ,{no: 2, col: 'importantYn', name: '중요',custom:function(obj){
+                /*,{no: 2, col: 'importantYn', name: '중요',custom:function(obj){
                     var impo = (obj.importantYn=='Y')?'v':'';
                     return impo;
-                }}
-                ,{no: 3, col: 'noticeType', name: '공지',custom:function(obj){
+                }}*/
+                /*,{no: 3, col: 'noticeType', name: '공지',custom:function(obj){
                     var noticeType = (obj.noticeType == '003002')?'v':'';
                     return noticeType;
-                }}
+                }}*/
                 , {no: 4, col: 'title', name: '제목', width:"400px;",custom:function(obj){
                     var title = obj.title;
 
@@ -103,7 +103,7 @@
                 cntPerPage: 10
                 ,currentPage:no
                 ,cate1 : $('#devIdSelSCate1').val()
-                ,keyField : $('#devIdSelKeyField').val()
+                ,keyField : $('#keyField').val()
                 ,keyWord : $('#sKeyword').val()
             };
 

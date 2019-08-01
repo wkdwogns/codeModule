@@ -38,7 +38,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <!--<tr>
                 <th>중요여부<span class="required">*</span></th>
                 <td>
                     <input type="radio" id="importantYn1" name="importantYn" value="Y" class="devCssRdoIsView">
@@ -47,7 +47,7 @@
                     <input type="radio" id="importantYn2" name="importantYn" value="N" class="devCssRdoIsView" checked="">
                     <label for="importantYn2">중요하지 않음</label>
                 </td>
-            </tr>
+            </tr>-->
 
             <tr>
                 <th>노출여부<span class="required">*</span></th>
@@ -238,7 +238,8 @@
             data.append("editorDelImg", editorDelImg);
             data.append("viewUnlimitYn", isA );
             data.append("contents", contents );
-            data.append('importantYn', $(":input:radio[name=importantYn]:checked").val() );
+            /*data.append('importantYn', $(":input:radio[name=importantYn]:checked").val() );*/
+            data.append('importantYn', 'N' );
             var sdt = $('#devIdTxtSdt').val();
             var edt = $('#devIdTxtEdt').val();
             if(tms.isNotEmpty( sdt )){
