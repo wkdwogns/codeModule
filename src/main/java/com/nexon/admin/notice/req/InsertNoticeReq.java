@@ -14,11 +14,13 @@ public class InsertNoticeReq {
     private String viewEndDt;
     private String viewUnlimitYn;
     private Integer fileGrpSeq;
+    private Integer imgGrpSeq;
     private String contents;
     private String noticeType;
     private String creId;
     private String updId;
     private MultipartFile file;
+    private MultipartFile img;
     private ArrayList<String> editorDelImg;
 
 }

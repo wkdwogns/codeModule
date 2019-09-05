@@ -6,7 +6,7 @@ $(function(){
         notice:{
             bigMenu:[
                 {
-                    name:'공지사항관리'
+                    name:'공지사항'
                     ,url:mainPath+'/notice/list'
                 }
             ]

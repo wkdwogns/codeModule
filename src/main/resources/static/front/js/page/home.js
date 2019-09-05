@@ -1,5 +1,5 @@
 $(function(){
-    setLangUI();
+    getBanner();
 });
 
 var setLang = function (lang) {
@@ -146,10 +146,14 @@ var getBanner = function(){
     tms.ajaxGetHelper("/api/banner", null, null, function(res){
         if(res.code == 0){
             var list = res.data.list;
-            var html = '';
-            list.forEach(function(obj, idx){
-                $('.section_01 .slider').slick('slickAdd', bannerTemplate(obj))
-            });
+
+            //$('.section_01 .slider').html('');
+            //$('.section_01 .slider_thum').html('');
+            /*list.forEach(function(obj, idx){
+                $('.section_01 .slider').append(bannerTemplate(obj))
+                $('.section_01 .slider_thum').append(bannerTemplate2(obj))
+            });*/
+            //UI.fn_main();
         }
     });
 }
@@ -164,38 +168,39 @@ var getContentsBanner = function(){
                 $(".section_04 .thumnail").slick('slickAdd', bannerContentsThumTemplate(obj))
                 $('.section_04 .slider').slick('slickAdd', bannerContentsTemplate(obj))
             });
+
+
         }
     });
 }
 
 /* 메인 배너 템플릿 */
 var bannerTemplate = function(obj){
-    var html;
-    if(obj.bannerType == bannerTypeCode.type3){
-        html = '<div>'
-        html +=    '<div class="bg_picture">';
-        html +=    '    <iframe src="https://www.youtube.com/embed/'+obj.videoUrl+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen  style="width: 100%;height: 100%;"></iframe>';
-        html +=   '</div>'
-        html +=   '   <div class="comment_box">'
-         html +=  '    <p class="tit">'+obj.topText+'</p>'
-         html +=  '<p class="txt" style="word-break: keep-all;white-space:pre;">'+obj.title+'</p>'
-         html +=  '</div>'
-         html +=  '</div>';
-    } else {
-        html = '<div>';
-        if(tms.isNotEmpty(obj.targetUrl)){
-            html +='<a href="'+obj.targetUrl+'">';
-        }
-         html +=   '<div class="bg_picture" style="background:url('+obj.filePath+') center top no-repeat;"></div>';
-        if(tms.isNotEmpty(obj.targetUrl)){
-            html +='</a>';
-        }
-         html +=   '   <div class="comment_box">';
-         html +=   '    <p class="tit">'+obj.topText+'</p>';
-         html +=   '<p class="txt" style="word-break: keep-all;white-space:pre;">'+obj.title+'</p>';
-         html +=   '</div>';
-         html +=   '</div>';
-    }
+    var html='<div>';
+    html+='<div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>';
+    html+='<div class="comment_box">';
+    html+='<p class="txt_01">NYPC { }</p>';
+    html+='<p class="txt_02">청년의 꿈을 펼치는 <br/>바람콘서트</p>';
+    html+='<p class="txt_03">다양한 난이도의 문제를 통해 <br/>';
+    html+='프로그래밍을 처음 접하는 학생들도 부담없이 <br/>';
+    html+='도전해 볼 수 있었던 대회의 현장, 함께해보세요!</p>';
+    html+='<a href="#self" class="btn_more">자세히 보기</a>';
+    html+='</div>';
+    html+='</div>';
+
+    return html;
+}
+
+var bannerTemplate2 = function(obj){
+    var html='<div>';
+    html+='<div class="cont">';
+    html+='<div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>';
+    html+='<div class="comment_box">';
+    html+='<p>청년의 꿈을 펼치는 <br/>바람콘서트</p>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+
     return html;
 }
 

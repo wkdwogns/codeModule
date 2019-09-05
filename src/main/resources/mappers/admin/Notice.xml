@@ -53,6 +53,7 @@
             ,n.VIEW_YN
             ,n.CONTENTS
             ,n.FILE_GRP_SEQ
+            ,n.IMG_GRP_SEQ
             ,n.VIEW_UNLIMIT_YN
             ,n.NOTICE_TYPE
             ,DATE_FORMAT(n.VIEW_ST_DT, '%Y-%m-%d %H:%i') VIEW_ST_DT
@@ -73,6 +74,7 @@
             ,VIEW_END_DT
             ,VIEW_UNLIMIT_YN
             ,NOTICE_TYPE
+            ,IMG_GRP_SEQ
             ,FILE_GRP_SEQ
             ,CONTENTS
             ,DEL_YN
@@ -88,6 +90,7 @@
             ,#{viewEndDt}
             ,#{viewUnlimitYn}
             ,#{noticeType}
+            ,#{imgGrpSeq}
             ,#{fileGrpSeq}
             ,#{contents}
             ,'N'
@@ -109,6 +112,9 @@
             ,VIEW_END_DT=#{viewEndDt}
             ,VIEW_UNLIMIT_YN=#{viewUnlimitYn}
             ,NOTICE_TYPE=#{noticeType}
+            <if test="imgGrpSeq!=null and imgGrpSeq!=''">
+                ,IMG_GRP_SEQ=#{imgGrpSeq}
+            </if>
             <if test="fileGrpSeq!=null and fileGrpSeq!=''">
                 ,FILE_GRP_SEQ=#{fileGrpSeq}
             </if>
@@ -141,7 +147,12 @@
         UPDATE
             TB_NOTICE
         SET
+        <if test="type.equals('attach')">
             FILE_GRP_SEQ=null
+        </if>
+        <if test="type.equals('img')">
+            IMG_GRP_SEQ=NULL
+        </if>
         WHERE
             NOTICE_SEQ=#{seq}
     </update>

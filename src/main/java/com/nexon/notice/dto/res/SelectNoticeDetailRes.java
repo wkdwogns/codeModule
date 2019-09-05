@@ -22,6 +22,7 @@ public class SelectNoticeDetailRes {
     private String updId;
 
     private Integer fileGrpSeq;
+    private Integer imgGrpSeq;
     private String attach;
     private String attachName;
     private List fList;

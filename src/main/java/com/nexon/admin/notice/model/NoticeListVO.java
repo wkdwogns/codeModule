@@ -9,6 +9,7 @@ public class NoticeListVO {
     private String title;
     private String importantYn;
     private String fileGrpSeq;
+    private String imgGrpSeq;
     private String viewYn;
     private String viewStDt;
     private String viewEndDt;

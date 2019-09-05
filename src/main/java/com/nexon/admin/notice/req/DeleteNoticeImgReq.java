@@ -6,4 +6,5 @@ import lombok.Data;
 public class DeleteNoticeImgReq {
     private Integer seq;
     private Integer fileSeq;
+    private String type;
 }

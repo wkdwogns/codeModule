@@ -7,7 +7,7 @@
                 공지사항 등록 리스트
                 <div class="searchBox floatRight">
                     <input type="hidden" name="page" id="devIdHdnPage" value="1">
-                    <select id="devIdSelKeyField" name="sKeyfield" style="margin-right: 5px">
+                    <select id="sKeyField" name="sKeyField" style="margin-right: 5px">
                         <option value="">선택</option>
                         <option value="Title">제목</option>
                         <option value="Content">내용</option>
@@ -36,8 +36,8 @@
                 <!--<th>중요</th>-->
                 <!--<th>공지</th>-->
                 <th>제목</th>
-                <th>노출기간</th>
-                <th>파일여부</th>
+                <th>노출일자</th>
+                <th>첨부파일</th>
                 <th>노출여부</th>
             </tr>
             </thead>
@@ -47,7 +47,7 @@
 
     <div class="btnList clearfix">
         <div id="paging" class="paging"></div>
-        <button type="button" class="btn mainBtn floatRight devCssBtnAdd">등록</button>
+        <button type="button" class="btn mainBtn floatRight devCssBtnAdd">공지사항 등록</button>
     </div>
     <script>
         $('.devCssBtnAdd').click(function () {
@@ -80,14 +80,8 @@
 
                     return '<a href="/page/admin/notice/add?info='+obj.noticeSeq+'" class="ell">'+title+'</a>';
                 }}
-                , {no: 5, col: 'viewStDt', name: '노출기간', width:"400px;",custom:function(obj){
-                    var viewUnlimitYn = obj.viewUnlimitYn;
-                    var viewStDt = obj.viewStDt;
-                    var viewEndDt = obj.viewEndDt;
-                    var rs = (viewUnlimitYn=='N')?viewStDt+'~'+viewEndDt:'무제한';
-                    return rs;
-                }}
-                , {no: 6, col: 'attach', name: '파일첨부',custom:function(obj){
+                , {no: 5, col: 'viewStDt', name: '노출일자', width:"400px;"}
+                , {no: 6, col: 'attach', name: '첨부파일',custom:function(obj){
                     var a = obj.fileGrpSeq;
 
                     if(a!=null&&a!=''){
@@ -103,7 +97,7 @@
                 cntPerPage: 10
                 ,currentPage:no
                 ,cate1 : $('#devIdSelSCate1').val()
-                ,keyField : $('#keyField').val()
+                ,keyField : $('#sKeyField').val()
                 ,keyWord : $('#sKeyword').val()
             };
 

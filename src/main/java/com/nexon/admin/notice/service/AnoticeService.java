@@ -59,23 +59,28 @@ public class AnoticeService {
         try{
 
             //중요 여부 2개 제한
-            if(checkNoticeViewCnt() && "Y".equals(req.getViewYn()) && "Y".equals(req.getImportantYn())) {
-                result.setReturnCode(ReturnType.RTN_TYPE_DATA_EXISTS);
-                return result;
-            }
+//            if(checkNoticeViewCnt() && "Y".equals(req.getViewYn()) && "Y".equals(req.getImportantYn())) {
+//                result.setReturnCode(ReturnType.RTN_TYPE_DATA_EXISTS);
+//                return result;
+//            }
 
+            if(req.getImg()!=null) {
+                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
+                req.setImgGrpSeq(igs);
+            }
 
             if(req.getFile()!=null) {
                 int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory3());
                 req.setFileGrpSeq(fgs);
             }
 
+
+
             if(CommonUtil.isNotEmpty(req.getEditorDelImg())){
                 adminFileService.setDeleteFileByEditor(req.getEditorDelImg(),configFile.getSelectCategory3());
             }
 
             adminNoticeDao.insertNotice(req);
-
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
         } catch (Exception e) {
             result.setReturnCode(ReturnType.RTN_TYPE_NG);
@@ -89,7 +94,7 @@ public class AnoticeService {
         ResponseHandler<?> result = new ResponseHandler<>();
 
         try{
-
+/*
             SelectNoticeDetailReq dtlReq = new SelectNoticeDetailReq();
             dtlReq.setSeq(req.getSeq());
             SelectNoticeDetailRes res = adminNoticeDao.selectNoticeDetail(dtlReq);
@@ -98,6 +103,15 @@ public class AnoticeService {
             if(checkNoticeViewCnt() && "Y".equals(req.getViewYn()) && "Y".equals(req.getImportantYn()) && !req.getViewYn().equals(res.getViewYn())) {
                 result.setReturnCode(ReturnType.RTN_TYPE_DATA_EXISTS);
                 return result;
+            }*/
+
+            if(req.getImg()!=null) {
+                if(req.getImgSeq()!=null){
+                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getImgSeq(),configFile.getSelectCategory3());
+                    fileService.deleteFiles(fr);
+                }
+                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
+                req.setImgGrpSeq(igs);
             }
 
             if(req.getFile()!=null) {
@@ -153,6 +167,13 @@ public class AnoticeService {
                 fReq.setFileGrpSeq(fgs);
                 List fList = fileService.getFileList(fReq);
                 res.setFList(fList);
+            }
+            Integer igs = res.getImgGrpSeq();
+            if(igs!=null){
+                FileListReq fReq = new FileListReq();
+                fReq.setFileGrpSeq(igs);
+                List fList = fileService.getFileList(fReq);
+                res.setIList(fList);
             }
 
             result.setData(res);

@@ -86,6 +86,7 @@
             ,n.VIEW_CNT
             ,n.CONTENTS
             ,n.FILE_GRP_SEQ
+            ,n.IMG_GRP_SEQ
             ,n.VIEW_UNLIMIT_YN
             ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
             ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT

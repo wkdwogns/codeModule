@@ -42,7 +42,7 @@ function list(no, callback){
             return "<input type='checkbox' name='chk' value='"+obj.bannerSeq+"' />";
         }}
         , {no: 2, col: 'no', name: '번호',width:'40px'}
-        ,{no: 3, col: 'typeNm', name: '배너타입',width:'80px'}
+        //,{no: 3, col: 'typeNm', name: '배너타입',width:'80px'}
         , {no: 4, col: 'subject', name: '배너명',custom:function (obj) {
             return '<a href="'+bannerUrl.pageAdd+'?info='+obj.bannerSeq+'">'+obj.bannerNm+'</a>';
         }}
@@ -158,9 +158,9 @@ var viewYnControl = function(obj){
         var $bannerListTd = $this.parents("tr").find("td");
 
         $htmlObj.find("td").eq(0).find("input").attr("data-seq", $this.val());
-        $htmlObj.find("td").eq(1).text($bannerListTd.eq(2).text()); //배너타입
-        $htmlObj.find("td").eq(2).text($bannerListTd.eq(3).text()); //배너명
-        $htmlObj.find("td").eq(3).text($bannerListTd.eq(4).text()); //노출기간
+        //$htmlObj.find("td").eq(1).text($bannerListTd.eq(2).text()); //배너타입
+        $htmlObj.find("td").eq(1).text($bannerListTd.eq(2).text()); //배너명
+        $htmlObj.find("td").eq(2).text($bannerListTd.eq(3).text()); //노출기간
 
         $(".nodata").remove();
         $tableObj.append($htmlObj[0]);
@@ -174,7 +174,7 @@ var template = function(){
         "<td><input type='text' name='sortNo' style='width: 50px;' maxlength='1' /></td> " +
         "<td></td>" +
         "<td></td>" +
-        "<td></td>" +
+        //"<td></td>" +
         "</tr>";
     return $.parseHTML( html);
 }
@@ -184,7 +184,7 @@ var getViewList = function(callback){
         {no: 1, col: '', name: '노출순서',width:'80px', custom:function(obj){
             return "<input type='text' name='sortNo' style='width: 50px;' maxlength='1' value='"+obj.sortNo+"' data-seq='"+obj.bannerSeq+"' />";
         }}
-        , {no: 2, col: 'typeNm', name: '배너타입'}
+        /*, {no: 2, col: 'typeNm', name: '배너타입'}*/
         , {no: 3, col: 'bannerNm', name: '배너명'}
         , {no: 4, col: '', name: '노출기간',width:'200px',custom:function (obj) {
             if(obj.viewUnlimitYn == "Y"){

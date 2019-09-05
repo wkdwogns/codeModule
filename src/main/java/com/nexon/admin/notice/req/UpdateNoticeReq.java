@@ -16,14 +16,16 @@ public class UpdateNoticeReq {
     private String viewEndDt;
     private String viewUnlimitYn;
     private String noticeType;
+    private Integer imgGrpSeq;
     private Integer fileGrpSeq;
     private String contents;
     private String creId;
     private String updId;
 
-    private Integer attach;
     private Integer attachSeq;
-    private MultipartFile file;
+    private Integer imgSeq;
 
+    private MultipartFile file;
+    private MultipartFile img;
     private ArrayList<String> editorDelImg;
 }

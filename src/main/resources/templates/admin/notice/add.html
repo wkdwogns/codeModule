@@ -1,7 +1,6 @@
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/admin/layout/layout">
 <div class="content" layout:fragment="contents">
     <form id="userForm" >
-        <input type="hidden" id="devIdHdnSEQ" value="">
 
         <table class="table writeTable">
             <caption>공지사항 관리</caption>
@@ -34,26 +33,7 @@
                     <input type="text" class="fullWidth" id="devIdTxtTitle" name="Title" maxlength="100" value="">
                 </td>
             </tr>
-            <!--<tr>
-                <th>중요여부<span class="required">*</span></th>
-                <td>
-                    <input type="radio" id="important_yn1" name="importantYn" value="Y" class="devCssRdoIsView" checked="checked">
-                    <label for="important_yn1">중요</label>
 
-                    <input type="radio" id="important_yn2" name="importantYn" value="N" class="devCssRdoIsView">
-                    <label for="important_yn2">중요하지 않음</label>
-                </td>
-            </tr>-->
-            <!--<tr>
-                <th>상단보기<span class="required">*</span></th>
-                <td>
-                    <input type="radio" id="devIdRdoIsTop1" name="IsTop" value="1" class="devCssRdoIsTop">
-                    <label for="devIdRdoIsTop1">상단</label>
-
-                    <input type="radio" id="devIdRdoIsTop2" name="IsTop" value="0" class="devCssRdoIsTop" checked="">
-                    <label for="devIdRdoIsTop2">일반</label>
-                </td>
-            </tr>-->
             <tr>
                 <th>노출여부<span class="required">*</span></th>
                 <td>
@@ -66,7 +46,7 @@
             </tr>
 
             <tr class="showTerm">
-                <th>노출기간<span class="required">*</span></th>
+                <th>노출일자<span class="required">*</span></th>
                 <td>
                     <div>
                         <label>
@@ -76,28 +56,23 @@
                             </span>
                         </label>
                     </div>
-                    <div class="div">
-                        <p>~</p>
-                    </div>
-                    <div>
-                        <label>
-                            <input type="tel" id="devIdTxtEdt" name="Edt" maxlength="16" class="dt" style="width:150px;">
-                            <span class="icon">
-										<i class="far fa-calendar-alt"></i>
-									</span>
-                        </label>
-                    </div>
-                    <div class="limitChk pl30">
-                        <input type="checkbox" id="unLimit" name="unLimit">
-                        <label for="unLimit">무제한</label>
-                    </div>
+
                 </td>
             </tr>
 
             <tr>
-                <th>첨부파일</th>
-                <td>
-                    <input type="file" id="devIdTxtAttach" name="Attach">
+                <th>대표이미지<span class="required">*</span></th>
+                <td id="repImg">
+                    <input type="hidden" id="imgSeq">
+                    <input type="file" id="devIdTxtImg">
+                </td>
+            </tr>
+
+            <tr>
+                <th>파일첨부</th>
+                <td id="attach">
+                    <input type="hidden" id="attachSeq">
+                    <input type="file" id="devIdTxtAttach">
                 </td>
             </tr>
 
@@ -143,6 +118,10 @@
             fileCheck(e.target);
         });
 
+        $('#devIdTxtImg').change(function (e) {
+            fileCheck(e.target,'onlyImg');
+        });
+
         $('.devCssBtnCancel').click(function(){
             location.href='/page/admin/notice/list';
         });
@@ -152,46 +131,37 @@
 
             var data = new FormData();
 
-            if(tms.isEmpty($('#devIdTxtTitle').val())){
-                alert('제목을 입력해 주세요.');
-                return;
+            var stat = 'insert';
+            var url = "/mapi/notice";
+            var info = tms.getParameterByName("info");
+            if(tms.isNotEmpty(info)){
+                stat = 'update';
+                url = "/mapi/notice/edit";
+                data.append("seq", info );
+
+                if( $('#repImg .file').length==0 ){
+                    var file = $('#devIdTxtImg')[0].files[0];
+                    if(file==null || file==''){
+                        alert('대표이미지를 등록해 주세요.');
+                        return false;
+                    }
+                }
+
             }
 
-            var isEmpty = $('#summernote').summernote('isEmpty');
-            if(isEmpty){
-                alert('내용을 입력해 주세요.');
-                return;
-            }
-            var chk = $("input:checkbox[id='unLimit']").is(":checked");
-            var isA = 'N';
-            if(chk){
-                isA='Y';
-            }else{
-                if(tms.isEmpty($('#devIdTxtSdt').val())){
-                    alert('예약일을 입력해 주세요.');
-                    return;
-                }
-                if(tms.isEmpty($('#devIdTxtEdt').val())){
-                    alert('예약일을 입력해 주세요.');
-                    return;
-                }
-            }
+            var vi = [
+                {id:'#devIdTxtTitle',rqd:true,msg:'제목을 입력해 주세요.'}
+                ,{id:'#devIdTxtSdt',rqd:true,msg:'노출일자를 입력해 주세요.'}
+                ,{id:'#devIdTxtImg',rqd:true,msg:'대표이미지를 첨부해주세요.',type:'file',pass:'update'}
+                ,{id:'#summernote',rqd:true,msg:'내용을 입력해 주세요.',type:'summerNote'}
+            ];
 
-            var stDt = $(".dt").eq(0).val();
-            var endDt = $(".dt").eq(1).val();
-            if(tms.isNotEmpty(stDt) && tms.isNotEmpty(endDt)){
-                stDt = stDt.replace(/\-|\s|\:/g,'');
-                endDt = endDt.replace(/\-|\s|\:/g,'');
-
-                if(stDt > endDt){
-                    alert("시작일은 작성일보다 이전일 수 없습니다.");
-                    return;
-                }
-            }
+            var dr = door(vi,stat);
+            if(!dr)
+                return ;
 
             /* 이미지 삭제 */
             var editorDelImg = editorImg.slice();
-
             var contents = $('#summernote').summernote('code'); //에디터 내용 가져오기
             var tempDiv = document.createElement('div');
             tempDiv.innerHTML = contents;
@@ -203,37 +173,31 @@
                 }
             });
 
-            data.append("contents", contents );
             data.append("title", $('#devIdTxtTitle').val() );
+            data.append("contents", contents );
             data.append("viewYn", $(":input:radio[name=viewYn]:checked").val() );
-            //data.append("importantYn", $(":input:radio[name=importantYn]:checked").val() );
+            data.append("viewStDt", $('#devIdTxtSdt').val() );
             data.append("importantYn", 'N' );
-            /*data.append("noticeType", $(":input:radio[name=noticeType]:checked").val());*/
             data.append("noticeType", '003002');
-            data.append("viewUnlimitYn", isA );
+            data.append("viewUnlimitYn", 'N' );
             data.append("editorDelImg", editorDelImg);
-
-
-            var sdt = $('#devIdTxtSdt').val();
-            var edt = $('#devIdTxtEdt').val();
-            if(tms.isNotEmpty( sdt )){ data.append("viewStDt", sdt ); }
-            if(tms.isNotEmpty( edt )){ data.append("viewEndDt", edt ); }
 
             var f1 = $('#devIdTxtAttach')[0].files[0];
             if(f1 != null && f1 != ''){
                 data.append("file", f1 );
             }
 
-            var url = "/mapi/notice";
-            var info = tms.getParameterByName("info");
+            var imgF = $('#devIdTxtImg')[0].files[0];
 
-            if(tms.isNotEmpty(info)){
-                url = "/mapi/notice/edit";
-                data.append("seq", info );
+            if(imgF != null && imgF != ''){
+                data.append("img", imgF );
             }
 
-            if(tms.isNotEmpty($('#devIdFileSeq').val())){
-                data.append("attachSeq", $('#devIdFileSeq').val() );
+            if(tms.isNotEmpty($('#attachSeq').val())){
+                data.append("attachSeq", $('#attachSeq').val() );
+            }
+            if(tms.isNotEmpty($('#imgSeq').val())){
+                data.append("imgSeq", $('#imgSeq').val() );
             }
 
             if(!confirm("저장하시겠습니까?")) {
@@ -276,6 +240,38 @@
 
             });
         }
+        
+        var door = function(vi,pass) {
+
+            var isValid = true;
+
+            $.each(vi,function(k,v){
+                if(pass==v.pass){return true;}
+
+                var obJet = null;
+                var rs = false;
+
+                if(v.type=='file'){
+                    obJet=$(v.id)[0].files[0];
+                    rs = (obJet==null||obJet=='')?true:false;
+                }else if(v.type=='summerNote'){
+                    var isEmpty = $(v.id).summernote('isEmpty');
+                    if(isEmpty)
+                        rs=true;
+                }else{
+                    obJet=$(v.id).val()
+                    rs = tms.isEmpty(obJet);
+                }
+
+                if(v.rqd && rs ){
+                    alert(v.msg);
+                    isValid=false;
+                    return false;
+                }
+            });
+
+            return isValid;
+        }
 
         function detail(info){
 
@@ -287,29 +283,22 @@
                     var d = rs.data;
 
                     $('#devIdTxtTitle').val(tms.convertHtml(d.title));
-
-                    $('input:radio[name=viewYn]:input[value=' + d.viewYn + ']').attr("checked", true);
-                    $('input:radio[name=importantYn]:input[value=' + d.importantYn + ']').attr("checked", true);
-                    if(tms.isNotEmpty(d.noticeType)) {
-                        $('input:radio[name=noticeType]:input[value=' + d.noticeType + ']').attr("checked", true);
-                    }
-
-                    if(d.viewUnlimitYn=='Y'){
-                        $('input:checkbox[id="unLimit"]').attr("checked", true);
-                    }
+                    $('input:radio[name=viewYn]:input[value='+d.viewYn+']').attr("checked",true);
                     $('#devIdTxtSdt').val(d.viewStDt);
-                    $('#devIdTxtEdt').val(d.viewEndDt);
-
-                    $('#thumbnailSeq').val(d.thumbnailSeq);
-                    $('#attachSeq').val(d.attachSeq);
 
                     if(d.flist!=null){
                         var fl =d.flist;
                         for(var i in fl){
-                            $('#devIdTxtAttach').after('<div id="fileNo'+fl[i].fileSeq+'">' +
-                                '<input type="hidden" id="devIdFileSeq" value="'+fl[i].fileSeq+'"/>'+
-                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=3" style="margin-right: 30px;">'+fl[i].orgFileNm+'</a>' +
-                                '<a onclick="deleteFile('+fl[i].fileSeq+')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a></div>');
+                            $('#devIdTxtAttach').after(setFileDOM(fl[i],'attach'));
+                            $('#attachSeq').val(fl[i].fileSeq);
+                        }
+                    }
+
+                    if(d.ilist!=null){
+                        var il =d.ilist;
+                        for(var i in il){
+                            $('#devIdTxtImg').after(setFileDOM(il[i],'img'));
+                            $('#imgSeq').val(il[i].fileSeq);
                         }
                     }
 
@@ -321,11 +310,21 @@
 
         }
 
-        function deleteFile(no) {
+        function setFileDOM(fl,type) {
+            return ''+
+                '<div id="fileNo'+fl.fileSeq+'" class="file">' +
+                    '<input type="hidden" class="fileSeq" value="'+fl.fileSeq+'"/>'+
+                        '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=3" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' +
+                        '<a onclick="deleteFile('+fl.fileSeq+',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>' +
+                '</div>';
+        }
+
+        function deleteFile(no,type) {
             if(confirm('삭제하시겠습니까?')){
                 var info = tms.getParameterByName("info");
                 var params = {
-                    seq : info
+                    type:type
+                    , seq : info
                     ,fileSeq:no
                 }
 
@@ -333,8 +332,10 @@
                     if(rs.code==0){
                         alert('삭제되었습니다.');
                         $('#fileNo'+no).remove();
+                        if( $('#repImg .file').length==0 ){$('#imgSeq').val('');}
+                        if( $('#attach .file').length==0 ){$('#attachSeq').val('');}
                     }else{
-                        alert('오류가 있습니다..')
+                        alert('오류가 있습니다.')
                     }
                 });
             }
@@ -342,20 +343,7 @@
 
         $(document).ready(function () {
 
-            $("#unLimit").change(function() {
-                var chk = $("input:checkbox[id='unLimit']").is(":checked");
-                if(chk) {
-                    $("#devIdTxtSdt").val("");
-                    $("#devIdTxtEdt").val("");
-                    $("#devIdTxtSdt").attr("disabled", true);
-                    $("#devIdTxtEdt").attr("disabled", true);
-                } else {
-                    $("#devIdTxtSdt").attr("disabled", false);
-                    $("#devIdTxtEdt").attr("disabled", false);
-                }
-            });
-
-            $('#devIdTxtSdt,#devIdTxtEdt').datetimepicker({
+            $('#devIdTxtSdt').datetimepicker({
                 dateFormat: "yy-mm-dd"
                 ,onClose: function() {
                     $('.note-toolbar').css({'zIndex':500});
