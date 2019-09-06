@@ -76,7 +76,6 @@
                 </td>
             </tr>
 
-
             <tr class="contentRow">
                 <th>내용<span class="required">*</span></th>
                 <td>
@@ -126,7 +125,6 @@
             location.href='/page/admin/notice/list';
         });
 
-
         $("#btnSave").click(function(){
 
             var data = new FormData();
@@ -160,6 +158,10 @@
             if(!dr)
                 return ;
 
+            if(!confirm("저장하시겠습니까?")) {
+                return;
+            }
+
             /* 이미지 삭제 */
             var editorDelImg = editorImg.slice();
             var contents = $('#summernote').summernote('code'); //에디터 내용 가져오기
@@ -188,7 +190,6 @@
             }
 
             var imgF = $('#devIdTxtImg')[0].files[0];
-
             if(imgF != null && imgF != ''){
                 data.append("img", imgF );
             }
@@ -198,10 +199,6 @@
             }
             if(tms.isNotEmpty($('#imgSeq').val())){
                 data.append("imgSeq", $('#imgSeq').val() );
-            }
-
-            if(!confirm("저장하시겠습니까?")) {
-                return;
             }
 
             tms.ajaxMulitpartHelper(url, data, null, function(result){
@@ -239,38 +236,6 @@
             }, function(){ //실패 처리
 
             });
-        }
-        
-        var door = function(vi,pass) {
-
-            var isValid = true;
-
-            $.each(vi,function(k,v){
-                if(pass==v.pass){return true;}
-
-                var obJet = null;
-                var rs = false;
-
-                if(v.type=='file'){
-                    obJet=$(v.id)[0].files[0];
-                    rs = (obJet==null||obJet=='')?true:false;
-                }else if(v.type=='summerNote'){
-                    var isEmpty = $(v.id).summernote('isEmpty');
-                    if(isEmpty)
-                        rs=true;
-                }else{
-                    obJet=$(v.id).val()
-                    rs = tms.isEmpty(obJet);
-                }
-
-                if(v.rqd && rs ){
-                    alert(v.msg);
-                    isValid=false;
-                    return false;
-                }
-            });
-
-            return isValid;
         }
 
         function detail(info){

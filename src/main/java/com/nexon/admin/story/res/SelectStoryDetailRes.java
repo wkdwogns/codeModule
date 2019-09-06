@@ -11,13 +11,17 @@ public class SelectStoryDetailRes {
     private String storyNm;
     private String title;
     private String importantYn;
+
     private String viewYn;
     private String viewUnlimitYn;
     private String contents;
     private String viewStDt;
-    private String viewEndDt;
+    private String orderNo;
 
     private Integer fileGrpSeq;
+    private Integer imgGrpSeq;
+
     private List fList;
+    private List iList;
 
 }

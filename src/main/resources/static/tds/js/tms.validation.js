@@ -287,3 +287,35 @@ $(function(){
         tmsValidation.validRegex.nickName = result.nickNameInfo;
     });
 });
+
+var door = function(vi,pass) {
+
+    var isValid = true;
+
+    $.each(vi,function(k,v){
+        if(pass==v.pass){return true;}
+
+        var obJet = null;
+        var rs = false;
+
+        if(v.type=='file'){
+            obJet=$(v.id)[0].files[0];
+            rs = (obJet==null||obJet=='')?true:false;
+        }else if(v.type=='summerNote'){
+            var isEmpty = $(v.id).summernote('isEmpty');
+            if(isEmpty)
+                rs=true;
+        }else{
+            obJet=$(v.id).val()
+            rs = tms.isEmpty(obJet);
+        }
+
+        if(v.rqd && rs ){
+            alert(v.msg);
+            isValid=false;
+            return false;
+        }
+    });
+
+    return isValid;
+}

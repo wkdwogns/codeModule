@@ -11,7 +11,8 @@
             SELECT
                 s.STORY_SEQ
                 , s.CATEGORY
-                , s.STORY_NM
+                , (SELECT USER_NAME FROM tb_user_profile WHERE USER_SEQ = s.CRE_ID) CRE_ID
+                , (SELECT USER_NAME FROM tb_user_profile WHERE USER_SEQ = s.UPD_ID) UPD_ID
                 , s.TITLE
                 , s.IMPORTANT_YN
                 , s.VIEW_UNLIMIT_YN
@@ -56,22 +57,22 @@
 
     <select id="selectStoryDetail" parameterType="com.nexon.admin.story.req.SelectStoryDetailReq" resultType="com.nexon.admin.story.res.SelectStoryDetailRes">
         SELECT
-            STORY_SEQ
-            , CATEGORY
-            , STORY_NM
-            , TITLE
-            , IMPORTANT_YN
-            , VIEW_YN
-            , VIEW_UNLIMIT_YN
-            , DATE_FORMAT(VIEW_ST_DT, '%Y-%m-%d %H:%i') VIEW_ST_DT
-            , DATE_FORMAT(VIEW_END_DT, '%Y-%m-%d %H:%i') VIEW_END_DT
-            , FILE_GRP_SEQ
-            , CONTENTS
+            s.STORY_SEQ
+              , s.CATEGORY
+              , s.TITLE
+              , s.IMPORTANT_YN
+              , s.ORDER_NO
+              , s.VIEW_YN
+              , s.VIEW_UNLIMIT_YN
+              , DATE_FORMAT(s.VIEW_ST_DT, '%Y-%m-%d %H:%i') VIEW_ST_DT
+              , s.FILE_GRP_SEQ
+              , s.IMG_GRP_SEQ
+              , s.CONTENTS
         FROM
-            TB_STORY
+            TB_STORY s
         WHERE
-            STORY_SEQ=#{seq}
-            and DEL_YN='N'
+            s.STORY_SEQ=#{seq}
+            and s.DEL_YN='N'
     </select>
 
     <insert id="insertStory" parameterType="com.nexon.admin.story.req.InsertStoryReq">
@@ -84,12 +85,15 @@
             , VIEW_YN
             , VIEW_UNLIMIT_YN
             , VIEW_ST_DT
-            , VIEW_END_DT
+            , ORDER_NO
             , FILE_GRP_SEQ
+            , IMG_GRP_SEQ
             , CONTENTS
             , DEL_YN
             , CRE_DT
             , CRE_ID
+            , UPD_DT
+            , UPD_ID
         ) VALUES (
             #{category}
             , #{storyNm}
@@ -98,12 +102,15 @@
             , #{viewYn}
             , #{viewUnlimitYn}
             , #{viewStDt}
-            , #{viewEndDt}
+            , #{orderNo}
             , #{fileGrpSeq}
+            , #{imgGrpSeq}
             , #{contents}
             , 'N'
             , now()
-            , #{creId}
+            , #{userSeq}
+            , now()
+            , #{userSeq}
         )
     </insert>
 
@@ -118,11 +125,16 @@
             , VIEW_YN=#{viewYn}
             , VIEW_UNLIMIT_YN=#{viewUnlimitYn}
             , VIEW_ST_DT=#{viewStDt}
-            , VIEW_END_DT=#{viewEndDt}
+            , ORDER_NO=#{orderNo}
             <if test="fileGrpSeq!=null and fileGrpSeq!=''">
                 , FILE_GRP_SEQ=#{fileGrpSeq}
             </if>
+            <if test="imgGrpSeq!=null and imgGrpSeq!=''">
+                , IMG_GRP_SEQ=#{imgGrpSeq}
+            </if>
             , CONTENTS=#{contents}
+            , UPD_DT=now()
+            , UPD_ID=#{userSeq}
         WHERE
             STORY_SEQ=#{seq}
     </update>
@@ -151,7 +163,12 @@
         UPDATE
             TB_STORY
         SET
-            FILE_GRP_SEQ=null
+            <if test="type.equals('attach')">
+                FILE_GRP_SEQ=null
+            </if>
+            <if test="type.equals('img')">
+                IMG_GRP_SEQ=NULL
+            </if>
         WHERE
             STORY_SEQ=#{seq}
     </update>

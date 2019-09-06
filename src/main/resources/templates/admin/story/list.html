@@ -4,23 +4,22 @@
     <div id="list">
         <table class="table writeTable">
             <caption>
-                 스토리
+                 스토리 등록 리스트
                 <div class="searchBox floatRight">
-                    <input type="hidden" name="page" id="devIdHdnPage" value="1">
-                    <select id="devIdSelKeyField1" name="sKeyfield1" style="margin-right: 5px">
+                    <select id="devIdSelKeyField1" style="margin-right: 5px">
                         <option value="">카테고리</option>
                         <option value="1">IT</option>
                         <option value="2">CULTURE</option>
                         <option value="3">PLAY</option>
                         <option value="4">HEALTH</option>
                     </select>
-                    <select id="devIdSelKeyField" name="sKeyfield" style="margin-right: 5px">
+                    <select id="devIdSelKeyField" style="margin-right: 5px">
                         <option value="">선택</option>
                         <option value="storyNm">성명</option>
                         <option value="title">제목</option>
                     </select>
                     <label>
-                        <input id="sKeyword" name="sKeyword" type="text" maxlength="100" value="" placeholder="" style="margin-right: 10px">
+                        <input id="sKeyword" name="sKeyword" type="text" maxlength="100" style="margin-right: 10px">
                         <button type="button" class="btn blackBtn devCssBtnSearch" onclick="list(1)">검색</button>
                     </label>
                 </div>
@@ -41,11 +40,11 @@
             <thead>
             <tr>
                 <th>번호</th>
-                <!--<th>중요</th>-->
                 <th>카테고리</th>
-                <th>성명</th>
+                <th>작성자</th>
                 <th>제목</th>
-                <th>노출기간</th>
+                <th>노출일자</th>
+                <th>첨부파일</th>
                 <th>노출여부</th>
                 <th>관리</th>
             </tr>
@@ -75,11 +74,7 @@
 
             var colsInfo = [
                 {no: 1, col: 'no', name: '번호'}
-                /*, {no: 2, col: 'importantYn', name: '중요',custom:function(obj){
-                    var rs = (obj.importantYn=="Y")?'Y':'';
-                    return rs;
-                }}*/
-                , {no: 3, col: 'category', name: '카테고리',custom:function(obj){
+                , {no: 2, col: 'category', name: '카테고리',custom:function(obj){
                     var rs ='';
                     if(obj.category=="1"){rs ='IT';}
                     if(obj.category=="2"){rs ='CULTURE';}
@@ -87,16 +82,19 @@
                     if(obj.category=="4"){rs='HEALTH';}
                     return rs;
                 }}
-                , {no: 4, col: 'storyNm', name: '성명'}
-                , {no: 5, col: 'title', name: '제목', width:"220px;",custom: function(obj){
+                , {no: 3, col: 'creId', name: '작성자',custom:function (obj) {
+                    var id=obj.updId;
+                    if(id==null||id==''){
+                        id=obj.creId;
+                    }
+                    return id;
+                }}
+                , {no: 4, col: 'title', name: '제목', width:"220px;",custom: function(obj){
                     return "<a href='/page/admin/story/add?info="+obj.storySeq+"'>"+obj.title+"</a>";
                 }}
-                , {no: 6, col: 'viewStDt', name: '노출기간', width:"400px;",custom:function(obj){
-                    var viewUnlimitYn = obj.viewUnlimitYn;
-                    var viewStDt = obj.viewStDt;
-                    var viewEndDt = obj.viewEndDt;
-                    var rs = (viewUnlimitYn=='N')?viewStDt+'~'+viewEndDt:'무제한';
-                    return rs;
+                , {no: 5, col: 'viewStDt', name: '노출일자', width:"400px;"}
+                , {no: 6, col: 'viewYn', name: '첨부파일',custom:function (obj) {
+                    return 'Y';
                 }}
                 , {no: 7, col: 'viewYn', name: '노출여부'}
                 , {no: 8, col: 'createDt', name: '관리',custom:function (obj) {

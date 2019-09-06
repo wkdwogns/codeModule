@@ -1,12 +1,11 @@
 package com.nexon.admin.story.controller;
 
-import com.nexon.admin.notice.req.DeleteNoticeImgReq;
 import com.nexon.admin.story.req.*;
-import com.nexon.admin.story.req.SelectStoryDetailReq;
 import com.nexon.admin.story.res.SelectStoryDetailRes;
 import com.nexon.admin.story.res.SelectStoryRes;
 import com.nexon.admin.story.service.AstoryService;
 import com.nexon.common.dto.res.ResponseHandler;
+import com.nexon.common.session.SessionCheck;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,17 +35,19 @@ public class AstoryController {
 
     @ApiOperation(value = "스토리 쓰기")
     @PostMapping
-    public ResponseHandler<?> insertStory(HttpServletRequest request, InsertStoryReq req) {
+    @SessionCheck
+    public ResponseHandler<?> insertStory(InsertStoryReq req) {
         System.out.println(req);
 
-        ResponseHandler<?> result = aStoryService.insertStory(request,req);
+        ResponseHandler<?> result = aStoryService.insertStory(req);
         return  result;
     }
 
     @ApiOperation(value = "스토리 수정")
     @PostMapping("/edit")
-    public ResponseHandler<?> updateStory(HttpServletRequest request, UpdateStoryReq req) {
-        ResponseHandler<?> result = aStoryService.updateStory(request,req);
+    @SessionCheck
+    public ResponseHandler<?> updateStory(UpdateStoryReq req) {
+        ResponseHandler<?> result = aStoryService.updateStory(req);
         return  result;
     }
 

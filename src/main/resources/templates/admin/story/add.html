@@ -1,128 +1,134 @@
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/admin/layout/layout">
+<head>
+    <style>
+        .table td input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            margin-top: 2px;
+            margin-right: 2px;
+        }
+
+        .table td label, .table td input[type="checkbox"] {
+            display: inline-block;
+            vertical-align: middle;
+            font-weight: normal;
+        }
+    </style>
+</head>
 <div class="content" layout:fragment="contents">
-    <form id="userForm" onsubmit="return sendIt();">
-        <input type="hidden" id="devIdHdnSEQ" value="">
 
-        <table class="table writeTable">
-            <caption> 스토리 등록</caption>
-            <tbody>
+    <table class="table writeTable">
+        <caption> 스토리 관리</caption>
+        <tbody>
 
-            <tr>
-                <th>카테고리<span class="required">*</span></th>
-                <td>
-                    <input type="radio" id="cate1" name="category" value="1" class="devCssRdoIsView" checked="checked">
-                    <label for="cate1">IT</label>
+        <tr>
+            <th>카테고리<span class="required">*</span></th>
+            <td>
+                <input type="radio" id="cate1" name="category" value="1" class="devCssRdoIsView" checked="checked">
+                <label for="cate1">IT</label>
 
-                    <input type="radio" id="cate2" name="category" value="2" class="devCssRdoIsView">
-                    <label for="cate2">CULTURE</label>
+                <input type="radio" id="cate2" name="category" value="2" class="devCssRdoIsView">
+                <label for="cate2">CULTURE</label>
 
-                    <input type="radio" id="cate3" name="category" value="3" class="devCssRdoIsView">
-                    <label for="cate3">PLAY</label>
+                <input type="radio" id="cate3" name="category" value="3" class="devCssRdoIsView">
+                <label for="cate3">PLAY</label>
 
-                    <input type="radio" id="cate4" name="category" value="4" class="devCssRdoIsView">
-                    <label for="cate4">HEALTH</label>
-                </td>
-            </tr>
+                <input type="radio" id="cate4" name="category" value="4" class="devCssRdoIsView">
+                <label for="cate4">HEALTH</label>
+            </td>
+        </tr>
 
-            <tr>
-                <th>성명<span class="required">*</span></th>
-                <td>
-                    <input type="text" class="fullWidth" id="devIdTxtStoryNm" maxlength="30" value="">
-                </td>
-            </tr>
+        <tr>
+            <th>제목<span class="required">*</span></th>
+            <td>
+                <input type="text" class="fullWidth" id="devIdTxtTitle" maxlength="100" placeholder="2글자에서 100글자까지 입력 가능합니다. 문자 제한 없습니다.">
+            </td>
+        </tr>
 
-            <tr>
-                <th>제목<span class="required">*</span></th>
-                <td>
-                    <input type="text" class="fullWidth" id="devIdTxtTitle" name="Title" maxlength="36" value="">
-                </td>
-            </tr>
+        <tr class="showTerm">
+            <th>Top story</th>
+            <td>
+                <div>
+                    <input type="checkbox" class="fullWidth" id="importantYn"><label for="importantYn">Top story 지정</label>
+                </div>
+                <div>
+                    <input type="text" id="orderNo" style="margin-left: 30px;width: 40px;margin-right: 10px;" maxlength="4"><label for="orderNo">Top story 표시순서</label>
+                </div>
+            </td>
+        </tr>
 
-            <!--<tr>
-                <th>중요여부<span class="required">*</span></th>
-                <td>
-                    <input type="radio" id="importantYn1" name="importantYn" value="Y" class="devCssRdoIsView">
-                    <label for="importantYn1">중요</label>
+        <tr>
+            <th>노출여부<span class="required">*</span></th>
+            <td>
+                <input type="radio" id="devIdRdoIsView1" name="viewYn" value="Y">
+                <label for="devIdRdoIsView1">노출</label>
 
-                    <input type="radio" id="importantYn2" name="importantYn" value="N" class="devCssRdoIsView" checked="">
-                    <label for="importantYn2">중요하지 않음</label>
-                </td>
-            </tr>-->
+                <input type="radio" id="devIdRdoIsView2" name="viewYn" value="N" checked="checked">
+                <label for="devIdRdoIsView2">비노출</label>
+            </td>
+        </tr>
 
-            <tr>
-                <th>노출여부<span class="required">*</span></th>
-                <td>
-                    <input type="radio" id="devIdRdoIsView1" name="viewYn" value="Y" class="devCssRdoIsView">
-                    <label for="devIdRdoIsView1">공개</label>
+        <tr class="showTerm">
+            <th>노출일자<span class="required">*</span></th>
+            <td>
+                <div>
+                    <label>
+                        <input type="text" id="devIdTxtSdt" maxlength="16" style="width:150px;" readonly>
+                        <span class="icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </span>
+                    </label>
+                </div>
+            </td>
+        </tr>
 
-                    <input type="radio" id="devIdRdoIsView2" name="viewYn" value="N" class="devCssRdoIsView" checked="">
-                    <label for="devIdRdoIsView2">비공개</label>
-                </td>
-            </tr>
+        <tr>
+            <th>대표이미지<span class="required">*</span></th>
+            <td id="repImg">
+                <input type="hidden" id="imgSeq">
+                <input type="file" id="devIdTxtImg">
+            </td>
+        </tr>
 
-            <tr class="showTerm">
-                <th>노출기간<span class="required">*</span></th>
-                <td>
-                    <div>
-                        <label>
-                            <input type="text" id="devIdTxtSdt" name="Sdt" maxlength="16" class="dt" style="width:150px;" readonly>
-                            <span class="icon">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="div">
-                        <p>~</p>
-                    </div>
-                    <div>
-                        <label>
-                            <input type="text" id="devIdTxtEdt" name="Edt" maxlength="16" class="dt" style="width:150px;" readonly>
-                            <span class="icon">
-										<i class="far fa-calendar-alt"></i>
-									</span>
-                        </label>
-                    </div>
-                    <div class="limitChk pl30">
-                        <input type="checkbox" id="viewUnlimitYn" name="viewUnlimitYn">
-                        <label for="viewUnlimitYn">무제한</label>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <th>파일첨부</th>
+            <td id="attach">
+                <input type="hidden" id="attachSeq">
+                <input type="file" id="devIdTxtAttach">
+            </td>
+        </tr>
 
-            <tr>
-                <th>대표 이미지<span class="required">*</span></th>
-                <td>
-                    <input type="file" id="devIdTxtImg" name="Img" accept="image/*">
-                </td>
-            </tr>
+        <tr class="contentRow">
+            <th>내용<span class="required">*</span></th>
+            <td>
+                <div id="summernote"></div>
+            </td>
+        </tr>
 
-            <tr class="contentRow">
-                <th>내용<span class="required">*</span></th>
-                <td>
-                    <div id="summernote"></div>
-                </td>
-            </tr>
+        </tbody>
+    </table>
 
-            </tbody>
-        </table>
-        <input type="hidden" id="thumbnailSeq">
-        <input type="hidden" id="attachSeq">
-        <!-- btnList -->
-        <div class="btnList clearfix">
-            <button type="button" class="btn mainBtn floatLeft devCssBtnDel">삭제</button>
-            <button type="button" class="btn blackBtn devCssBtnCancel floatRight">취소</button>
-            <button id="btnSave" type="button" class="btn mainBtn floatRight" style="margin-right: 5px">저장</button>
+    <!-- btnList -->
+    <div id="btnList" class="btnList clearfix">
+        <button type="button" class="btn blackBtn devCssBtnCancel floatRight">취소</button>
+        <button id="btnSave" type="button" class="btn mainBtn floatRight" style="margin-right: 5px">저장</button>
+    </div>
+    <!-- //btnList -->
 
-        </div>
-        <!-- //btnList -->
-
-    </form>
 
     <!-- summernote 관련 JS -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-
     <script>
+
+        $('#orderNo').keyup(function () {
+            var regexp = /^[0-9]*$/
+            var v = $(this).val();
+            if( !regexp.test(v) ) {
+                $(this).val( v.replace(/[^0-9]/g,'') );
+            }
+        })
+
         /* 서머노트 초기화 함수 */
         var setSummernote = function(){
             $('#summernote').summernote({
@@ -136,90 +142,57 @@
             });
         }
 
-        $('.devCssBtnCancel').click(function(){
-           location.href='/page/admin/story/list';
+        $('#devIdTxtAttach').change(function (e) {
+            fileCheck(e.target);
         });
 
         $('#devIdTxtImg').change(function (e) {
             fileCheck(e.target,'onlyImg');
         });
 
-        $('.devCssBtnDel').click(function () {
-           if( confirm('삭제하시겠습니까?') ){
-
-               var info = tms.getParameterByName("info");
-               var params = {
-                   seq:info
-               }
-
-               tms.ajaxDeleteHelper('/mapi/story', JSON.stringify(params), null, function(rs) {
-                    if(rs.code==0){
-                        alert('삭제되었습니다.');
-                        location.href='/page/admin/story/list';
-                        return ;
-                    }else{
-                        alert('오류가 있습니다.');
-                    }
-               });
-           }
+        $('.devCssBtnCancel').click(function(){
+           location.href='/page/admin/story/list';
         });
 
-
         $("#btnSave").click(function(){
+
+            var data = new FormData();
+
+            var stat = 'insert';
+            var url = "/mapi/story";
+            var info = tms.getParameterByName("info");
+            if(tms.isNotEmpty(info)){
+                stat = 'update';
+                url = "/mapi/story/edit";
+                data.append("seq", info );
+
+                if( $('#repImg .file').length==0 ){
+                    var file = $('#devIdTxtImg')[0].files[0];
+                    if(file==null || file==''){
+                        alert('대표이미지를 등록해 주세요.');
+                        return false;
+                    }
+                }
+            }
+
+            var vi = [
+                {id:'#devIdTxtTitle',rqd:true,msg:'제목을 입력해 주세요.'}
+                ,{id:'#devIdTxtSdt',rqd:true,msg:'노출일자를 입력해 주세요.'}
+                ,{id:'#devIdTxtImg',rqd:true,msg:'대표이미지를 첨부해주세요.',type:'file',pass:'update'}
+                ,{id:'#summernote',rqd:true,msg:'내용을 입력해 주세요.',type:'summerNote'}
+            ];
+
+            var dr = door(vi,stat);
+            if(!dr)
+                return ;
 
             if(!confirm("저장하시겠습니까?")) {
                 return;
             }
 
-            var info = tms.getParameterByName("info");
-
-            if(tms.isEmpty($('#devIdTxtTitle').val())){
-                alert('제목을 입력해 주세요.');
-                return;
-            }
-
-            var chk = $("input:checkbox[id='viewUnlimitYn']").is(":checked");
-            var isA = 'N';
-            if(chk){
-                isA='Y';
-            }else{
-                if(tms.isEmpty($('#devIdTxtSdt').val())){
-                    alert('예약일을 입력해 주세요.');
-                    return;
-                }
-                if(tms.isEmpty($('#devIdTxtEdt').val())){
-                    alert('예약일을 입력해 주세요.');
-                    return;
-                }
-            }
-
-            var isEmpty = $('#summernote').summernote('isEmpty');
-            if(isEmpty){
-                alert('내용을 입력해 주세요.');
-                return;
-            }
-
-            if($('#devIdTxtImg')[0].files.length==0&&tms.isEmpty(info)){
-                alert('썸네일을 등록해주세요.')
-                return ;
-            }
-
-            var stDt = $(".dt").eq(0).val();
-            var endDt = $(".dt").eq(1).val();
-            if(tms.isNotEmpty(stDt) && tms.isNotEmpty(endDt)){
-                stDt = stDt.replace(/\-|\s|\:/g,'');
-                endDt = endDt.replace(/\-|\s|\:/g,'');
-
-                if(stDt > endDt){
-                    alert("시작일은 작성일보다 이전일 수 없습니다.");
-                    return;
-                }
-            }
-
             /* 이미지 삭제 */
             var editorDelImg = editorImg.slice();
             var contents = $('#summernote').summernote('code'); //에디터 내용 가져오기
-
             var tempDiv = document.createElement('div');
             tempDiv.innerHTML = contents;
             $.each($(tempDiv).find("img[data-filename]"), function(index, value) { //삭제된 이미지 비교 처리
@@ -230,43 +203,39 @@
                 }
             });
 
-            var data = new FormData();
             data.append("category", $(":input:radio[name=category]:checked").val() );
-            data.append("storyNm", $('#devIdTxtStoryNm').val() );
+            data.append("storyNm", "" );
             data.append("title", $('#devIdTxtTitle').val() );
-            data.append("viewYn", $(":input:radio[name=viewYn]:checked").val() );
-            data.append("editorDelImg", editorDelImg);
-            data.append("viewUnlimitYn", isA );
             data.append("contents", contents );
-            /*data.append('importantYn', $(":input:radio[name=importantYn]:checked").val() );*/
-            data.append('importantYn', 'N' );
-            var sdt = $('#devIdTxtSdt').val();
-            var edt = $('#devIdTxtEdt').val();
-            if(tms.isNotEmpty( sdt )){
-                data.append("viewStDt", sdt );
-                data.append("viewEndDt", edt );
+            data.append("viewYn", $(":input:radio[name=viewYn]:checked").val() );
+            data.append("viewStDt", $('#devIdTxtSdt').val() );
+
+            var iYn = ($("input:checkbox[id='importantYn']").is(":checked"))?'Y':'N';
+            data.append('importantYn', iYn );
+            data.append("orderNo", $('#orderNo').val() );
+            data.append("viewUnlimitYn", "N" );
+            data.append("editorDelImg", editorDelImg);
+
+            var f1 = $('#devIdTxtAttach')[0].files[0];
+            if(f1 != null && f1 != ''){
+                data.append("file", f1 );
             }
 
-            var f = $('#devIdTxtImg')[0].files[0];
-            if(f!=null&&f!=''){
-                if(!tms.checkFileExtensionImage(f.name)) {
-                    alert("이미지 파일만 업로드 가능합니다.");
-                    return;
-                }
-                data.append("image", f );
+            var imgF = $('#devIdTxtImg')[0].files[0];
+            if(imgF != null && imgF != ''){
+                data.append("img", imgF );
             }
 
-            var url = "/mapi/story";
-            if(tms.isNotEmpty(info)){
-                url = "/mapi/story/edit";
-                data.append("seq", info );
-                data.append("thumbnailSeq", $('#thumbnailSeq').val() );
+            if(tms.isNotEmpty($('#attachSeq').val())){
+                data.append("attachSeq", $('#attachSeq').val() );
+            }
+            if(tms.isNotEmpty($('#imgSeq').val())){
+                data.append("imgSeq", $('#imgSeq').val() );
             }
 
             tms.ajaxMulitpartHelper(url, data, null, function(result){
                 if(result.code == 0){
                     tms.initInputTxt('#inputFrm');
-                    $('#summernote').summernote('reset');
                     alert("저장되었습니다");
                     location.href = "/page/admin/story/list"
                 } else if(result.code == 350) {
@@ -308,49 +277,55 @@
             }
 
             tms.ajaxGetHelper('/mapi/story/detail', params, null, function(rs) {
+
                 if(rs.code==0){
                     var d = rs.data;
-
+                    console.log(d);
                     $('input:radio[name=category]:input[value=' + d.category + ']').attr("checked", true);
-                    $('#devIdTxtStoryNm').val(tms.convertHtml(d.storyNm));
                     $('#devIdTxtTitle').val(tms.convertHtml(d.title));
                     $('input:radio[name=viewYn]:input[value=' + d.viewYn + ']').attr("checked", true);
-                    $('input:radio[name=importantYn]:input[value=' + d.importantYn + ']').attr("checked", true);
                     $('#devIdTxtSdt').val(d.viewStDt);
-                    $('#devIdTxtEdt').val(d.viewEndDt);
-
                     $('#thumbnailSeq').val(d.thumbnailSeq);
-
-                    if(d.viewUnlimitYn=='Y'){
-                        $("input:checkbox[id='viewUnlimitYn']").prop("checked", true);
-                    }
-
+                    $("input:checkbox[id='importantYn']").prop("checked", (d.importantYn=='Y') );
+                    $('#orderNo').val(d.orderNo);
                     if(d.flist!=null){
                         var fl =d.flist;
                         for(var i in fl){
-                            $('#devIdTxtImg').after('<div id="fileNo'+fl[i].fileSeq+'">' +
-                                '<input type="hidden" id="thumbnailSeq" value="'+fl[i].fileSeq+'"/>'+
-                                '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=4" style="margin-right: 30px;">'+fl[i].orgFileNm+'</a>'+
-                                '<a onclick="deleteFile('+fl[i].fileSeq+')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a></div>');
+                            $('#devIdTxtAttach').after(setFileDOM(fl[i],'attach'));
+                            $('#attachSeq').val(fl[i].fileSeq);
+                        }
+                    }
+
+                    if(d.ilist!=null){
+                        var il =d.ilist;
+                        for(var i in il){
+                            $('#devIdTxtImg').after(setFileDOM(il[i],'img'));
+                            $('#imgSeq').val(il[i].fileSeq);
                         }
                     }
 
                     $('#summernote').summernote('code', d.contents);
                 }
-
-
-
             }, function(){
 
             });
-
         }
 
-        function deleteFile(no) {
+        function setFileDOM(fl,type) {
+            return ''+
+                '<div id="fileNo'+fl.fileSeq+'" class="file">' +
+                '<input type="hidden" class="fileSeq" value="'+fl.fileSeq+'"/>'+
+                '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=4" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' +
+                '<a onclick="deleteFile('+fl.fileSeq+',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>' +
+                '</div>';
+        }
+
+        function deleteFile(no,type) {
             if(confirm('삭제하시겠습니까?')){
                 var info = tms.getParameterByName("info");
                 var params = {
-                    seq : info
+                    type:type
+                    , seq : info
                     ,fileSeq:no
                 }
 
@@ -358,6 +333,8 @@
                     if(rs.code==0){
                         alert('삭제되었습니다.');
                         $('#fileNo'+no).remove();
+                        if( $('#repImg .file').length==0 ){$('#imgSeq').val('');}
+                        if( $('#attach .file').length==0 ){$('#attachSeq').val('');}
                     }else{
                         alert('오류가 있습니다..')
                     }
@@ -379,11 +356,29 @@
             });
 
             var info = tms.getParameterByName("info");
-
             if(info!=null&&info!=''){
                 detail(info);
-            }else{
-                $('.devCssBtnDel').remove();
+
+                $('#btnList').append('<button type="button" class="btn mainBtn floatLeft devCssBtnDel">삭제</button>');
+                $('.devCssBtnDel').click(function () {
+                    if( confirm('삭제하시겠습니까?') ){
+
+                        var info = tms.getParameterByName("info");
+                        var params = {
+                            seq:info
+                        }
+
+                        tms.ajaxDeleteHelper('/mapi/story', JSON.stringify(params), null, function(rs) {
+                            if(rs.code==0){
+                                alert('삭제되었습니다.');
+                                location.href='/page/admin/story/list';
+                                return ;
+                            }else{
+                                alert('오류가 있습니다.');
+                            }
+                        });
+                    }
+                });
             }
 
         });

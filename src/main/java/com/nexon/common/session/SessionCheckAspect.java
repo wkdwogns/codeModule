@@ -32,6 +32,11 @@ public class SessionCheckAspect {
         Object result = null;
 
         Object[] params = joinPoint.getArgs();
+        for(int i=0; i < params.length; i++){
+            System.out.println("args[" + i + "] : " + params[i].toString());
+        }
+
+
 
         if(params[0] != null) {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

@@ -16,8 +16,10 @@ public class UpdateNoticeReq {
     private String viewEndDt;
     private String viewUnlimitYn;
     private String noticeType;
-    private Integer imgGrpSeq;
+
     private Integer fileGrpSeq;
+    private Integer imgGrpSeq;
+
     private String contents;
     private String creId;
     private String updId;

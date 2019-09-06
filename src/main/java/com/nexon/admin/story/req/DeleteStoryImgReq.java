@@ -6,4 +6,5 @@ import lombok.Data;
 public class DeleteStoryImgReq {
     private Integer seq;
     private Integer fileSeq;
+    private String type;
 }

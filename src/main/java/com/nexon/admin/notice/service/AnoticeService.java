@@ -74,8 +74,6 @@ public class AnoticeService {
                 req.setFileGrpSeq(fgs);
             }
 
-
-
             if(CommonUtil.isNotEmpty(req.getEditorDelImg())){
                 adminFileService.setDeleteFileByEditor(req.getEditorDelImg(),configFile.getSelectCategory3());
             }

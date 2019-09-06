@@ -14,4 +14,6 @@ public class StoryListVO {
     private String viewYn;
     private String viewStDt;
     private String viewEndDt;
+    private String creId;
+    private String updId;
 }

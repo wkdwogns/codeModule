@@ -53,19 +53,19 @@ public class AstoryService {
         return result;
     }
 
-    public ResponseHandler<?> insertStory(HttpServletRequest request, InsertStoryReq req) {
+    public ResponseHandler<?> insertStory(InsertStoryReq req) {
         ResponseHandler<?> result = new ResponseHandler<>();
 
         try{
-            //중요 여부 15개 제한
-            if(checkStoryViewCnt() && "Y".equals(req.getViewYn())) {
-                result.setReturnCode(ReturnType.RTN_TYPE_DATA_EXISTS);
-                return result;
+
+            //대표이미지
+            if(req.getImg()!=null) {
+                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory4());
+                req.setImgGrpSeq(igs);
             }
 
-            //파일 업로드
-            if(req.getImage()!=null) {
-                int fgs = adminFileService.setImg(req.getImage() , configFile.getSelectCategory4());
+            if(req.getFile()!=null) {
+                int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory4());
                 req.setFileGrpSeq(fgs);
             }
 
@@ -84,28 +84,26 @@ public class AstoryService {
         return result;
     }
 
-    public ResponseHandler<?> updateStory(HttpServletRequest request,UpdateStoryReq req) {
+    public ResponseHandler<?> updateStory(UpdateStoryReq req) {
         ResponseHandler<?> result = new ResponseHandler<>();
 
         try{
 
-            SelectStoryDetailReq dtlReq = new SelectStoryDetailReq();
-            dtlReq.setSeq(req.getSeq());
-            SelectStoryDetailRes res = aStoryDao.selectStoryDetail(dtlReq);
-
-            //중요 여부 15개 제한 : 노출 15개이고 파라미터 및 상세데이터 체크
-            if(checkStoryViewCnt() && "Y".equals(req.getViewYn()) && !req.getViewYn().equals(res.getViewYn())) {
-                result.setReturnCode(ReturnType.RTN_TYPE_DATA_EXISTS);
-                return result;
-            }
-
-            //파일 업로드
-            if(req.getImage()!=null) {
-                if(req.getThumbnailSeq()!=null){
-                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getThumbnailSeq(),configFile.getSelectCategory4());
+            if(req.getImg()!=null) {
+                if(req.getImgSeq()!=null){
+                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getImgSeq(),configFile.getSelectCategory4());
                     fileService.deleteFiles(fr);
                 }
-                int fgs = adminFileService.setImg(req.getImage() , configFile.getSelectCategory4());
+                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory4());
+                req.setImgGrpSeq(igs);
+            }
+
+            if(req.getFile()!=null) {
+                if(req.getAttachSeq()!=null){
+                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getAttachSeq(),configFile.getSelectCategory4());
+                    fileService.deleteFiles(fr);
+                }
+                int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory4());
                 req.setFileGrpSeq(fgs);
             }
 
@@ -152,6 +150,13 @@ public class AstoryService {
                 fReq.setFileGrpSeq(fgs);
                 List fList = fileService.getFileList(fReq);
                 res.setFList(fList);
+            }
+            Integer igs = res.getImgGrpSeq();
+            if(igs!=null){
+                FileListReq fReq = new FileListReq();
+                fReq.setFileGrpSeq(igs);
+                List fList = fileService.getFileList(fReq);
+                res.setIList(fList);
             }
 
             result.setData(res);
