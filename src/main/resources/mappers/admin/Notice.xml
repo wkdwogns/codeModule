@@ -95,9 +95,9 @@
             ,#{contents}
             ,'N'
             ,now()
-            ,#{creId}
+            ,#{userSeq}
             ,now()
-            ,#{creId}
+            ,#{userSeq}
         )
     </insert>
 
@@ -120,7 +120,7 @@
             </if>
             ,CONTENTS=#{contents}
             ,UPD_DT=now()
-            ,UPD_ID=#{updId}
+            ,UPD_ID=#{userSeq}
         WHERE
             NOTICE_SEQ=#{seq}
     </update>

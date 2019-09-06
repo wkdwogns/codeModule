@@ -1,12 +1,13 @@
 package com.nexon.admin.notice.req;
 
+import com.nexon.common.dto.req.CommonReq;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
 @Data
-public class InsertNoticeReq {
+public class InsertNoticeReq extends CommonReq{
     private String title;
     private String importantYn;
     private String viewYn;

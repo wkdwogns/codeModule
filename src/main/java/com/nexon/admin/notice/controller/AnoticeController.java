@@ -3,6 +3,7 @@ package com.nexon.admin.notice.controller;
 import com.nexon.admin.notice.req.*;
 import com.nexon.admin.notice.service.AnoticeService;
 import com.nexon.common.dto.res.ResponseHandler;
+import com.nexon.common.session.SessionCheck;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +33,16 @@ public class AnoticeController {
 
     @ApiOperation(value = "공지사항 쓰기")
     @PostMapping
-    public ResponseHandler<?> insertNotice(HttpServletRequest request, InsertNoticeReq req) {
+    @SessionCheck
+    public ResponseHandler<?> insertNotice(InsertNoticeReq req,HttpServletRequest request) {
         ResponseHandler<?> result = aNoticeService.insertNotice(request,req);
         return  result;
     }
 
     @ApiOperation(value = "공지사항 수정")
     @PostMapping("/edit")
-    public ResponseHandler<?> updateNotice(HttpServletRequest request,UpdateNoticeReq req) {
+    @SessionCheck
+    public ResponseHandler<?> updateNotice(UpdateNoticeReq req,HttpServletRequest request) {
         ResponseHandler<?> result = aNoticeService.updateNotice(request,req);
         return  result;
     }
