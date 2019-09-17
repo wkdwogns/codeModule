@@ -2,14 +2,18 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="footerFragement">
 	<footer id="footer">
-		<div class="footer_inner">
-			<div class="f_logo"><span class="blind">넥슨재단</span></div>
-			<p class="address">서울특별시 강남구 도산대로 313, 313빌딩 6층 (신사동 630-31)</p>
-			<p class="copyright">© 2019 NEXON CORPORATION ALL RIGHTS RESERVED.</p>
-			<div class="contact">
-				<p>nexon@nexonfoundation.org</p>
-				<p>02-512-1994</p>
+		<div class="inner_box">
+			<div class="logo_box">
+				<ul>
+					<li><div class="logo_01"><span class="blind">넥슨재단</span></div></li>
+					<li><div class="logo_02"><span class="blind">넥슨재단</span></div></li>
+				</ul>
 			</div>
+			<p class="address">서울특별시 강남구 도산대로 313, 313빌딩 6층 (신사동 630-31) </p>
+			<p class="contact">
+				<span class="mail">nexon@nexonfoundation.org</span>
+				<span class="tel">02-512-1994</span>
+			</p>
 			<div class="select">
 				<select onchange="familySite(this.value)">
 					<option value="" selected="selected">Family Site</option>
@@ -20,17 +24,22 @@
 					<option value="5">넥슨개발자컨퍼런스</option>
 				</select>
 			</div>
+
 			<script>
-				function familySite(no) {
-				    var path = '';
-					if(no=='1'){path = 'http://company.nexon.com/';}
+                function familySite(no) {
+                    var path = '';
+                    if(no=='1'){path = 'http://company.nexon.com/';}
                     if(no=='2'){path = 'https://www.nypc.co.kr/main/main.do';}
                     if(no=='3'){path = 'https://nexonlibrary.com/';}
                     if(no=='4'){path = 'http://www.nexoncomputermuseum.org/';}
                     if(no=='5'){path = 'https://ndc.nexon.com/main';}
-                    window.open(path, '_blank');
+                    if(path!=''){
+                        window.open(path, '_blank');
+					}
                 }
 			</script>
-		</div><!-- class : footer_inner -->
+
+			<p class="copyright">© 2019 NEXON CORPORATION ALL RIGHTS RESERVED.</p>
+		</div><!-- class : inner_box -->
 	</footer><!-- id : footer -->
 </div>

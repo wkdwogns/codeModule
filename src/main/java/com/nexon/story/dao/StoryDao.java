@@ -25,5 +25,5 @@ public interface StoryDao {
     StoryDetailPrevNextVO selectPrevStory(SelectStoryDetailReq req);
     StoryDetailPrevNextVO selectNextStory(SelectStoryDetailReq req);
 
-
+    List topStory();
 }

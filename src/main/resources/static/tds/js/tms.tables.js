@@ -97,7 +97,7 @@ function tableType2(id, data, contents, info) {
     }
 
     //data empty
-    $(id).find('ul').empty();
+    //$(id).find('ul').empty();
 
     //data insert
     $.each(data, function (k, v) {

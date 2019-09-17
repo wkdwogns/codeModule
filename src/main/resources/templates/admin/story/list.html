@@ -95,6 +95,9 @@
                 }}
                 , {no: 5, col: 'viewStDt', name: '노출일자', width:"400px;"}
                 , {no: 6, col: 'viewYn', name: '첨부파일',custom:function (obj) {
+                    if(obj.fileGrpSeq ==null || obj.fileGrpSeq==''){
+                        return '';
+                    }
                     return 'Y';
                 }}
                 , {no: 7, col: 'viewYn', name: '노출여부'}
@@ -152,7 +155,7 @@
         list(1);
 
         function goT(t){
-            window.open('/page/kor/story_view?preview=Y&seq='+t,'미리보기','width=600, height=400, menubar=no, status=no, toolbar=no');
+            window.open('/page/admin/story/preview?no='+t,'미리보기','width=600, height=400, menubar=no, status=no, toolbar=no');
         }
     </script>
 

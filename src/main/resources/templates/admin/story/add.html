@@ -44,7 +44,8 @@
         <tr>
             <th>제목<span class="required">*</span></th>
             <td>
-                <input type="text" class="fullWidth" id="devIdTxtTitle" maxlength="100" placeholder="2글자에서 100글자까지 입력 가능합니다. 문자 제한 없습니다.">
+                <!--<input type="text" class="fullWidth" id="devIdTxtTitle" maxlength="100" placeholder="2글자에서 100글자까지 입력 가능합니다. 문자 제한 없습니다.">-->
+                <textarea id="devIdTxtTitle" cols="20" rows="2" maxlength="100"></textarea>
             </td>
         </tr>
 
@@ -55,7 +56,7 @@
                     <input type="checkbox" class="fullWidth" id="importantYn"><label for="importantYn">Top story 지정</label>
                 </div>
                 <div>
-                    <input type="text" id="orderNo" style="margin-left: 30px;width: 45px;margin-right: 10px;" maxlength="4"><label for="orderNo">Top story 표시순서</label>
+                    <input type="text" id="orderNo" style="margin-left: 30px;width: 45px;margin-right: 10px;" maxlength="1" disabled><label for="orderNo">Top story 표시순서</label>
                 </div>
             </td>
         </tr>
@@ -124,11 +125,38 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <script>
 
+        $('[name=viewYn]').click(function () {
+            if( $(this).val() == 'N' ){
+                $("input:checkbox[id='importantYn']").prop("checked", false );
+                $('#orderNo').val('').attr('disabled',true);
+            }
+        })
+
+        $("#importantYn").click(function(){
+
+
+            var viewYn = $(":input:radio[name=viewYn]:checked").val();
+            if(viewYn=='N'){return false;}
+
+            var chk = $(this).is(":checked");
+            $('#orderNo').attr('disabled',!chk);
+            if(!chk){
+                $('#orderNo').val('');
+            }
+
+        });
+
         $('#orderNo').keyup(function () {
             var regexp = /^[0-9]*$/
             var v = $(this).val();
             if( !regexp.test(v) ) {
                 $(this).val( v.replace(/[^0-9]/g,'') );
+                return ;
+            }
+
+            if( $(this).val() > 4){
+                $(this).val('');
+                return ;
             }
         })
 
@@ -136,7 +164,8 @@
         var setSummernote = function(){
             $('#summernote').summernote({
                 minHeight:300,
-                placeholder: '',
+                placeholder: '텍스트 입력 가능하며, 문자 제한 없습니다.\n' +
+                '글자수 제한 없습니다.\n',
                 callbacks: {
                     onImageUpload: function(files, editor, welEditable) {
                         sendFile(files, this, welEditable); //에디터 이미지 업로드 처리
@@ -150,7 +179,25 @@
         });
 
         $('#devIdTxtImg').change(function (e) {
-            fileCheck(e.target,'onlyImg');
+            var et = e.target;
+
+            fileCheck(et,'onlyImg');
+            var fr = new FileReader;
+            fr.onload = function() {
+                var img = new Image;
+                img.onload = function() {
+                    var w = img.width;
+                    var h = img.height;
+                    if(w!=315&&h!=267){
+                        alert('315x267 사이즈로 올려주세요.');
+                        $(et).val('');
+                    }
+                };
+                img.src = fr.result;
+            };
+
+            if(et.files.length>0)
+                fr.readAsDataURL(et.files[0]);
         });
 
         $('.devCssBtnCancel').click(function(){
@@ -179,17 +226,24 @@
             }
 
             var vi = [
-                {id:'#devIdTxtTitle',rqd:true,msg:'제목을 입력해 주세요.'}
+                {id:'#devIdTxtTitle',rqd:true,msg:'게시물 제목을 작성하여 주세요.',min:2,max:100}
                 ,{id:'#devIdTxtSdt',rqd:true,msg:'노출일자를 입력해 주세요.'}
                 ,{id:'#devIdTxtImg',rqd:true,msg:'대표이미지를 첨부해주세요.',type:'file',pass:'update'}
-                ,{id:'#summernote',rqd:true,msg:'내용을 입력해 주세요.',type:'summerNote'}
+                ,{id:'#summernote',rqd:true,msg:'게시물 내용을 작성하여 주세요.',type:'summerNote'}
             ];
 
             var dr = door(vi,stat);
             if(!dr)
                 return ;
 
-            if(!confirm("저장하시겠습니까?")) {
+            var chk = $('#importantYn').is(":checked")
+            var ord = $('#orderNo').val();
+            if(chk && (ord==null||ord=='') ){
+                alert('Top Story표시순서를 입력해주세요');
+                return ;
+            }
+
+            if(!confirm("해당 내용으로 저장하시겠습니까?")) {
                 return;
             }
 
@@ -268,7 +322,7 @@
                         $(editor).summernote('insertImage', result.data.fileInfos[i].fileUrl, fileName);
                     }
                 }
-            }, function(){ //실패 처리
+            }, function(e){ //실패 처리
 
             });
         }
@@ -283,13 +337,14 @@
 
                 if(rs.code==0){
                     var d = rs.data;
-                    console.log(d);
+
                     $('input:radio[name=category]:input[value=' + d.category + ']').attr("checked", true);
                     $('#devIdTxtTitle').val(tms.convertHtml(d.title));
                     $('input:radio[name=viewYn]:input[value=' + d.viewYn + ']').attr("checked", true);
                     $('#devIdTxtSdt').val(d.viewStDt);
                     $('#thumbnailSeq').val(d.thumbnailSeq);
                     $("input:checkbox[id='importantYn']").prop("checked", (d.importantYn=='Y') );
+                    $('#orderNo').attr('disabled', !(d.importantYn=='Y') );
                     $('#orderNo').val(d.orderNo);
                     if(d.flist!=null){
                         var fl =d.flist;

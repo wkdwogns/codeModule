@@ -702,3 +702,34 @@ box-sizing:border-box;
 .table .contentRow .note-editor td{padding:8px !important;}
 .table .note-editor tr{border-bottom: 0 !important;}
 .note-editable .table {border: none !important;}
+
+
+#popup_all .popup_view {width:100%; height:100%; position:fixed; left:0px; top:0px; z-index:150; background-color:rgba(0, 0, 0, 0.6); overflow:hidden; overflow-y:scroll;}
+#popup_all .popup_view .inner_box {width:1200px; padding:60px 100px; margin:250px auto; background-color:#fff; z-index:10; position:relative; box-sizing:border-box;}
+#popup_all .popup_view .cont .name {margin-bottom:10px; font-size:34px; font-weight:900; line-height:50px;}
+#popup_all .popup_view .cont .date {font-size:22px; color:#777; border-bottom:solid 1px #d3d3d3; padding-bottom:25px; margin-bottom:25px;}
+#popup_all .popup_view .cont .file_list {margin-bottom:20px;}
+#popup_all .popup_view .cont .file_list ul {width:1005px; overflow:hidden;}
+#popup_all .popup_view .cont .file_list ul li {float:left; margin:0 5px 5px 0;}
+#popup_all .popup_view .cont .file_list ul li a {display:block; width:194px; height:48px; line-height:50px; color:#00a0e0; font-size:16px; border:solid 1px #d3d3d3; background:url(../../images/common/ico_05.png) 15px center no-repeat; background-size:13px auto; position:relative;}
+#popup_all .popup_view .cont .file_list ul li a strong {display:block; padding:0 40px 0 35px; text-align:right; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; font-weight:400;}
+#popup_all .popup_view .cont .file_list ul li a strong span.extension {position:absolute; right:15px; top:0px;}
+#popup_all .popup_view .cont .img {margin-bottom:50px;}
+#popup_all .popup_view .cont .img img {width:100%;}
+#popup_all .popup_view .cont .txt {margin-bottom:50px; font-size:22px; line-height:36px;}
+#popup_all .popup_view .cont .txt strong {font-weight:900;}
+#popup_all .popup_view .control {overflow:hidden;}
+#popup_all .popup_view .control .tit {margin-bottom:40px; padding-top:15px; font-size:20px; font-weight:900;}
+#popup_all .popup_view .control a {display:block;}
+#popup_all .popup_view .control a span {display:block;}
+#popup_all .popup_view .control a span.img {margin-bottom:20px;}
+#popup_all .popup_view .control a span.img img {width:100%;}
+#popup_all .popup_view .control a span.name {margin-bottom:5px; font-size:20px; line-height:28px; font-weight:900;}
+#popup_all .popup_view .control a span.date {font-size:14px; color:#acacac;}
+#popup_all .popup_view .control > div {width:380px;}
+#popup_all .popup_view .control > div:nth-child(1) {float:left;}
+#popup_all .popup_view .control > div:nth-child(2) {float:right;}
+#popup_all .popup_view .control > div:nth-child(1) .tit {color:#fa7921; border-top:solid 3px #fa7921;}
+#popup_all .popup_view .control > div:nth-child(2) .tit {color:#03b5aa; border-top:solid 3px #03b5aa; text-align:right;}
+#popup_all .popup_view .btn_close {display:block; width:64px; height:64px; position:absolute; right:-30px; top:-30px; background:url(../../images/common/btn_close_02.png) 0 0 no-repeat;}
+

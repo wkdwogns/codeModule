@@ -315,6 +315,16 @@ var door = function(vi,pass) {
             isValid=false;
             return false;
         }
+
+        if(v.min !=null && v.max!=null){
+            var isLen = $(v.id).val().length;
+            console.log(isLen);
+            if(v.min > isLen || isLen > v.max){
+                alert('제목은 '+v.min+'글자 이상으로 입력해 주세요.');
+                isValid=false;
+                return false;
+            }
+        }
     });
 
     return isValid;

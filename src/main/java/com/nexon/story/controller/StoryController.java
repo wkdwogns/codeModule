@@ -4,7 +4,6 @@ import com.nexon.common.dto.res.ResponseHandler;
 import com.nexon.story.dto.req.SelectStoryDetailReq;
 import com.nexon.story.dto.req.StoryListReq;
 import com.nexon.story.dto.res.SelectStoryDetailRes;
-import com.nexon.story.dto.res.StoryListImportRes;
 import com.nexon.story.dto.res.StoryListRes;
 import com.nexon.story.service.StoryService;
 import io.swagger.annotations.ApiOperation;
@@ -29,13 +28,6 @@ public class StoryController {
         return  result;
     }
 
-    @ApiOperation(value = "스토리 목록")
-    @GetMapping("/important")
-    public ResponseHandler<StoryListImportRes> selectStoryImportantList() {
-        ResponseHandler<StoryListImportRes> result = storyService.selectStoryImportantList();
-        return  result;
-    }
-
     @ApiOperation(value = "스토리 상세")
     @GetMapping("/detail")
     public ResponseHandler<SelectStoryDetailRes> selectStoryDetail(SelectStoryDetailReq req) {
@@ -50,6 +42,13 @@ public class StoryController {
     @GetMapping("/preview")
     public ResponseHandler<SelectStoryDetailRes> selectStoryPreveiw(SelectStoryDetailReq req, HttpServletRequest request) {
         ResponseHandler<SelectStoryDetailRes> result = storyService.selectStoryPreveiw(req, request);
+        return  result;
+    }
+
+    @ApiOperation(value = "topStory 목록")
+    @GetMapping("/topStory")
+    public ResponseHandler<?> topStory() {
+        ResponseHandler<?> result = storyService.topStory();
         return  result;
     }
 

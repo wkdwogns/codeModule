@@ -14,6 +14,8 @@ import com.nexon.notice.dto.req.SelectNoticeReq;
 import com.nexon.notice.dto.res.SelectNoticeDetailPrevNextRes;
 import com.nexon.notice.dto.res.SelectNoticeDetailRes;
 import com.nexon.notice.dto.res.SelectNoticeRes;
+import com.nexon.story.dao.StoryDao;
+import com.nexon.story.dto.req.StoryListReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class NoticeService {
     private NoticeDao noticeDao;
 
     @Autowired
-    private ConfigFile configFile;
+    private StoryDao storyDao;
 
     @Autowired
     private FileService fileService;
@@ -36,56 +38,16 @@ public class NoticeService {
         ResponseHandler<SelectNoticeRes> result = new ResponseHandler<>();
 
         try{
-            int impCnt = 0;
-            int dataPerPage = req.getCntPerPage();
-            List<NoticeListVO> impList = noticeDao.selectNoticeImportantList();
-            if(impList != null && impList.size() > 0) {
-                impCnt = impList.size();
-            }
 
-            //중요게시물을 제외한 한페이지에 보여지는 글 개수
-            req.setCntPerPage(dataPerPage - impCnt);
             req.setStartRow();
-
             List<NoticeListVO> list = noticeDao.selectNotice(req);
-            int cnt = noticeDao.selectNoticeCnt(req);
-
-            //중요게시물을 제외한 전체 페이지 개수
-            int pageCnt = 0;
-            if(cnt > 0) {
-                pageCnt = cnt % req.getCntPerPage();
-                if(pageCnt == 0) {
-                    pageCnt = cnt / req.getCntPerPage();
-                } else {
-                    pageCnt = (cnt / req.getCntPerPage()) + 1;
-                }
-            }
-
-            //중요게시물을 포함한 전체 글 수
-            int totalCnt = 0;
-            if(pageCnt > 0) {
-                totalCnt = cnt + (impCnt * pageCnt);
-            } else {
-                totalCnt = cnt + impCnt;
-            }
-            List<NoticeListVO> totalList = new ArrayList<>();
-            totalList.addAll(impList);
-            totalList.addAll(list);
-
-            //페이지 번호 지정
-            if(totalList != null && totalList.size() > 0) {
-                int idx = (req.getCurrentPage() - 1) * dataPerPage + 1;
-                for(int i=0; i<totalList.size(); i++) {
-                    totalList.get(i).setNo(idx);
-                    idx++;
-                }
-            }
+            int totalCnt = noticeDao.selectNoticeCnt(req);
+            int storyCnt = storyDao.selectStoryListCnt(new StoryListReq());
 
             SelectNoticeRes res = new SelectNoticeRes();
-            //res.setList(list);
-            //res.setTotalCnt(cnt);
-            res.setList(totalList);
+            res.setList(list);
             res.setTotalCnt(totalCnt);
+            res.setStoryCnt(storyCnt);
 
             result.setData(res);
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
@@ -103,14 +65,6 @@ public class NoticeService {
 
         try{
             SelectNoticeDetailRes res = noticeDao.selectNoticeDetail(req);
-
-            Integer fgs= res.getFileGrpSeq();
-            if(fgs!=null){
-                FileListReq fReq = new FileListReq();
-                fReq.setFileGrpSeq(fgs);
-                List fList = fileService.getFileList(fReq);
-                res.setFList(fList);
-            }
 
             NoticeDetailPrevNextVO prevVo = noticeDao.selectPrevNotice(req);
             NoticeDetailPrevNextVO nextVo = noticeDao.selectNextNotice(req);

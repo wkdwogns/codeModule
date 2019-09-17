@@ -5,6 +5,8 @@ import com.nexon.common.dto.res.ResponseHandler;
 import com.nexon.common.file.dto.req.FileListReq;
 import com.nexon.common.file.service.FileService;
 import com.nexon.common.type.ReturnType;
+import com.nexon.notice.dao.NoticeDao;
+import com.nexon.notice.dto.req.SelectNoticeReq;
 import com.nexon.story.dao.StoryDao;
 import com.nexon.story.dto.model.StoryDetailPrevNextVO;
 import com.nexon.story.dto.model.StoryListVO;
@@ -18,14 +20,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StoryService {
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private StoryDao storyDao;
+
+    @Autowired
+    private NoticeDao noticeDao;
 
     @Autowired
     private FileService fileService;
@@ -37,44 +44,21 @@ public class StoryService {
         ResponseHandler<StoryListRes> result = new ResponseHandler<>();
 
         try{
-            StoryListRes res = new StoryListRes();
 
             req.setStartRow();
             List<StoryListVO> list = storyDao.selectStoryList(req);
             int totalCnt = storyDao.selectStoryListCnt(req);
+            int noticeCnt = noticeDao.selectNoticeCnt(new SelectNoticeReq());
 
-            //List<StoryListVO> impList = storyDao.selectStoryImportantList();
-
+            StoryListRes res = new StoryListRes();
             res.setList(list);
             res.setTotalCnt(totalCnt);
+            res.setNoticeCnt(noticeCnt);
 
             result.setData(res);
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
-            logger.info("selectStory[result]", result);
         } catch (Exception e) {
             result.setReturnCode(ReturnType.RTN_TYPE_NG);
-            logger.error("selectStory[Exception]", e);
-        }
-
-        return result;
-    }
-
-    public ResponseHandler<StoryListImportRes> selectStoryImportantList() {
-        ResponseHandler<StoryListImportRes> result = new ResponseHandler<>();
-
-        try{
-            StoryListImportRes res = new StoryListImportRes();
-
-            List<StoryListVO> impList = storyDao.selectStoryImportantList();
-
-            res.setStoryImpList(impList);
-
-            result.setData(res);
-            result.setReturnCode(ReturnType.RTN_TYPE_OK);
-            logger.info("StoryListImportRes[result]", result);
-        } catch (Exception e) {
-            result.setReturnCode(ReturnType.RTN_TYPE_NG);
-            logger.error("StoryListImportRes[Exception]", e);
         }
 
         return result;
@@ -85,14 +69,6 @@ public class StoryService {
 
         try{
             SelectStoryDetailRes res = storyDao.selectStoryDetail(req);
-
-            Integer fgs= res.getFileGrpSeq();
-            if(fgs!=null){
-                FileListReq fReq = new FileListReq();
-                fReq.setFileGrpSeq(fgs);
-                List fList = fileService.getFileList(fReq);
-                res.setFList(fList);
-            }
 
             StoryDetailPrevNextVO prevVO = storyDao.selectPrevStory(req);
             StoryDetailPrevNextVO nextVO = storyDao.selectNextStory(req);
@@ -121,4 +97,35 @@ public class StoryService {
         }
         return result;
     }
+
+    public ResponseHandler<?> topStory() {
+        ResponseHandler<List> result = new ResponseHandler<>();
+
+        try{
+
+            List list = storyDao.topStory();
+            Iterator it =  list.iterator();
+            List newList = new ArrayList();
+            while(it.hasNext()){
+                Map map = (Map)it.next();
+                if(map.get("IMG_GRP_SEQ")!=null){
+                    String fgs = map.get("IMG_GRP_SEQ").toString();
+                    FileListReq req = new FileListReq();
+                    req.setFileGrpSeq(Integer.parseInt(fgs));
+                    List fList = fileService.getFileList(req);
+                    map.put("fList",fList);
+                }
+                newList.add(map);
+            }
+
+            result.setData(newList);
+            result.setReturnCode(ReturnType.RTN_TYPE_OK);
+        } catch (Exception e) {
+            result.setReturnCode(ReturnType.RTN_TYPE_NG);
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 }

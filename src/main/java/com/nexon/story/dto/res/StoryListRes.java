@@ -10,5 +10,6 @@ public class StoryListRes {
 
     private List<StoryListVO> list;
     int totalCnt;
+    int noticeCnt;
 
 }

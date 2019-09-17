@@ -1,16 +1,47 @@
-<html lang="ko">
-<div id="content" class="content">
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout">
+<div class="content" layout:fragment="contents">
+
+    <section id="popup_all">
+        <div class="popup_view" style="display: none">
+            <div class="inner_box">
+                <div class="cont" style="margin-bottom: 60px;"></div>
+
+                <button type="button" class="btn_close" onclick="self_CLOSE();"><span class="blind">닫기</span></button>
+            </div>
+        </div>
+    </section>
 
     <script>
-        var info = tms.getParameterByName("info");
-        if(info==null||info==''){
+        var no = tms.getParameterByName("no");
+        tms.ajaxGetHelper('/mapi/story/detail', {seq:no}, null, function(rs) {
 
-        }else{
-            var img = document.createElement("img");
-            img.src=info;
-            img.style.width='500px';
-            var x = document.getElementById("content");
-            x.appendChild(img);
+            if(rs.code==0){
+                var title = rs.data.title;
+                var viewStDt =rs.data.viewStDt;
+                var contents = rs.data.contents;
+
+                var d = new Date(viewStDt);
+                var mm = d.getMonth() < 9 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1); // getMonth() is zero-based
+                var dd  = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+                var dStr = d.getFullYear()+'.'+mm+'.'+dd;
+                $('#popup_all .popup_view .cont').html('');
+                $('#popup_all .popup_view .cont').append('<h2 class="name">'+title+'</h2>');
+                $('#popup_all .popup_view .cont').append('<p class="date">'+dStr+'</p>');
+
+                var fl =rs.data.flist;
+                for(var i in fl){
+                    $('#popup_all .popup_view .cont').append('<div class="file_list"><ul><li>'+
+                        '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=4"><strong>'+fl[i].orgFileNm+'</strong></a>'+
+                        '</li></ul></div>');
+                }
+                $('#popup_all .popup_view .cont').append(contents);
+            }
+
+            layer_OPEN('.popup_view');
+        });
+
+        function self_CLOSE() {
+            self.close();
         }
     </script>
 

@@ -30,7 +30,7 @@
             <tr>
                 <th>제목<span class="required">*</span></th>
                 <td>
-                    <input type="text" class="fullWidth" id="devIdTxtTitle" name="Title" maxlength="100" value="">
+                    <input type="text" class="fullWidth" id="devIdTxtTitle" name="Title" maxlength="100" placeholder="2글자에서 100글자까지 입력 가능합니다. 문자 제한 없습니다.">
                 </td>
             </tr>
 
@@ -104,7 +104,8 @@
         var setSummernote = function(){
             $('#summernote').summernote({
                 minHeight:300,
-                placeholder: '',
+                placeholder: '텍스트 입력 가능하며, 문자 제한 없습니다.\n' +
+                '글자수 제한 없습니다.\n',
                 callbacks: {
                     onImageUpload: function(files, editor, welEditable) {
                         sendFile(files, this, welEditable); //에디터 이미지 업로드 처리
@@ -118,7 +119,25 @@
         });
 
         $('#devIdTxtImg').change(function (e) {
+            var et = e.target;
+
             fileCheck(e.target,'onlyImg');
+            var fr = new FileReader;
+            fr.onload = function() {
+                var img = new Image;
+                img.onload = function() {
+                    var w = img.width;
+                    var h = img.height;
+                    if(w!=315&&h!=267){
+                        alert('315x267 사이즈로 올려주세요.');
+                        $(et).val('');
+                    }
+                };
+                img.src = fr.result;
+            };
+
+            if(et.files.length>0)
+                fr.readAsDataURL(et.files[0]);
         });
 
         $('.devCssBtnCancel').click(function(){
@@ -148,17 +167,17 @@
             }
 
             var vi = [
-                {id:'#devIdTxtTitle',rqd:true,msg:'제목을 입력해 주세요.'}
-                ,{id:'#devIdTxtSdt',rqd:true,msg:'노출일자를 입력해 주세요.'}
+                {id:'#devIdTxtTitle',rqd:true,msg:'게시물 제목을 작성하여 주세요.',min:2,max:100}
+                ,{id:'#devIdTxtSdt',rqd:true,msg:'노출일자를 설정해 주세요.'}
                 ,{id:'#devIdTxtImg',rqd:true,msg:'대표이미지를 첨부해주세요.',type:'file',pass:'update'}
-                ,{id:'#summernote',rqd:true,msg:'내용을 입력해 주세요.',type:'summerNote'}
+                ,{id:'#summernote',rqd:true,msg:'게시물 내용을 작성하여 주세요.',type:'summerNote'}
             ];
 
             var dr = door(vi,stat);
             if(!dr)
                 return ;
 
-            if(!confirm("저장하시겠습니까?")) {
+            if(!confirm("해당 내용으로 저장하시겠습니까?")) {
                 return;
             }
 

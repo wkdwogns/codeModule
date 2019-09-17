@@ -17,7 +17,7 @@ public class UpdateStoryReq extends CommonReq{
     private String viewUnlimitYn;
     private String contents;
     private String viewStDt;
-    private String orderNo;
+    private Integer orderNo;
     private String creId;
 
     private Integer fileGrpSeq;

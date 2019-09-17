@@ -5,42 +5,52 @@
 </head>
 <body>
 <div class="content" layout:fragment="contents">
-    <div id="container">
-
-        <div class="mobild_sub_tabs">
-            <ul class="two">
-                <li><a href="/page/eng/story_list"><em>Story</em></a></li>
-                <li class="on"><a href="#self"><em>Notice</em></a></li>
-            </ul>
-        </div>
-
-        <section class="sub_visual_wrap new2">
-            <div class="txt_box">
-                <h3 class="tit">Notice</h3>
-            </div>
-        </section>
-
-        <section class="notice_list_wrap">
+    <section id="container">
+        <div id="contents" class="sub_news">
             <div class="inner_box">
-                <div class="serach_box">
-                    <select id="keyField" name="">
-                        <option value="" selected="selected">all</option>
-                        <option value="title">title</option>
-                        <option value="contents">contents</option>
-                    </select>
-                    <span class="btn_search">
-                        <input type="text" id="keyWord" class="it"/>
-                        <a href="#self" onclick="getList(1)"><span class="blind">find</span></a>
-                    </span>
+                <div class="tab_box">
+                    <a href="/page/eng/story_list"><span>story<strong class="count">0</strong></span></a>
+                    <a href="#self" class="on"><span>notice<strong class="count">0</strong></span></a>
+                </div>
+                <div id="notice_list" class="story_list">
+                    <ul></ul>
+                </div>
+                <div class="btn_more">
+                    <button type="button">more</button>
+                </div>
+            </div>
+        </div><!-- id : contents -->
+    </section><!-- id : main_container -->
+
+    <section id="popup_all">
+        <div class="popup_view" style="display: none">
+            <div class="inner_box">
+                <div class="cont" style="margin-bottom: 60px;"></div>
+
+                <div class="control">
+                    <div class="prevS">
+                        <p class="tit">Previous</p>
+                        <a href="#self" class="btn_prev">
+                            <span class="img"><img src="https://placeimg.com/380/270/any" /></span>
+                            <span class="name">제 4회 ‘청소년 프로그래밍 챌린지(NYPC)’ 일정 공개하고 ‘토크콘서트’ 참가자 모집을 시작합니다.</span>
+                            <span class="date">2019.03.12</span>
+                        </a>
+                    </div>
+                    <div class="nextS">
+                        <p class="tit">Next</p>
+                        <a href="#self" class="btn_next">
+                            <span class="img"><img src="https://placeimg.com/380/270/any" /></span>
+                            <span class="name">제 4회 ‘청소년 프로그래밍 챌린지(NYPC)’ 일정 공개하고 ‘토크콘서트’ 참가자 모집을 시작합니다.</span>
+                            <span class="date">2019.03.12</span>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="notice_list_box"></div>
-
-                <div id="paging" class="pagination"></div>
+                <button type="button" class="btn_close" onclick="layer_CLOSE('.popup_view');"><span class="blind">닫기</span></button>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </div><!-- id : main_container -->
 </div>
 
 </body>

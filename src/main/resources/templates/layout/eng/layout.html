@@ -2,22 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="/layout/eng/static :: staticFragement"></th:block>
-    <style>
-        #header .gnb > ul > li > a {
-            margin: 0px 50px;
-        }
-        #main_contents .section_02 .list ul li a {
-            height: 450px;
-        }
-    </style>
 </head>
 <body>
 
 <div id="wrap">
-    <div id="btn_top" class="btn_top">
-        <a href="#self"><span class="blind">Top</span></a>
-    </div>
-
     <th:block th:include="/layout/eng/header :: headerFragement"></th:block><!-- id : header -->
 
     <div layout:fragment="contents"></div>

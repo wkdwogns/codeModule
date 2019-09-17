@@ -4,6 +4,7 @@ import com.nexon.common.dto.req.CommonReq;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 
 @Data
@@ -16,7 +17,7 @@ public class InsertStoryReq extends CommonReq {
     private String viewUnlimitYn;
     private String contents;
     private String viewStDt;
-    private String orderNo;
+    private Integer orderNo;
     private String creId;
 
     private Integer fileGrpSeq;

@@ -16,7 +16,6 @@ import com.nexon.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -58,6 +57,12 @@ public class AstoryService {
 
         try{
 
+            if( req.getOrderNo()>4 ){
+                result.setMessage("4 이하의 숫자만 입력해주세요.");
+                result.setReturnCode(ReturnType.RTN_TYPE_NG);
+                return result;
+            }
+
             //대표이미지
             if(req.getImg()!=null) {
                 int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory4());
@@ -88,6 +93,14 @@ public class AstoryService {
         ResponseHandler<?> result = new ResponseHandler<>();
 
         try{
+
+            if( req.getViewYn().equals("Y")
+                    && req.getImportantYn().equals("Y")
+                    && req.getOrderNo()>4 ){
+                result.setMessage("4 이하의 숫자만 입력해주세요.");
+                result.setReturnCode(ReturnType.RTN_TYPE_NG);
+                return result;
+            }
 
             if(req.getImg()!=null) {
                 if(req.getImgSeq()!=null){
@@ -197,4 +210,5 @@ public class AstoryService {
 
         return result;
     }
+
 }

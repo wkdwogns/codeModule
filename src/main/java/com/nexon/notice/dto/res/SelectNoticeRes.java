@@ -9,4 +9,5 @@ import java.util.List;
 public class SelectNoticeRes {
     List<NoticeListVO> list;
     int totalCnt;
+    int storyCnt;
 }

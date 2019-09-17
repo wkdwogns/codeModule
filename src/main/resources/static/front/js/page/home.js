@@ -1,5 +1,18 @@
 $(function(){
-    getBanner();
+    var ln = tms.getCookie('lang');
+    if((ln=='eng')){
+        $('#header .logo a').css({
+            'width': '205px'
+            ,'background': 'url(/front/images/common/logo_eng.png) 0 center no-repeat'
+        })
+        $('#footer .logo_box ul li .logo_01').css({
+            'width': '265px'
+            ,'background': 'url(/front/images/common/footer_logo_01_eng.png) 0 center no-repeat'
+        })
+        $('#footer .logo_box ul li .logo_02').css({
+            'background': 'url(/front/images/common/footer_logo_02_eng.png) 0 center no-repeat'
+        })
+    }
 });
 
 var setLang = function (lang) {
@@ -9,7 +22,7 @@ var setLang = function (lang) {
         var ln = tms.getCookie('lang');
         var pNm = location.pathname;
         var pLink = (ln == 'eng')?pNm.replace('kor','eng'):pNm.replace('eng','kor');
-        console.log(location.search);
+
         location.href=pLink+location.search;
     });
 }
@@ -75,158 +88,3 @@ var getList = function(no) {
     });
 
 };
-
-var getPopup = function() {
-
-    var cookieVal = tms.getCookie("popup");
-    var cookieArray = cookieVal.split(",");
-
-    tms.ajaxGetHelper('/api/popup', null, null, function(result) {
-        if(result.code == 0) {
-            var list = result.data.list;
-            var html = "";
-            if(list.length > 0) {
-                for(var i=1; i<list.length+1; i++) {
-                    var cookieFalg = false;
-                    if(cookieArray != null && cookieArray.length > 0) {
-                        for(var j=0; j<cookieArray.length; j++) {
-                            if(cookieArray[j] == ("popup_main_0"+i)) {
-                                cookieFalg = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if(!cookieFalg) {
-                        html += '<div class="popup_main_0'+i+'">';
-                        html += '    <div class="out_layer_box">';
-                        html += '        <div class="in_layer_box">';
-                        if(tms.isNotEmpty(list[i-1].targetUrl)){
-                            if(list[i-1].targetYn == "N"){
-                                html += ' <div class="img"> <a href="'+list[i-1].targetUrl+'" target="_blank"><img src="'+list[i-1].filePath+'" /></a></div>';
-                            } else {
-                                html += ' <div class="img"> <a href="'+list[i-1].targetUrl+'"><img src="'+list[i-1].filePath+'" /></a></div>';
-                            }
-                        } else {
-                            html += '           <div class="img"><img src="'+list[i-1].filePath+'" /></div>';
-                        }
-                        html += '            <div class="close_box">';
-                        html += '                <label for="CHK_0'+i+'" class="chk"><input type="checkbox" id="CHK_0'+i+'" name="CHK_0'+i+'" /> 오늘 하루 다시 보지 않기</label>';
-                        html += "                <a href=\"#self\" class=\"btn_close_02\" onclick=\"popupClose('popup_main_0', "+i+");\"><span class=\"blind\">닫기</span></a>";
-                        html += '            </div>';
-                        html += '        </div>';
-                        html += '    </div>';
-                        html += '</div>';
-                    }
-                }
-
-                $(".popup_main .in_box").html(html);
-                $(".popup_all").show();
-            }
-
-        }
-
-    });
-};
-
-var popupClose = function(classVal, idx) {
-    var checked = $("input:checkbox[id='CHK_0"+idx+"']").is(":checked");
-    if(checked) {
-        var cookieVal = tms.getCookie("popup");
-        cookieVal = cookieVal + "," + classVal + idx;
-        tms.setCookie("popup", cookieVal, 1);
-    }
-
-    layer_CLOSE("." + classVal + idx);
-};
-
-
-/* 메인배너 조회 */
-var getBanner = function(){
-    tms.ajaxGetHelper("/api/banner", null, null, function(res){
-        if(res.code == 0){
-            var list = res.data.list;
-
-            //$('.section_01 .slider').html('');
-            //$('.section_01 .slider_thum').html('');
-            /*list.forEach(function(obj, idx){
-                $('.section_01 .slider').append(bannerTemplate(obj))
-                $('.section_01 .slider_thum').append(bannerTemplate2(obj))
-            });*/
-            //UI.fn_main();
-        }
-    });
-}
-
-/* 컨텐츠 배너 조회 */
-var getContentsBanner = function(){
-    tms.ajaxGetHelper("/api/banner/contents", null, null, function(res){
-        if(res.code == 0){
-            var list = res.data.list;
-            var html = '';
-            list.forEach(function(obj, idx){
-                $(".section_04 .thumnail").slick('slickAdd', bannerContentsThumTemplate(obj))
-                $('.section_04 .slider').slick('slickAdd', bannerContentsTemplate(obj))
-            });
-
-
-        }
-    });
-}
-
-/* 메인 배너 템플릿 */
-var bannerTemplate = function(obj){
-    var html='<div>';
-    html+='<div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>';
-    html+='<div class="comment_box">';
-    html+='<p class="txt_01">NYPC { }</p>';
-    html+='<p class="txt_02">청년의 꿈을 펼치는 <br/>바람콘서트</p>';
-    html+='<p class="txt_03">다양한 난이도의 문제를 통해 <br/>';
-    html+='프로그래밍을 처음 접하는 학생들도 부담없이 <br/>';
-    html+='도전해 볼 수 있었던 대회의 현장, 함께해보세요!</p>';
-    html+='<a href="#self" class="btn_more">자세히 보기</a>';
-    html+='</div>';
-    html+='</div>';
-
-    return html;
-}
-
-var bannerTemplate2 = function(obj){
-    var html='<div>';
-    html+='<div class="cont">';
-    html+='<div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>';
-    html+='<div class="comment_box">';
-    html+='<p>청년의 꿈을 펼치는 <br/>바람콘서트</p>';
-    html+='</div>';
-    html+='</div>';
-    html+='</div>';
-
-    return html;
-}
-
-/* 컨텐츠 배너 썸네일 템플릿 */
-var bannerContentsThumTemplate = function(obj){
-    var html = '<div>'+
-      '  <div class="img"><img src="'+obj.filePath+'" alt="" /></div>'+
-     '   <p class="name" style="word-break: keep-all;">'+obj.thumbnailNm+'</p>'+
-    '</div>';
-
-    return html;
-}
-
-/* 컨텐츠 배너 템플릿 */
-var bannerContentsTemplate = function(obj){
-    var html = '<div>'
-    html += '<div class="picture"><img src="'+obj.filePath+'" alt="" /></div>';
-    html +=                '<div class="txt_box">';
-    html +=                    '<p class="txt_01" style="word-break: keep-all;white-space:pre;">'+obj.topText+'</p>';
-    html +=                    '<p class="txt_02" style="word-break: keep-all;white-space:pre;">'+obj.title+'</p>';
-    html +=                    '<p class="txt_03" style="word-break: keep-all;white-space:pre;">'+obj.contents+'</p>';
-                                if(tms.isNotEmpty(obj.targetUrl)){
-                                    html += '<a href="'+obj.targetUrl+'" class="btn_more"><span class="blind">자세히보기</span></a>';
-                                }
-    html +=                '</div>';
-    html +=           '</div>';
-
-    return html;
-}

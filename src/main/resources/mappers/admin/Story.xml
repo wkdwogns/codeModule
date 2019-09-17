@@ -14,11 +14,10 @@
                 , (SELECT USER_NAME FROM tb_user_profile WHERE USER_SEQ = s.CRE_ID) CRE_ID
                 , (SELECT USER_NAME FROM tb_user_profile WHERE USER_SEQ = s.UPD_ID) UPD_ID
                 , s.TITLE
-                , s.IMPORTANT_YN
-                , s.VIEW_UNLIMIT_YN
+                , s.FILE_GRP_SEQ
                 , s.VIEW_YN
                 , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-                , DATE_FORMAT(s.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
+
             FROM TB_STORY s
             WHERE IFNULL(s.DEL_YN, 'N') = 'N'
             <if test="keyField=='title'">

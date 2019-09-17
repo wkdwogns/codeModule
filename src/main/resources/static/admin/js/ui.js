@@ -186,5 +186,19 @@ function fileCheck(obj,isImg) {
         return ;
     }
 
-
 }
+
+//레이어 오픈
+var layer_OPEN = function (obj_selector){
+    var obj = $(obj_selector);
+    obj.css({'display':'block','opacity':0});
+    obj.stop().animate({'opacity':1},500);
+};
+
+//레이어 클로즈
+var layer_CLOSE = function (obj_selector){
+    var obj = $(obj_selector);
+    obj.stop().animate({'opacity':0},500,function (){
+        $(this).css({'display':'none'});
+    });
+};

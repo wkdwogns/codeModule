@@ -1,93 +1,71 @@
-var today = new Date();
 $(function() {
     getList(1);
+
+    //상세이동
+    $(document).on("click", ".story_list li a", function(e){
+        var seq = $(this).data("seq");
+        getDetail(seq);
+    });
+
 });
 
 var getList = function(no) {
-    var colsInfo = [
-          {no: 1, col: 'no', name: '번호'}
-        , {no: 2, col: 'title', name: '제목', width:"400px;"
-            , class: function(obj){
-                var creDt = obj.creDt;
-                var creDtArr = creDt.split(".");
-                var date = new Date();
-                date.setFullYear(creDtArr[0], (Number(creDtArr[1])-1), creDtArr[2]);
-                date.setDate(date.getDate() + 30);
-
-                var cl = "article";
-                if(obj.fileGrpSeq != null && obj.fileGrpSeq != 0) {
-                    cl += ' file';
-                }
-                if(today.getTime() < date.getTime()) { //30일전
-                    cl += ' new';
-                }
-                return cl
-            },
-            custom:function(obj){
-                var creDt = obj.creDt;
-                var creDtArr = creDt.split(".");
-
-                var date = new Date();
-                date.setFullYear(creDtArr[0], (Number(creDtArr[1])-1), creDtArr[2]);
-                date.setDate(date.getDate() + 30);
-
-                var nw = '';
-                var f = '';
-                if(obj.fileGrpSeq != null && obj.fileGrpSeq != 0) {
-                    f='<span class="ico_file"><em class="blind">file</em></span>';
-                }
-
-                if(today.getTime() < date.getTime()) { //30일전
-                    nw='<span class="ico_new"><em class="blind">new</em></span>';
-                }
-
-                var url = location.pathname.replace('list','view')+'?seq='+obj.noticeSeq;
-                var html = '<a href="#self" onclick="viewCnt('+obj.noticeSeq+')">'+obj.title+nw+f+'</a>';
-                return html;
-            }
-        }
-        , {no: 3, col: 'creDt', name: '등록일', class: function(){return "date"}}
-        , {no: 4, col: 'viewCnt', name: '조회수', class: function(){return "count"}}
-    ];
 
     var params = {
-        cntPerPage: 10
+        cntPerPage: 12
         ,currentPage:no
-        ,keyField:$('#keyField').val()
-        ,keyWord:$('#keyWord').val()
     };
 
     tms.ajaxGetHelper('/api/notice', params, null, function(result) {
 
-        var paging = {
-            id: '#paging',
-            pageNo: no,
-            totalCnt: result.data.totalCnt,
-            countPerPage: 10,
-            pageCount: 10,
-            fn: 'getList',
-            activeClass: 'on',
-            type: 'type3'
+        var contents = function (obj){
+
+            var fPath = (obj.filePath==null)?'/front/images/sub/exp1.jpg':obj.filePath;
+
+            var html = "";
+            html += '<a href="#self" data-seq="'+obj.noticeSeq+'">';
+            html += '   <span class="img"><img src="'+fPath+'" alt=""/></span>';
+            html += '   <span class="tit">'+obj.title+'</span>';
+            html += '   <span class="date">'+obj.viewStDt+'</span>';
+            html += '</a>';
+
+            return html;
         };
 
-        var info = {
-            colsInfo: colsInfo,
-            paging: paging
-        };
-
-        var listObj = ".notice_list_box";
-
-        if(result.code == 0) {
+        if(result.code == "0") {
             var totalCnt = result.data.totalCnt;
-            paging.totalCnt = totalCnt;
 
             if(totalCnt == 0){
-                tableType3(listObj, null, info, 4, "데이터가 없습니다.");
+                tableType2("#notice_list", null, contents, {})
             } else {
-                tableType3(listObj, result.data.list, info);
+                tableType2("#notice_list", result.data.list, contents, {})
+                var len = $('.sub_news .story_list ul li').length;
+                if( (len % 4) == 1 ){
+                    $('.sub_news .story_list ul li:last-child').css({'float':'none'});
+                }
+
+                // 페이지 카운트
+                var pageCnt = totalCnt % params.cntPerPage;
+                if (pageCnt == 0) {
+                    pageCnt = Math.floor(totalCnt / params.cntPerPage);
+                } else {
+                    pageCnt = Math.floor(totalCnt / params.cntPerPage) + 1;
+                }
+
+                if(params.currentPage>=pageCnt){
+                    $('.sub_news .btn_more button').remove();
+                }else{
+                    $('.sub_news .btn_more button').click(function(){
+                        var idx=params.currentPage+1;
+                        getList(idx);
+                    })
+                }
+
+                $('.sub_news .tab_box a:nth-child(1) .count').text(result.data.storyCnt);
+                $('.sub_news .tab_box a:nth-child(2) .count').text(totalCnt);
             }
         } else {
-            tableType3(listObj, null, info );
+            tableType2("#story_list", null, contents, info)
         }
 
     }, function(){
@@ -96,13 +74,53 @@ var getList = function(no) {
 
 }
 
-var viewCnt = function(no){
+var getDetail = function(no) {
+    var params = {
+        seq: no
+    };
 
-    tms.ajaxPutHelper('/api/notice/viewCnt', JSON.stringify({no:no}), null, function(rs) {
+    tms.ajaxGetHelper('/api/notice/detail', params, null, function(rs) {
 
         if(rs.code==0){
-            var url = location.pathname.replace('list','view')+'?seq='+no;
-            location.href=url;
+            var title = rs.data.title;
+            var viewStDt =rs.data.viewStDt;
+            var contents = rs.data.contents;
+            var fileSeq = rs.data.fileSeq;
+            var orgFileNm = rs.data.orgFileNm;
+            $('#popup_all .popup_view .cont').html('');
+            $('#popup_all .popup_view .cont').append('<h2 class="name">'+title+'</h2>');
+            $('#popup_all .popup_view .cont').append('<p class="date">'+viewStDt+'</p>');
+            if(fileSeq!=null&&fileSeq!=''){
+                $('#popup_all .popup_view .cont').append('<div class="file_list"><ul><li>'+
+                    '<a href="/api/file/download?fileSeq='+fileSeq+'&category=3"><strong>'+orgFileNm+'</strong></a>'+
+                    '</li></ul></div>');
+            }
+            $('#popup_all .popup_view .cont').append(contents);
+
+            var prevS = rs.data.prevNotice;
+            var nextS = rs.data.nextNotice;
+
+            var BtnPrev = $('#popup_all .popup_view .control .btn_prev');
+            var BtnNext = $('#popup_all .popup_view .control .btn_next');
+            if(prevS==null){
+                BtnPrev.hide()
+            }else{
+                $('.prevS .img img').attr('src',prevS.filePath);
+                $('.prevS .name').text(prevS.title);
+                $('.prevS .date').text(prevS.viewStDt);
+                BtnPrev.attr('onclick','getDetail('+prevS.noticeSeq+')').show();
+            }
+            if(nextS==null){
+                BtnNext.hide()
+            }else{
+                $('.nextS .img img').attr('src',nextS.filePath);
+                $('.nextS .name').text(nextS.title);
+                $('.nextS .date').text(nextS.viewStDt);
+                BtnNext.attr('onclick','getDetail('+nextS.noticeSeq+')').show();
+            }
         }
+
+        layer_OPEN('.popup_view');
     });
+
 }

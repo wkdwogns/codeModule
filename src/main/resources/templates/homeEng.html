@@ -1,133 +1,95 @@
 <!DOCTYPE html>
 <html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/eng/layout" xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <style>
+        @media screen and (min-width: 750px){
+            #main_contents .section_02 .list ul li a span.tit{
+                width:315px;
+            }
+        }
+    </style>
+    <script th:src="@{/front/js/page/index.js}"></script>
+</head>
 <body>
 <div class="content" layout:fragment="contents">
-    <div id="main_container">
+
+    <section id="container">
+
         <div id="main_contents">
-            <div class="section_01">
-                <div class="slider">
-                    <div>
-                        <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                        <div class="comment_box">
-                            <p class="txt_01">NYPC { }</p>
-                            <p class="txt_02">청년의 꿈을 펼치는 <br/>바람콘서트</p>
-                            <p class="txt_03">다양한 난이도의 문제를 통해 <br/>
-                                프로그래밍을 처음 접하는 학생들도 부담없이 <br/>
-                                도전해 볼 수 있었던 대회의 현장, 함께해보세요!</p>
-                            <a href="#self" class="btn_more">자세히 보기</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                        <div class="comment_box">
-                            <p class="txt_01">NYPC { }</p>
-                            <p class="txt_02">넥슨 청소년 프로그래밍 <br/>챌린지 본선 대회 현장</p>
-                            <p class="txt_03">다양한 난이도의 문제를 통해 <br/>
-                                프로그래밍을 처음 접하는 학생들도 부담없이 <br/>
-                                도전해 볼 수 있었던 대회의 현장, 함께해보세요!</p>
-                            <a href="#self" class="btn_more">자세히 보기</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                        <div class="comment_box">
-                            <p class="txt_01">NYPC { }</p>
-                            <p class="txt_02">다시보는 2018 <br/>NYPC 토크 콘서트</p>
-                            <p class="txt_03">다양한 난이도의 문제를 통해 <br/>
-                                프로그래밍을 처음 접하는 학생들도 부담없이 <br/>
-                                도전해 볼 수 있었던 대회의 현장, 함께해보세요!</p>
-                            <a href="#self" class="btn_more">자세히 보기</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                        <div class="comment_box">
-                            <p class="txt_01">NYPC { }</p>
-                            <p class="txt_02">넥슨작은책방 <br/>제 8회 독후감 시상식</p>
-                            <p class="txt_03">다양한 난이도의 문제를 통해 <br/>
-                                프로그래밍을 처음 접하는 학생들도 부담없이 <br/>
-                                도전해 볼 수 있었던 대회의 현장, 함께해보세요!</p>
-                            <a href="#self" class="btn_more">자세히 보기</a>
-                        </div>
+            <div class="inner_box">
+                <div class="section_01">
+                    <h2 class="title">A <strong>head<span>start</span></strong> for our <br/>
+                        future generation</h2>
+                    <p class="txt">Enabling youth to learn, create, and dream</p>
+                    <div class="character">
+                        <span class="c_01"></span>
+                        <span class="c_02"></span>
+                        <span class="c_03"></span>
+                        <span class="c_04"></span>
                     </div>
                 </div>
-                <div class="slider_thum">
-                    <div>
-                        <div class="cont">
-                            <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                            <div class="comment_box">
-                                <p>청년의 꿈을 펼치는 <br/>바람콘서트</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="cont">
-                            <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                            <div class="comment_box">
-                                <p>넥슨 청소년 프로그래밍 <br/>챌린지 본선 대회 현장</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="cont">
-                            <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                            <div class="comment_box">
-                                <p>다시보는 2018 <br/>NYPC 토크 콘서트</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="cont">
-                            <div class="bg_picture" style="background:url(/front/images/main/main_visual_02.jpg) center top no-repeat;"></div>
-                            <div class="comment_box">
-                                <p>넥슨작은책방 <br/>제 8회 독후감 시상식</p>
-                            </div>
-                        </div>
+
+                <div class="section_02">
+                    <h2 class="title">LATEST NEWS</h2>
+                    <div class="list">
+                        <ul></ul>
                     </div>
                 </div>
-            </div>
-            <div class="section_02">
-                <div class="inner_box">
-                    <h2 class="tit">About Project</h2>
-                    <p class="exp">The Nexon Foundation wants to create various projects in the areas of IT, culture, play and health.</p>
+
+                <div class="section_03">
+                    <h2 class="title">OUR INITIATIVES</h2>
                     <div class="list">
                         <ul>
-                            <li><a href="/page/eng/business1">
+                            <li>
+                                <p class="tit">Technology <span class="no blue">1</span></p>
+                                <p class="txt">Nexon Foundation is building the groundwork for future generations to <br/>
+                                    grow into creative talents in the field of software and will continue to <br/>
+                                    identify outstanding youths with potential in this very realm.</p>
                                 <span class="img"><img src="/front/images/main/business_01.jpg" alt="" /></span>
-                                <span class="txt_box">
-										<span class="name">IT</span>
-										<span class="txt">Supports the foundation for future generations to grow into creative talents in the field of SW, and discovers and sponsors excellent adolescents with the potential in this field.</span>
-									</span>
-                            </a></li>
-                            <li><a href="/page/eng/business4">
-                                <span class="img"><img src="/front/images/main/business_04.jpg" alt="" /></span>
-                                <span class="txt_box">
-										<span class="name">HEALTH</span>
-										<span class="txt">Sponsors the establishment of rehabilitation hospitals and supports long-term self-reliance to ensure that children in need of rehabilitation can receive proper treatment at the right time. </span>
-									</span>
-                            </a></li>
-                            <li><a href="/page/eng/business2">
-                                <span class="img"><img src="/front/images/main/business_03.jpg" alt="" /></span>
-                                <span class="txt_box">
-										<span class="name">CULTURE</span>
-										<span class="txt">We introduce various cultural contents to our society and help children and adolescents to access cultural contents more easily.</span>
-									</span>
-                            </a></li>
-                            <li><a href="/page/eng/business3">
+                                <a href="/page/eng/business1?info=Tech" class="btn_more"><span>See projects</span></a>
+                            </li>
+                            <li>
+                                <p class="tit">Health <span class="no mint">1</span></p>
+                                <p class="txt">Nexon Foundation supports the establishment of rehabilitation hospitals <br/>
+                                    and backing long-term self-reliance so that children who are in need of<br/>
+                                    rehabilitation can properly receive the right treatment in a timely manner.​</p>
                                 <span class="img"><img src="/front/images/main/business_02.jpg" alt="" /></span>
-                                <span class="txt_box">
-										<span class="name">PLAY</span>
-										<span class="txt">Play, the right of all children in the world! We are creating a fun play culture that can stimulate children's imagination and creativity using bricks.</span>
-									</span>
-                            </a></li>
+                                <a href="/page/eng/business1?info=Health" class="btn_more"><span>See projects</span></a>
+                            </li>
+                            <li>
+                                <p class="tit">Culture <span class="no lime">3</span></p>
+                                <p class="txt">Nexon Foundation helps children to gain knowledge and let them <br/>
+                                    understand the joy of learning through books. In addition,<br/>
+                                    Nexon Foundation introduces various cultural content to our society and<br/>
+                                    help children and teenagers to easily access those materials. </p>
+                                <span class="img"><img src="/front/images/main/business_03.jpg" alt="" /></span>
+                                <a href="/page/eng/business1?info=Culture" class="btn_more"><span>See projects</span></a>
+                            </li>
+                            <li>
+                                <p class="tit">Play <span class="no orange">1</span></p>
+                                <p class="txt">Nexon Foundation helps children around the globe to develop their <br/>
+                                    creativity through ‘play’, and nurture them to grow into changemakers.<br/>
+                                    Children are invited to the world beyond their imagination via brick,<br/>
+                                    the toy that can make anything out of nothing.</p>
+                                <span class="img"><img src="/front/images/main/business_04.jpg" alt="" /></span>
+                                <a href="/page/eng/business1?info=Play" class="btn_more"><span>See projects</span></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
         </div><!-- id : main_contents -->
-    </div><!-- id : main_container -->
+    </section><!-- id : main_container -->
+
+    <section id="popup_all">
+        <div class="popup_view" style="display: none">
+            <div class="inner_box">
+                <div class="cont" style="margin-bottom: 60px;"></div>
+
+                <button type="button" class="btn_close" onclick="layer_CLOSE('.popup_view');"><span class="blind">닫기</span></button>
+            </div>
+        </div>
+    </section>
 </div>
 
 </body>

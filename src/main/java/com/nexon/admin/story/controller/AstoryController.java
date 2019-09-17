@@ -64,4 +64,5 @@ public class AstoryController {
         ResponseHandler<?> result = aStoryService.deleteFile(req);
         return  result;
     }
+
 }

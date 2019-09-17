@@ -3,43 +3,26 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="headerFragement">
 	<header id="header">
-		<div class="header_inner">
-			<h1 class="logo"><a href="/"><span class="blind">NEXON FOUNDATION</span></a></h1>
-			<a href="#self" class="btn_menu"><span class="blind">menu</span></a>
-			<ul class="util_menu">
-				<li><a href="#self" onclick="setLang('kor')">KOR</a></li>
-				<li><a href="#self" onclick="setLang('eng')">ENG</a></li>
-			</ul>
-			<div id="gnb" class="gnb">
-				<div class="gnb_top">
-					<img class="menu_logo" src="/front/images/common/logo.png" alt="NEXON FOUNDATION" />
-					<a href="#self" class="btn_close"><span class="blind">all menu</span></a>
+		<div class="inner_box">
+			<h1 class="logo"><a href="/"><span class="blind">NEXON Foundation</span></a></h1>
+			<a href="#self" class="btn_menu"><span><span class="blind">Menu</span></span></a>
+			<nav id="gnb_wrap" class="gnb_wrap">
+				<div class="util_menu">
+					<ul>
+						<li><a href="#self" onclick="setLang('kor')">Korean</a></li>
+						<li class="on"><a href="#self" onclick="setLang('eng')">English</a></li>
+					</ul>
 				</div>
-				<ul>
-					<li><a href="/page/eng/intro1"><span>About Foundation</span></a>
-						<ul class="depth2">
-							<li><a href="/page/eng/intro1"><span>Introduction</span></a></li>
-							<li><a href="/page/eng/intro2"><span>History</span></a></li>
-							<li><a href="/page/eng/intro3"><span>Location map</span></a></li>
-						</ul>
-					</li>
-					<li><a href="/page/eng/business1"><span>About Project</span></a>
-						<ul class="depth2">
-							<li><a href="/page/eng/business1"><span>IT</span></a></li>
-							<li><a href="/page/eng/business4"><span>HEALTH</span></a></li>
-							<li><a href="/page/eng/business2"><span>CULTURE</span></a></li>
-							<li><a href="/page/eng/business3"><span>PLAY</span></a></li>
-						</ul>
-					</li>
-					<li><a href="/page/eng/story_list"><span>News</span></a>
-						<ul class="depth2">
-							<li><a href="/page/eng/story_list"><span>Story</span></a></li>
-							<li><a href="/page/eng/notice_list"><span>Notice</span></a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div><!-- class : header_inner -->
+				<a href="#self" class="btn_close"><span class="blind">Menu Close</span></a>
+				<div class="gnb">
+					<ul>
+						<li><a href="/page/eng/intro1"><span>About us</span></a></li>
+						<li><a href="/page/eng/business1"><span>Our Projects</span></a></li>
+						<li><a href="/page/eng/story_list"><span>Featured News</span></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div><!-- class : inner_box -->
 	</header><!-- id : header -->
 </div>
 <!-- END HEADER -->

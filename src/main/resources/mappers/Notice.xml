@@ -26,37 +26,20 @@
     </select>
 
     <select id="selectNotice" parameterType="com.nexon.notice.dto.req.SelectNoticeReq" resultType="com.nexon.notice.dto.model.NoticeListVO">
-        SELECT @rownum:=@rownum+1 no
-          , A.*
-        FROM (
-            SELECT
-                n.NOTICE_SEQ
-                ,n.TITLE
-                ,n.IMPORTANT_YN
-                ,n.VIEW_YN
-                ,n.VIEW_CNT
-                ,n.VIEW_UNLIMIT_YN
-                ,n.NOTICE_TYPE
-                ,n.FILE_GRP_SEQ
-                ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-                ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
-                ,DATE_FORMAT(n.CRE_DT, '%Y.%m.%d') CRE_DT
-            FROM
-                TB_NOTICE n
-            WHERE IFNULL(n.DEL_YN, 'N') ='N'
-              AND n.VIEW_YN = 'Y'
-              AND IFNULL(n.IMPORTANT_YN, 'N') = 'N'
-              AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
-                <if test="keyField=='title'">
-                    AND n.TITLE like concat('%',#{keyWord},'%')
-                </if>
-                <if test="keyField=='contents'">
-                    AND n.CONTENTS like concat('%',#{keyWord},'%')
-                </if>
+        SELECT
+            @rownum:=@rownum+1 no
+            , n.NOTICE_SEQ
+            , n.TITLE
+            , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= n.IMG_GRP_SEQ LIMIT 1) FILE_PATH
+            , DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+        FROM
+            TB_NOTICE n
+            ,(SELECT @rownum:=0) rn
+        WHERE
+            IFNULL(n.DEL_YN, 'N') ='N'
+            AND n.VIEW_YN = 'Y'
+            AND date(n.VIEW_ST_DT) <![CDATA[ < ]]> now()
             ORDER BY n.CRE_DT DESC
-        ) A,
-        (SELECT @rownum:=0) rn
-        ORDER BY no
         LIMIT ${startRow}, ${cntPerPage}
     </select>
 
@@ -65,61 +48,61 @@
             count(*)
         FROM
             TB_NOTICE n
-        WHERE IFNULL(n.DEL_YN, 'N') ='N'
-          AND n.VIEW_YN = 'Y'
-          AND IFNULL(n.IMPORTANT_YN, 'N') = 'N'
-          AND (n.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN n.VIEW_ST_DT AND n.VIEW_END_DT)
-            <if test="keyField=='title'">
-                AND n.TITLE like concat('%',#{keyWord},'%')
-            </if>
-            <if test="keyField=='contents'">
-                AND n.CONTENTS like concat('%',#{keyWord},'%')
-            </if>
+            ,(SELECT @rownum:=0) rn
+        WHERE
+            IFNULL(n.DEL_YN, 'N') ='N'
+            AND n.VIEW_YN = 'Y'
+            AND date(n.VIEW_ST_DT) <![CDATA[ < ]]> now()
     </select>
 
     <select id="selectNoticeDetail" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.res.SelectNoticeDetailRes">
         SELECT
             n.NOTICE_SEQ
             ,n.TITLE
-            ,n.IMPORTANT_YN
-            ,n.VIEW_YN
-            ,n.VIEW_CNT
             ,n.CONTENTS
-            ,n.FILE_GRP_SEQ
-            ,n.IMG_GRP_SEQ
-            ,n.VIEW_UNLIMIT_YN
-            ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
-            ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
-            ,DATE_FORMAT(n.CRE_DT, '%Y.%m.%d') CRE_DT
+            , (SELECT FILE_SEQ FROM TB_FILE WHERE FILE_GRP_SEQ= n.FILE_GRP_SEQ LIMIT 1) FILE_SEQ
+            , (SELECT ORG_FILE_NM FROM TB_FILE WHERE FILE_GRP_SEQ= n.FILE_GRP_SEQ LIMIT 1) ORG_FILE_NM
+            ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
             TB_NOTICE n
         WHERE
             n.NOTICE_SEQ=#{seq}
+            and n.DEL_YN='N'
+            and n.VIEW_YN='Y'
+            AND date(n.VIEW_ST_DT) <![CDATA[ < ]]> now()
     </select>
 
     <select id="selectPrevNotice" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.model.NoticeDetailPrevNextVO">
-        SELECT A.NOTICE_SEQ
-          , A.TITLE
-          , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
-        FROM TB_NOTICE A
-        WHERE A.NOTICE_SEQ <![CDATA[ < ]]> #{seq}
+        SELECT
+            A.NOTICE_SEQ
+            , A.TITLE
+            , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= A.IMG_GRP_SEQ LIMIT 1) FILE_PATH
+            , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+        FROM
+            TB_NOTICE A
+        WHERE
+          A.NOTICE_SEQ <![CDATA[ < ]]> #{seq}
           AND IFNULL(A.DEL_YN, 'N') ='N'
           AND A.VIEW_YN = 'Y'
-          AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
+          AND date(A.VIEW_ST_DT) <![CDATA[ < ]]> now()
         ORDER BY A.NOTICE_SEQ DESC
         LIMIT 1
     </select>
 
     <select id="selectNextNotice" parameterType="com.nexon.notice.dto.req.SelectNoticeDetailReq" resultType="com.nexon.notice.dto.model.NoticeDetailPrevNextVO">
-        SELECT A.NOTICE_SEQ
-          , A.TITLE
-          , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
-        FROM TB_NOTICE A
-        WHERE A.NOTICE_SEQ <![CDATA[ > ]]> #{seq}
+        SELECT
+            A.NOTICE_SEQ
+            , A.TITLE
+            , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= A.IMG_GRP_SEQ LIMIT 1) FILE_PATH
+            , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+        FROM
+            TB_NOTICE A
+        WHERE
+          A.NOTICE_SEQ <![CDATA[ > ]]> #{seq}
           AND IFNULL(A.DEL_YN, 'N') ='N'
           AND A.VIEW_YN = 'Y'
-          AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
-        ORDER BY A.NOTICE_SEQ
+          AND date(A.VIEW_ST_DT) <![CDATA[ < ]]> now()
+        ORDER BY A.NOTICE_SEQ DESC
         LIMIT 1
     </select>
 

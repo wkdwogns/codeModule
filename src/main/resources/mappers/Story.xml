@@ -4,82 +4,34 @@
 <mapper namespace="com.nexon.story.dao.StoryDao">
 
     <select id="selectStoryList" parameterType="com.nexon.story.dto.req.StoryListReq" resultType="com.nexon.story.dto.model.StoryListVO">
-        SELECT A.*
-          , @rownum:=@rownum+1 NO
-        FROM (
-            SELECT
-                A.STORY_SEQ
-                , A.CATEGORY
-                , A.STORY_NM
-                , A.TITLE
-                , A.IMPORTANT_YN
-                , A.VIEW_UNLIMIT_YN
-                , A.VIEW_YN
-                , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-                , DATE_FORMAT(A.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
-                , CASE WHEN A.VIEW_UNLIMIT_YN = 'Y' THEN 'Y'
-                        WHEN A.VIEW_UNLIMIT_YN = 'N' AND NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT THEN 'Y'
-                        ELSE 'N'
-                        END VIEW_CHECK
-                , B.FILE_PATH
-                , A.CRE_DT
-            FROM TB_STORY A
-              LEFT OUTER JOIN TB_FILE B ON A.FILE_GRP_SEQ = B.FILE_GRP_SEQ AND IFNULL(B.DEL_YN, 'N') = 'N'
-            WHERE IFNULL(A.DEL_YN, 'N') = 'N'
-                AND A.VIEW_YN = 'Y'
-                <if test="category!=null and category!=''">
-                    AND A.CATEGORY = #{category}
-                </if>
-                <if test="keyField=='title'">
-                    AND A.TITLE like concat('%',#{keyWord},'%')
-                </if>
-                <if test="keyField=='contents'">
-                    AND A.CONTENTS like concat('%',#{keyWord},'%')
-                </if>
-        ) A
-          , (SELECT @rownum:=0) RN
-        WHERE A.VIEW_CHECK = 'Y'
-
-        ORDER BY A.CRE_DT DESC
-        LIMIT ${startRow}, ${cntPerPage}
+        SELECT
+            @rownum:=@rownum+1 no
+            , s.STORY_SEQ
+            , s.TITLE
+            , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+            , s.IMG_GRP_SEQ
+            , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= s.IMG_GRP_SEQ LIMIT 1) FILE_PATH
+        FROM
+            TB_STORY s
+            ,(SELECT @rownum:=0) rn
+        WHERE
+            s.DEL_YN='N'
+            and s.VIEW_YN='Y'
+            and date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
+            ORDER BY s.VIEW_ST_DT DESC
+            LIMIT ${startRow}, ${cntPerPage}
     </select>
 
     <select id="selectStoryListCnt" parameterType="com.nexon.story.dto.req.StoryListReq" resultType="int">
-        SELECT COUNT(*)
-        FROM (
-            SELECT
-                A.STORY_SEQ
-                , A.CATEGORY
-                , A.STORY_NM
-                , A.TITLE
-                , A.IMPORTANT_YN
-                , A.VIEW_UNLIMIT_YN
-                , A.VIEW_YN
-                , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-                , DATE_FORMAT(A.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
-                , CASE WHEN A.VIEW_UNLIMIT_YN = 'Y' THEN 'Y'
-                        WHEN A.VIEW_UNLIMIT_YN = 'N' AND NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT THEN 'Y'
-                        ELSE 'N'
-                        END VIEW_CHECK
-                , B.FILE_PATH
-            FROM
-                TB_STORY A
-                LEFT OUTER JOIN TB_FILE B ON A.FILE_GRP_SEQ = B.FILE_GRP_SEQ AND IFNULL(B.DEL_YN, 'N') = 'N'
-            WHERE
-                IFNULL(A.DEL_YN, 'N') = 'N'
-                AND A.VIEW_YN = 'Y'
-                <if test="category!=null and category!=''">
-                    AND A.CATEGORY = #{category}
-                </if>
-                <if test="keyField=='title'">
-                    AND A.TITLE like concat('%',#{keyWord},'%')
-                </if>
-                <if test="keyField=='contents'">
-                    AND A.CONTENTS like concat('%',#{keyWord},'%')
-                </if>
-
-        ) A
-        WHERE A.VIEW_CHECK = 'Y'
+        SELECT
+            count(*)
+        FROM
+            TB_STORY s
+            ,(SELECT @rownum:=0) rn
+        WHERE
+            s.DEL_YN='N'
+            and s.VIEW_YN='Y'
+            and DATE(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
     </select>
 
     <select id="selectStoryImportantList" resultType="com.nexon.story.dto.model.StoryListVO">
@@ -114,64 +66,74 @@
 
     <select id="selectStoryDetail" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.res.SelectStoryDetailRes">
         SELECT
-            STORY_SEQ
-            , CATEGORY
-            , STORY_NM
-            , TITLE
-            , IMPORTANT_YN
-            , VIEW_YN
-            , VIEW_UNLIMIT_YN
-            , DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
-            , DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i') VIEW_END_DT
-            , FILE_GRP_SEQ
-            , CONTENTS
-            , DATE_FORMAT(CRE_DT, '%Y.%m.%d') CRE_DT
+            s.STORY_SEQ
+            , s.TITLE
+            , s.CONTENTS
+            , (SELECT FILE_SEQ FROM TB_FILE WHERE FILE_GRP_SEQ= s.FILE_GRP_SEQ LIMIT 1) FILE_SEQ
+            , (SELECT ORG_FILE_NM FROM TB_FILE WHERE FILE_GRP_SEQ= s.FILE_GRP_SEQ LIMIT 1) ORG_FILE_NM
+            , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
-            TB_STORY
+            TB_STORY s
         WHERE
-            STORY_SEQ=#{seq}
-            and IFNULL(DEL_YN, 'N') = 'N'
-            <if test="!isPreview">
-                AND VIEW_YN = 'Y'
-                AND (VIEW_UNLIMIT_YN = 'Y'
-                OR DATE_FORMAT(now(), '%Y.%m.%d %H:%i') BETWEEN DATE_FORMAT(VIEW_ST_DT, '%Y.%m.%d %H:%i') AND DATE_FORMAT(VIEW_END_DT, '%Y.%m.%d %H:%i'))
-            </if>
+            s.STORY_SEQ=#{seq}
+            and IFNULL(s.DEL_YN, 'N') = 'N'
+            AND s.VIEW_YN = 'Y'
+            and date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
     </select>
 
     <select id="selectPrevStory" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.model.StoryDetailPrevNextVO">
         SELECT
-            A.STORY_SEQ
-            , A.TITLE
-            , A.STORY_NM
-            , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
+            s.STORY_SEQ
+            , s.TITLE
+            , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+            , s.IMG_GRP_SEQ
+            , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= s.IMG_GRP_SEQ LIMIT 1) FILE_PATH
         FROM
-            TB_STORY A
+            TB_STORY s
         WHERE
-            A.STORY_SEQ <![CDATA[ < ]]> #{seq}
-            AND IFNULL(A.DEL_YN, 'N') = 'N'
-            AND A.VIEW_YN = 'Y'
-            AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
-        ORDER BY A.STORY_SEQ DESC
+            s.STORY_SEQ <![CDATA[ < ]]> #{seq}
+            AND IFNULL(s.DEL_YN, 'N') = 'N'
+            AND s.VIEW_YN = 'Y'
+            AND date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
+        ORDER BY s.STORY_SEQ DESC
         LIMIT 1
     </select>
 
     <select id="selectNextStory" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.model.StoryDetailPrevNextVO">
         SELECT
-            A.STORY_SEQ
-            , A.TITLE
-            , A.STORY_NM
-            , DATE_FORMAT(A.CRE_DT, '%Y.%m.%d') CRE_DT
+            s.STORY_SEQ
+            , s.TITLE
+            , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+            , s.IMG_GRP_SEQ
+            , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= s.IMG_GRP_SEQ LIMIT 1) FILE_PATH
         FROM
-            TB_STORY A
+            TB_STORY s
         WHERE
-            A.STORY_SEQ <![CDATA[ > ]]> #{seq}
-            AND IFNULL(A.DEL_YN, 'N') = 'N'
-            AND A.VIEW_YN = 'Y'
-            AND (A.VIEW_UNLIMIT_YN = 'Y' OR NOW() BETWEEN A.VIEW_ST_DT AND A.VIEW_END_DT)
-        ORDER BY A.STORY_SEQ
+            s.STORY_SEQ <![CDATA[ > ]]> #{seq}
+            AND IFNULL(s.DEL_YN, 'N') = 'N'
+            AND s.VIEW_YN = 'Y'
+            AND date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
+        ORDER BY s.STORY_SEQ
         LIMIT 1
     </select>
 
-
+    <select id="topStory" resultType="map">
+        SELECT
+            s.STORY_SEQ
+            ,s.TITLE
+            ,s.IMG_GRP_SEQ
+            ,s.ORDER_NO
+            ,DATE_FORMAT(s.CRE_DT, '%Y.%m.%d') CRE_DT
+            ,DATE_FORMAT(s.UPD_DT, '%Y.%m.%d') UPD_DT
+        FROM
+            TB_STORY s
+        WHERE
+            DEL_YN='N'
+            and VIEW_YN='Y'
+            and IMPORTANT_YN='Y'
+            and date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
+        ORDER BY s.ORDER_NO ASC
+        limit 4
+    </select>
 
 </mapper>
