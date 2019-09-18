@@ -77,7 +77,7 @@
             A.NOTICE_SEQ
             , A.TITLE
             , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= A.IMG_GRP_SEQ LIMIT 1) FILE_PATH
-            , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+            , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
             TB_NOTICE A
         WHERE
@@ -94,7 +94,7 @@
             A.NOTICE_SEQ
             , A.TITLE
             , (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ= A.IMG_GRP_SEQ LIMIT 1) FILE_PATH
-            , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d %H:%i') VIEW_ST_DT
+            , DATE_FORMAT(A.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
             TB_NOTICE A
         WHERE

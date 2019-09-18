@@ -7,5 +7,5 @@ public class NoticeDetailPrevNextVO {
     private String noticeSeq;
     private String title;
     private String filePath;
-    private String creDt;
+    private String viewStDt;
 }

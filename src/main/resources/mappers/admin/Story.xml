@@ -11,8 +11,8 @@
             SELECT
                 s.STORY_SEQ
                 , s.CATEGORY
-                , (SELECT USER_NAME FROM tb_user_profile WHERE USER_SEQ = s.CRE_ID) CRE_ID
-                , (SELECT USER_NAME FROM tb_user_profile WHERE USER_SEQ = s.UPD_ID) UPD_ID
+                , (SELECT USER_NAME FROM TB_USER_PROFILE WHERE USER_SEQ = s.CRE_ID) CRE_ID
+                , (SELECT USER_NAME FROM TB_USER_PROFILE WHERE USER_SEQ = s.UPD_ID) UPD_ID
                 , s.TITLE
                 , s.FILE_GRP_SEQ
                 , s.VIEW_YN
@@ -23,11 +23,8 @@
             <if test="keyField=='title'">
                 and s.TITLE LIKE concat('%',#{keyword},'%')
             </if>
-            <if test="keyField=='storyNm'">
-                and s.STORY_NM LIKE concat('%',#{keyword},'%')
-            </if>
-            <if test="category!=null and category!=''">
-                and s.CATEGORY = #{category}
+            <if test="keyField=='Content'">
+                and s.CONTENTS LIKE concat('%',#{keyWord},'%')
             </if>
             ORDER BY s.CRE_DT DESC
         ) A,
@@ -46,11 +43,8 @@
             <if test="keyField=='title'">
                 and s.TITLE LIKE concat('%',#{keyword},'%')
             </if>
-            <if test="keyField=='storyNm'">
-                and s.STORY_NM LIKE concat('%',#{keyword},'%')
-            </if>
-            <if test="category!=null and category!=''">
-                and s.CATEGORY = #{category}
+            <if test="keyField=='Content'">
+                and s.CONTENTS LIKE concat('%',#{keyWord},'%')
             </if>
     </select>
 

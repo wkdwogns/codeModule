@@ -57,7 +57,9 @@ public class AstoryService {
 
         try{
 
-            if( req.getOrderNo()>4 ){
+            if( req.getViewYn().equals("Y")
+                    && req.getImportantYn().equals("Y")
+                    && req.getOrderNo()>4 ){
                 result.setMessage("4 이하의 숫자만 입력해주세요.");
                 result.setReturnCode(ReturnType.RTN_TYPE_NG);
                 return result;

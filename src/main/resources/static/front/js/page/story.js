@@ -25,7 +25,7 @@ var basicList = function (no) {
 var getList = function(params) {
 
     tms.ajaxGetHelper('/api/story', params, null, function(result) {
-
+        console.log(result)
         var contents = function (obj){
 
             var fPath = (obj.filePath==null)?'/front/images/sub/exp1.jpg':obj.filePath;
@@ -51,29 +51,31 @@ var getList = function(params) {
                 if( (len % 4) == 1 ){
                     $('.sub_news .story_list ul li:last-child').css({'float':'none'});
                 }
-
-                // 페이지 카운트
-                var pageCnt = totalCnt % params.cntPerPage;
-                if (pageCnt == 0) {
-                    pageCnt = Math.floor(totalCnt / params.cntPerPage);
-                } else {
-                    pageCnt = Math.floor(totalCnt / params.cntPerPage) + 1;
-                }
-
-                if(params.currentPage>=pageCnt){
-                    $('.sub_news .btn_more button').remove();
-                }else{
-                    $('.sub_news .btn_more button').click(function(){
-                        var idx=params.currentPage+1;
-                        basicList(idx);
-                    })
-                }
-
-                $('.sub_news .tab_box a:nth-child(1) .count').text(totalCnt);
-                $('.sub_news .tab_box a:nth-child(2) .count').text(result.data.noticeCnt);
             }
+
+            // 페이지 카운트
+            var pageCnt = totalCnt % params.cntPerPage;
+            if (pageCnt == 0) {
+                pageCnt = Math.floor(totalCnt / params.cntPerPage);
+            } else {
+                pageCnt = Math.floor(totalCnt / params.cntPerPage) + 1;
+            }
+
+            if(params.currentPage>=pageCnt){
+                $('.sub_news .btn_more button').remove();
+            }else{
+                $('.sub_news .btn_more button').show();
+                $('.sub_news .btn_more button').click(function(){
+                    var idx=params.currentPage+1;
+                    basicList(idx);
+                })
+            }
+
+            $('.sub_news .tab_box a:nth-child(1) .count').text(totalCnt);
+            $('.sub_news .tab_box a:nth-child(2) .count').text(result.data.noticeCnt);
+
         } else {
-            tableType2("#story_list", null, contents, info)
+            tableType2("#story_list", null, contents, {})
         }
 
     }, function(){

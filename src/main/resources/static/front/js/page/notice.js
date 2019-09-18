@@ -43,27 +43,29 @@ var getList = function(no) {
                 if( (len % 4) == 1 ){
                     $('.sub_news .story_list ul li:last-child').css({'float':'none'});
                 }
-
-                // 페이지 카운트
-                var pageCnt = totalCnt % params.cntPerPage;
-                if (pageCnt == 0) {
-                    pageCnt = Math.floor(totalCnt / params.cntPerPage);
-                } else {
-                    pageCnt = Math.floor(totalCnt / params.cntPerPage) + 1;
-                }
-
-                if(params.currentPage>=pageCnt){
-                    $('.sub_news .btn_more button').remove();
-                }else{
-                    $('.sub_news .btn_more button').click(function(){
-                        var idx=params.currentPage+1;
-                        getList(idx);
-                    })
-                }
-
-                $('.sub_news .tab_box a:nth-child(1) .count').text(result.data.storyCnt);
-                $('.sub_news .tab_box a:nth-child(2) .count').text(totalCnt);
             }
+
+            // 페이지 카운트
+            var pageCnt = totalCnt % params.cntPerPage;
+            if (pageCnt == 0) {
+                pageCnt = Math.floor(totalCnt / params.cntPerPage);
+            } else {
+                pageCnt = Math.floor(totalCnt / params.cntPerPage) + 1;
+            }
+
+            if(params.currentPage>=pageCnt){
+                $('.sub_news .btn_more button').remove();
+            }else{
+                $('.sub_news .btn_more button').show();
+                $('.sub_news .btn_more button').click(function(){
+                    var idx=params.currentPage+1;
+                    getList(idx);
+                })
+            }
+
+            $('.sub_news .tab_box a:nth-child(1) .count').text(result.data.storyCnt);
+            $('.sub_news .tab_box a:nth-child(2) .count').text(totalCnt);
+
         } else {
             tableType2("#story_list", null, contents, info)
         }
@@ -80,7 +82,7 @@ var getDetail = function(no) {
     };
 
     tms.ajaxGetHelper('/api/notice/detail', params, null, function(rs) {
-
+console.log(rs);
         if(rs.code==0){
             var title = rs.data.title;
             var viewStDt =rs.data.viewStDt;
