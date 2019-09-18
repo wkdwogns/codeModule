@@ -3,7 +3,9 @@ package com.nexon.membership.controller;
 import com.nexon.common.dto.res.ResponseHandler;
 import com.nexon.common.file.config.ConfigFile;
 import com.nexon.common.file.service.FileService;
+import com.nexon.common.session.SessionCheck;
 import com.nexon.common.type.ReturnType;
+import com.nexon.common.util.CommonUtil;
 import com.nexon.membership.config.ConfigMembership;
 import com.nexon.membership.dto.req.*;
 import com.nexon.membership.dto.res.*;
@@ -83,16 +85,13 @@ public class MembershipController {
 	 */
 	@PostMapping(value = "/change/pwd")
 	@ApiOperation(value = "비밀번호 변경")
+	@SessionCheck
 	public ResponseHandler<?> changePassword(@Valid @RequestBody(required = false) final ChangePasswordReq req) {
 		ResponseHandler<?> result = new ResponseHandler<>();
 		ReturnType rtn;
 
 		try {
-
-			MembershipInfo sessionInfo = membershipService.currentSessionUserInfo();
-
-			if (sessionInfo != null) {
-				req.setUserSeq(sessionInfo.getUserSeq());
+			if (CommonUtil.isNotEmpty(req.getUserSeq())) {
 				rtn = membershipService.changePwd(req);
 				result.setReturnCode(rtn);
 			} else {

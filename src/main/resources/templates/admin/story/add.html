@@ -370,12 +370,16 @@
         }
 
         function setFileDOM(fl,type) {
-            return ''+
+            var html = ''+
                 '<div id="fileNo'+fl.fileSeq+'" class="file">' +
                 '<input type="hidden" class="fileSeq" value="'+fl.fileSeq+'"/>'+
-                '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=4" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' +
-                '<a onclick="deleteFile('+fl.fileSeq+',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>' +
-                '</div>';
+                '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=3" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' ;
+            if(type=='attach'){
+                html+='<a onclick="deleteFile('+fl.fileSeq+',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>';
+            }
+            html+='</div>';
+
+            return html;
         }
 
         function deleteFile(no,type) {
