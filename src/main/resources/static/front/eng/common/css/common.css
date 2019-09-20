@@ -31,7 +31,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #footer .logo_box {position:absolute; left:0px; top:55px;}
 #footer .logo_box ul {overflow:hidden;}
 #footer .logo_box ul li {float:left; margin-right:90px;}
-#footer .logo_box ul li .logo_01 {width:234px; height:41px; background:url(../../../images/common/footer_logo_01.png) 0 0 no-repeat;}
+#footer .logo_box ul li .logo_01 {width:265px; height:41px; background:url(../../../images/common/footer_logo_01.png) 0 0 no-repeat;}
 #footer .logo_box ul li .logo_02 {width:134px; height:47px; background:url(../../../images/common/footer_logo_02.png) 0 0 no-repeat;}
 #footer .address {font-size:15px; position:absolute; left:0px; top:165px;}
 #footer .contact {font-size:15px; position:absolute; left:0px; top:190px; letter-spacing:-0.035em;}
@@ -116,7 +116,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #main_contents .section_03 .list ul li .tit .no.mint {background-color:#03b5aa;}
 #main_contents .section_03 .list ul li .tit .no.lime {background-color:#c2d502;}
 #main_contents .section_03 .list ul li .tit .no.orange {background-color:#fa7921;}
-#main_contents .section_03 .list ul li .txt {margin-bottom:30px; font-size:20px; line-height:36px; text-br}
+#main_contents .section_03 .list ul li .txt {margin-bottom:30px; font-size:20px; line-height:36px;}
 #main_contents .section_03 .list ul li .img {display:block; margin-bottom:30px;}
 #main_contents .section_03 .list ul li .btn_more {display:block; width:150px; height:48px; line-height:50px; border:solid 1px #1c1c1b; text-align:center; font-size:14px;}
 #main_contents .section_03 .list ul li .btn_more span {display:inline-block; padding-right:40px; background:url(../../../images/common/ico_01.png) right center no-repeat;}
@@ -225,7 +225,6 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 .sub_news .notice_list ul li a {display:inline-block;}
 .sub_news .notice_list ul li a span.name {font-size:24px; font-weight:900;}
 .sub_news .notice_list ul li span.date {font-size:20px; color:#a3a3a3; position:absolute; right:0px; top:34px;}
-
 
 @media screen and (max-width: 750px) {
 	/* Layout */

@@ -18,7 +18,7 @@
             s.DEL_YN='N'
             and s.VIEW_YN='Y'
             and date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
-            ORDER BY s.VIEW_ST_DT DESC
+            ORDER BY s.VIEW_ST_DT DESC,s.STORY_SEQ DESC
             LIMIT ${startRow}, ${cntPerPage}
     </select>
 
@@ -91,12 +91,10 @@
         FROM
             TB_STORY s
         WHERE
-            s.STORY_SEQ <![CDATA[ < ]]> #{seq}
+            s.STORY_SEQ = #{prev}
             AND IFNULL(s.DEL_YN, 'N') = 'N'
             AND s.VIEW_YN = 'Y'
             AND date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
-        ORDER BY s.STORY_SEQ DESC
-        LIMIT 1
     </select>
 
     <select id="selectNextStory" parameterType="com.nexon.story.dto.req.SelectStoryDetailReq" resultType="com.nexon.story.dto.model.StoryDetailPrevNextVO">
@@ -109,12 +107,10 @@
         FROM
             TB_STORY s
         WHERE
-            s.STORY_SEQ <![CDATA[ > ]]> #{seq}
+            s.STORY_SEQ = #{next}
             AND IFNULL(s.DEL_YN, 'N') = 'N'
             AND s.VIEW_YN = 'Y'
             AND date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
-        ORDER BY s.STORY_SEQ
-        LIMIT 1
     </select>
 
     <select id="topStory" resultType="map">

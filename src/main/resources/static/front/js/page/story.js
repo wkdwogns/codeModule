@@ -2,9 +2,14 @@ $(function() {
     basicList(1);
 
     //상세이동
-    $(document).on("click", ".story_list li a", function(e){
-        var seq = $(this).data("seq");
-        getDetail(seq);
+    $(document).on("click", ".story_list li", function(e){
+        var seq = $(this).find('a').data("seq");
+        var viewStDt = $(this).find('a').data("viewstdt");
+
+        var p = $(this).prev().find('a').data("seq");
+        var n = $(this).next().find('a').data("seq");
+
+        getDetail(seq,viewStDt,p,n);
     });
 
 });
@@ -25,13 +30,13 @@ var basicList = function (no) {
 var getList = function(params) {
 
     tms.ajaxGetHelper('/api/story', params, null, function(result) {
-        console.log(result)
+
         var contents = function (obj){
 
             var fPath = (obj.filePath==null)?'/front/images/sub/exp1.jpg':obj.filePath;
 
             var html = "";
-            html += '<a href="#self" data-seq="'+obj.storySeq+'">';
+            html += '<a href="#self" id="story'+obj.storySeq+'" data-seq="'+obj.storySeq+'" data-viewStDt="'+obj.viewStDt+'">';
             html += '   <span class="img"><img src="'+fPath+'" alt=""/></span>';
             html += '   <span class="tit">'+obj.title+'</span>';
             html += '   <span class="date">'+obj.viewStDt+'</span>';
@@ -84,9 +89,12 @@ var getList = function(params) {
 
 }
 
-var getDetail = function(no) {
+var getDetail = function(no,viewStDt,p,n) {
     var params = {
         seq: no
+        ,viewStDt:viewStDt
+        ,prev:p
+        ,next:n
     };
 
     tms.ajaxGetHelper('/api/story/detail', params, null, function(rs) {
@@ -118,7 +126,7 @@ var getDetail = function(no) {
                 $('.prevS .img img').attr('src',prevS.filePath);
                 $('.prevS .name').text(prevS.title);
                 $('.prevS .date').text(prevS.viewStDt);
-                BtnPrev.attr('onclick','getDetail('+prevS.storySeq+')').show();
+                BtnPrev.attr('onclick','getDetail2('+prevS.storySeq+')').show();
             }
             if(nextS==null){
                 BtnNext.hide()
@@ -126,7 +134,7 @@ var getDetail = function(no) {
                 $('.nextS .img img').attr('src',nextS.filePath);
                 $('.nextS .name').text(nextS.title);
                 $('.nextS .date').text(nextS.viewStDt);
-                BtnNext.attr('onclick','getDetail('+nextS.storySeq+')').show();
+                BtnNext.attr('onclick','getDetail2('+nextS.storySeq+')').show();
             }
         }
 
@@ -134,4 +142,9 @@ var getDetail = function(no) {
     });
 
 };
+
+
+var getDetail2 = function(no){
+    $('#story'+no).parent().click();
+}
 

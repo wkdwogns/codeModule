@@ -2,9 +2,13 @@ $(function() {
     getList(1);
 
     //상세이동
-    $(document).on("click", ".story_list li a", function(e){
-        var seq = $(this).data("seq");
-        getDetail(seq);
+    $(document).on("click", ".notice_list li", function(e){
+        var seq = $(this).find('a').data("seq");
+
+        var p = $(this).prev().find('a').data("seq");
+        var n = $(this).next().find('a').data("seq");
+
+        getDetail(seq,p,n);
     });
 
 });
@@ -22,12 +26,18 @@ var getList = function(no) {
 
             var fPath = (obj.filePath==null)?'/front/images/sub/exp1.jpg':obj.filePath;
 
+            // var html = "";
+            // html += '<a href="#self" data-seq="'+obj.noticeSeq+'">';
+            // html += '   <span class="img"><img src="'+fPath+'" alt=""/></span>';
+            // html += '   <span class="tit">'+obj.title+'</span>';
+            // html += '   <span class="date">'+obj.viewStDt+'</span>';
+            // html += '</a>';
+
             var html = "";
             html += '<a href="#self" data-seq="'+obj.noticeSeq+'">';
-            html += '   <span class="img"><img src="'+fPath+'" alt=""/></span>';
-            html += '   <span class="tit">'+obj.title+'</span>';
-            html += '   <span class="date">'+obj.viewStDt+'</span>';
+            html += '   <span class="name">'+obj.title+'</span>';
             html += '</a>';
+            html += '   <span class="date">'+obj.viewStDt+'</span>';
 
             return html;
         };
@@ -76,13 +86,15 @@ var getList = function(no) {
 
 }
 
-var getDetail = function(no) {
+var getDetail = function(no,p,n) {
     var params = {
         seq: no
+        ,prev:p
+        ,next:n
     };
 
     tms.ajaxGetHelper('/api/notice/detail', params, null, function(rs) {
-console.log(rs);
+
         if(rs.code==0){
             var title = rs.data.title;
             var viewStDt =rs.data.viewStDt;
@@ -97,7 +109,7 @@ console.log(rs);
                     '<a href="/api/file/download?fileSeq='+fileSeq+'&category=3"><strong>'+orgFileNm+'</strong></a>'+
                     '</li></ul></div>');
             }
-            $('#popup_all .popup_view .cont').append(contents);
+            $('#popup_all .popup_view .cont').append( tms.convertHtml(contents) );
 
             var prevS = rs.data.prevNotice;
             var nextS = rs.data.nextNotice;
@@ -107,16 +119,16 @@ console.log(rs);
             if(prevS==null){
                 BtnPrev.hide()
             }else{
-                $('.prevS .img img').attr('src',prevS.filePath);
-                $('.prevS .name').text(prevS.title);
+                //$('.prevS .img img').attr('src',prevS.filePath);
+                $('.prevS .name').text( prevS.title );
                 $('.prevS .date').text(prevS.viewStDt);
                 BtnPrev.attr('onclick','getDetail('+prevS.noticeSeq+')').show();
             }
             if(nextS==null){
                 BtnNext.hide()
             }else{
-                $('.nextS .img img').attr('src',nextS.filePath);
-                $('.nextS .name').text(nextS.title);
+                //$('.nextS .img img').attr('src',nextS.filePath);
+                $('.nextS .name').text( nextS.title );
                 $('.nextS .date').text(nextS.viewStDt);
                 BtnNext.attr('onclick','getDetail('+nextS.noticeSeq+')').show();
             }

@@ -2,15 +2,14 @@ $(function(){
     var ln = tms.getCookie('lang');
     if((ln=='eng')){
         $('#header .logo a').css({
-            'width': '205px'
-            ,'background': 'url(/front/images/common/logo_eng.png) 0 center no-repeat'
+
+            'background': 'url(/front/images/common/logo_eng.png) 0 center no-repeat'
         })
         $('#footer .logo_box ul li .logo_01').css({
-            'width': '265px'
-            ,'background': 'url(/front/images/common/footer_logo_01_eng.png) 0 center no-repeat'
+            'background-image': 'url(/front/images/common/footer_logo_01_eng.png)'
         })
         $('#footer .logo_box ul li .logo_02').css({
-            'background': 'url(/front/images/common/footer_logo_02_eng.png) 0 center no-repeat'
+            'background-image': 'url(/front/images/common/footer_logo_02_eng.png)'
         })
     }
 });

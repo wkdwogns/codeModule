@@ -61,15 +61,6 @@
             </tr>
 
             <tr>
-                <th>대표이미지<br>(315x267)<span class="required">*</span></th>
-                <td id="repImg">
-                    <input type="hidden" id="imgSeq">
-                    <input type="file" id="devIdTxtImg">
-
-                </td>
-            </tr>
-
-            <tr>
                 <th>파일첨부</th>
                 <td id="attach">
                     <input type="hidden" id="attachSeq">
@@ -119,28 +110,6 @@
             fileCheck(e.target);
         });
 
-        $('#devIdTxtImg').change(function (e) {
-            var et = e.target;
-
-            fileCheck(e.target,'onlyImg');
-            var fr = new FileReader;
-            fr.onload = function() {
-                var img = new Image;
-                img.onload = function() {
-                    var w = img.width;
-                    var h = img.height;
-                    if(w!=315&&h!=267){
-                        alert('315x267 사이즈로 올려주세요.');
-                        $(et).val('');
-                    }
-                };
-                img.src = fr.result;
-            };
-
-            if(et.files.length>0)
-                fr.readAsDataURL(et.files[0]);
-        });
-
         $('.devCssBtnCancel').click(function(){
             location.href='/page/admin/notice/list';
         });
@@ -157,20 +126,12 @@
                 url = "/mapi/notice/edit";
                 data.append("seq", info );
 
-                if( $('#repImg .file').length==0 ){
-                    var file = $('#devIdTxtImg')[0].files[0];
-                    if(file==null || file==''){
-                        alert('대표이미지를 등록해 주세요.');
-                        return false;
-                    }
-                }
-
             }
 
             var vi = [
                 {id:'#devIdTxtTitle',rqd:true,msg:'게시물 제목을 작성하여 주세요.',min:2,max:100}
                 ,{id:'#devIdTxtSdt',rqd:true,msg:'노출일자를 설정해 주세요.'}
-                ,{id:'#devIdTxtImg',rqd:true,msg:'대표이미지를 첨부해주세요.',type:'file',pass:'update'}
+                //,{id:'#devIdTxtImg',rqd:true,msg:'대표이미지를 첨부해주세요.',type:'file',pass:'update'}
                 ,{id:'#summernote',rqd:true,msg:'게시물 내용을 작성하여 주세요.',type:'summerNote'}
             ];
 
@@ -209,16 +170,8 @@
                 data.append("file", f1 );
             }
 
-            var imgF = $('#devIdTxtImg')[0].files[0];
-            if(imgF != null && imgF != ''){
-                data.append("img", imgF );
-            }
-
             if(tms.isNotEmpty($('#attachSeq').val())){
                 data.append("attachSeq", $('#attachSeq').val() );
-            }
-            if(tms.isNotEmpty($('#imgSeq').val())){
-                data.append("imgSeq", $('#imgSeq').val() );
             }
 
             tms.ajaxMulitpartHelper(url, data, null, function(result){
@@ -250,7 +203,11 @@
                     for(var i=0; i< result.data.fileInfos.length;i++){
                         var fileName = result.data.fileInfos[i].fileSysName;
                         editorImg.push(fileName);
-                        $(editor).summernote('insertImage', result.data.fileInfos[i].fileUrl, fileName);
+
+                        $(editor).summernote('insertImage', result.data.fileInfos[i].fileUrl,function($image){
+                            $image.attr('data-filename', fileName);
+                            $image.css({'width':'50%'});
+                        });
                     }
                 }
             }, function(){ //실패 처리
@@ -276,14 +233,6 @@
                         for(var i in fl){
                             $('#devIdTxtAttach').after(setFileDOM(fl[i],'attach'));
                             $('#attachSeq').val(fl[i].fileSeq);
-                        }
-                    }
-
-                    if(d.ilist!=null){
-                        var il =d.ilist;
-                        for(var i in il){
-                            $('#devIdTxtImg').after(setFileDOM(il[i],'img'));
-                            $('#imgSeq').val(il[i].fileSeq);
                         }
                     }
 

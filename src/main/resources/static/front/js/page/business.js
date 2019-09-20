@@ -4,6 +4,10 @@ $(function () {
         var ref = $(this).attr('ref');
         $('.sub_business .section_02 .aside .select_box .select li').removeClass('on');
         $(this).parent().addClass('on');
+
+        $('.sub_business .section_02 .aside .select_box .btn_select').html( $(this).html() );
+
+
         var labelArr = $('.sub_business .section_02 .cont ul li');
         if(ref=='All'){
             labelArr.show();

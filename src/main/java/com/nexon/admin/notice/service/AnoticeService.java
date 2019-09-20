@@ -64,10 +64,10 @@ public class AnoticeService {
 //                return result;
 //            }
 
-            if(req.getImg()!=null) {
-                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
-                req.setImgGrpSeq(igs);
-            }
+//            if(req.getImg()!=null) {
+//                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
+//                req.setImgGrpSeq(igs);
+//            }
 
             if(req.getFile()!=null) {
                 int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory3());
@@ -103,14 +103,14 @@ public class AnoticeService {
                 return result;
             }*/
 
-            if(req.getImg()!=null) {
-                if(req.getImgSeq()!=null){
-                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getImgSeq(),configFile.getSelectCategory3());
-                    fileService.deleteFiles(fr);
-                }
-                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
-                req.setImgGrpSeq(igs);
-            }
+//            if(req.getImg()!=null) {
+//                if(req.getImgSeq()!=null){
+//                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getImgSeq(),configFile.getSelectCategory3());
+//                    fileService.deleteFiles(fr);
+//                }
+//                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
+//                req.setImgGrpSeq(igs);
+//            }
 
             if(req.getFile()!=null) {
                 if(req.getAttachSeq()!=null){
@@ -182,16 +182,6 @@ public class AnoticeService {
         }
 
         return result;
-    }
-
-    private boolean checkNoticeViewCnt() {
-        boolean check = false;
-        int cnt = adminNoticeDao.selectViewLimitCnt();
-        if(cnt >= 2) {
-            check = true;
-        }
-
-        return check;
     }
 
     public ResponseHandler<?> deleteFile(DeleteNoticeImgReq req) {

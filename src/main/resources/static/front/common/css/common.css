@@ -31,7 +31,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #footer .logo_box {position:absolute; left:0px; top:55px;}
 #footer .logo_box ul {overflow:hidden;}
 #footer .logo_box ul li {float:left; margin-right:90px;}
-#footer .logo_box ul li .logo_01 {width:234px; height:41px; background:url(../../images/common/footer_logo_01.png) 0 0 no-repeat;}
+#footer .logo_box ul li .logo_01 {width:265px; height:41px; background:url(../../images/common/footer_logo_01.png) 0 0 no-repeat;}
 #footer .logo_box ul li .logo_02 {width:134px; height:47px; background:url(../../images/common/footer_logo_02.png) 0 0 no-repeat;}
 #footer .address {font-size:15px; position:absolute; left:0px; top:165px;}
 #footer .contact {font-size:15px; position:absolute; left:0px; top:190px; letter-spacing:-0.035em;}
@@ -46,7 +46,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #contents .inner_box {width:1320px; margin:0 auto; position:relative;}
 
 #popup_all .popup_view {width:100%; height:100%; position:fixed; left:0px; top:0px; z-index:150; background-color:rgba(0, 0, 0, 0.6); overflow:hidden; overflow-y:scroll;}
-#popup_all .popup_view .inner_box {width:1200px; padding:60px 100px; margin:250px auto; background-color:#fff; z-index:10; position:relative; box-sizing:border-box;}
+#popup_all .popup_view .inner_box {width:1200px; padding:60px 100px; margin:250px auto; background-color:#fff; z-index:10; position:relative; box-sizing:border-box; word-break:break-all;}
 #popup_all .popup_view .cont .name {margin-bottom:10px; font-size:34px; font-weight:900; line-height:50px;}
 #popup_all .popup_view .cont .date {font-size:22px; color:#777; border-bottom:solid 1px #d3d3d3; padding-bottom:25px; margin-bottom:25px;}
 #popup_all .popup_view .cont .file_list {margin-bottom:20px;}
@@ -119,20 +119,20 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #main_contents .section_03 .list ul li .btn_more {display:block; width:150px; height:48px; line-height:50px; border:solid 1px #1c1c1b; text-align:center; font-size:14px;}
 #main_contents .section_03 .list ul li .btn_more span {display:inline-block; padding-right:40px; background:url(../../images/common/ico_01.png) right center no-repeat;}
 @keyframes character_ani_01 {
-  from {right:-1000px;}
-  to {right:450px;}
+	from {right:-1000px;}
+	to {right:450px;}
 }
 @keyframes character_ani_02 {
-  from {right:-1000px;}
-  to {right:285px;}
+	from {right:-1000px;}
+	to {right:285px;}
 }
 @keyframes character_ani_03 {
-  from {right:-1000px;}
-  to {right:137px;}
+	from {right:-1000px;}
+	to {right:137px;}
 }
 @keyframes character_ani_04 {
-  from {right:-1000px;}
-  to {right:0px;}
+	from {right:-1000px;}
+	to {right:0px;}
 }
 
 
@@ -146,10 +146,10 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 .sub_about .navi ul li button {display:block; padding:10px; border-radius:5px; font-size:12px;}
 .sub_about .navi ul li.on button {padding:8px 10px; background-color:#c2d502; font-weight:900;}
 .sub_about .section_01 {padding:100px 0 140px; position:relative;}
-.sub_about .section_01:after {content:""; display:block; width:745px; height:729px; position:absolute; right:-240px; top:330px; background:url(../../images/sub/about_01.png) 0 0 no-repeat;}
+.sub_about .section_01:after {content:""; display:block; width:745px; height:729px; position:absolute; right:-240px; top:475px; background:url(../../images/sub/about_01.png) 0 0 no-repeat;}
 .sub_about .section_01 .title {margin-bottom:60px; font-size:14px; font-weight:400; letter-spacing:0.25em;}
 .sub_about .section_01 .tit {margin-bottom:60px; font-size:54px; line-height:72px;}
-.sub_about .section_01 .tit strong {font-weight:900; border-bottom:solid 1px #1c1c1b;}
+.sub_about .section_01 .tit strong {display:inline-block; line-height:54px; font-weight:900; border-bottom:solid 1px #1c1c1b;}
 .sub_about .section_01 .txt {font-size:22px; line-height:36px;}
 .sub_about .section_02 .title {margin-bottom:70px; font-size:14px; font-weight:400; letter-spacing:0.25em;}
 .sub_about .section_02 .period {margin-bottom:60px; font-size:36px; font-weight:900;}
@@ -229,7 +229,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	/* Layout */
 	#wrap {min-width:100%;}
 
-	#header {position:relative; z-index:1;}
+	#header {position:relative; z-index:2;}
 	#header:after {content:""; display:none; width:100%; height:100%; position:fixed; left:0px; top:0px; background-color:rgba(0, 0, 0, 0.6); transition:all 0.3s;}
 	#header.open:after {display:block;}
 	#header .inner_box {width:100%; height:50px;}
@@ -272,6 +272,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 
 	#popup_all .popup_view {padding:0 15px; box-sizing:border-box;}
 	#popup_all .popup_view .inner_box {width:100%; padding:25px 15px 40px; margin:100px auto;}
+	#popup_all .popup_view .cont img {max-width:260px;}
 	#popup_all .popup_view .cont .name {padding:0 10px; margin-bottom:10px; font-size:17px; line-height:25px;}
 	#popup_all .popup_view .cont .date {padding:0 10px; font-size:13px; padding-bottom:12px; margin-bottom:12px;}
 	#popup_all .popup_view .cont .file_list {margin-bottom:10px;}
@@ -330,20 +331,20 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	#main_contents .section_03 .list ul li .btn_more {margin-left:15px; width:125px; height:40px; line-height:42px; font-size:12px;}
 	#main_contents .section_03 .list ul li .btn_more span {padding-right:23px; background-size:12px auto;}
 	@keyframes character_ani_01_m {
-	  from {right:-1000px;}
-	  to {right:220px;}
+		from {right:-1000px;}
+		to {right:220px;}
 	}
 	@keyframes character_ani_02_m {
-	  from {right:-1000px;}
-	  to {right:142px;}
+		from {right:-1000px;}
+		to {right:142px;}
 	}
 	@keyframes character_ani_03_m {
-	  from {right:-1000px;}
-	  to {right:69px;}
+		from {right:-1000px;}
+		to {right:69px;}
 	}
 	@keyframes character_ani_04_m {
-	  from {right:-1000px;}
-	  to {right:0px;}
+		from {right:-1000px;}
+		to {right:0px;}
 	}
 
 	/* Sub */
@@ -352,6 +353,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	.sub_about .section_01:after {width:399px; height:390px; position:absolute; right:-165px; top:auto; bottom:0; background-size:399px 390px;}
 	.sub_about .section_01 .title {margin-bottom:30px; font-size:12px;}
 	.sub_about .section_01 .tit {margin-bottom:30px; font-size:29px; line-height:42px;}
+	.sub_about .section_01 .tit strong {line-height:29px;}
 	.sub_about .section_01 .tit br {display:none;}
 	.sub_about .section_01 .txt {font-size:14px; line-height:24px;}
 	.sub_about .section_01 .txt br {display:none;}
