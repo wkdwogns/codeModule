@@ -34,7 +34,7 @@ var getList = function(no) {
             // html += '</a>';
 
             var html = "";
-            html += '<a href="#self" data-seq="'+obj.noticeSeq+'">';
+            html += '<a href="#self" id="notice'+obj.noticeSeq+'" data-seq="'+obj.noticeSeq+'">';
             html += '   <span class="name">'+obj.title+'</span>';
             html += '</a>';
             html += '   <span class="date">'+obj.viewStDt+'</span>';
@@ -122,7 +122,7 @@ var getDetail = function(no,p,n) {
                 //$('.prevS .img img').attr('src',prevS.filePath);
                 $('.prevS .name').text( prevS.title );
                 $('.prevS .date').text(prevS.viewStDt);
-                BtnPrev.attr('onclick','getDetail('+prevS.noticeSeq+')').show();
+                BtnPrev.attr('onclick','getDetail2('+prevS.noticeSeq+')').show();
             }
             if(nextS==null){
                 BtnNext.hide()
@@ -130,11 +130,15 @@ var getDetail = function(no,p,n) {
                 //$('.nextS .img img').attr('src',nextS.filePath);
                 $('.nextS .name').text( nextS.title );
                 $('.nextS .date').text(nextS.viewStDt);
-                BtnNext.attr('onclick','getDetail('+nextS.noticeSeq+')').show();
+                BtnNext.attr('onclick','getDetail2('+nextS.noticeSeq+')').show();
             }
         }
 
         layer_OPEN('.popup_view');
     });
 
+}
+
+var getDetail2 = function(no){
+    $('#notice'+no).parent().click();
 }
