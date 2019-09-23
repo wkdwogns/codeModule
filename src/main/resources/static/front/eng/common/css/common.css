@@ -10,7 +10,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #header {border-bottom:solid 1px #e9e9e9;}
 #header .inner_box {width:1320px; height:80px; margin:0 auto; position:relative;}
 #header .logo {position:absolute; left:0px; top:0px;}
-#header .logo a {display:block; width:185px; height:80px; background:url(../../../images/common/logo.png) 0 center no-repeat;}
+#header .logo a {display:block; width:210px; height:80px; background:url(../../../images/common/logo.png) 0 center no-repeat;}
 #header .gnb_wrap .util_menu {position:absolute; right:0px; top:0px;}
 #header .gnb_wrap .util_menu ul {overflow:hidden;}
 #header .gnb_wrap .util_menu ul li {float:left;}
