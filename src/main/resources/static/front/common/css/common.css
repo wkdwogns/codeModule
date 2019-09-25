@@ -10,7 +10,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #header {border-bottom:solid 1px #e9e9e9;}
 #header .inner_box {width:1320px; height:80px; margin:0 auto; position:relative;}
 #header .logo {position:absolute; left:0px; top:0px;}
-#header .logo a {display:block; width:210px; height:80px; background:url(../../images/common/logo.png) 0 center no-repeat;}
+#header .logo a {display:block; width:185px; height:80px; background:url(../../images/common/logo.png) 0 center no-repeat;}
 #header .gnb_wrap .util_menu {position:absolute; right:0px; top:0px;}
 #header .gnb_wrap .util_menu ul {overflow:hidden;}
 #header .gnb_wrap .util_menu ul li {float:left;}
@@ -31,7 +31,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #footer .logo_box {position:absolute; left:0px; top:55px;}
 #footer .logo_box ul {overflow:hidden;}
 #footer .logo_box ul li {float:left; margin-right:90px;}
-#footer .logo_box ul li .logo_01 {width:265px; height:41px; background:url(../../images/common/footer_logo_01.png) 0 0 no-repeat;}
+#footer .logo_box ul li .logo_01 {width:234px; height:41px; background:url(../../images/common/footer_logo_01.png) 0 0 no-repeat;}
 #footer .logo_box ul li .logo_02 {width:134px; height:47px; background:url(../../images/common/footer_logo_02.png) 0 0 no-repeat;}
 #footer .address {font-size:15px; position:absolute; left:0px; top:165px;}
 #footer .contact {font-size:15px; position:absolute; left:0px; top:190px; letter-spacing:-0.035em;}
@@ -208,12 +208,12 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 .sub_news .tab_box a.on:nth-child(2) span {font-weight:900; border-bottom:solid 4px #03b5aa;}
 .sub_news .story_list {margin-bottom:50px;}
 .sub_news .story_list ul {width:1340px; overflow:hidden;}
-.sub_news .story_list ul li {width:315px; margin:0 0 80px 20px; float:left;}
+.sub_news .story_list ul li {width:315px; height:423px; margin:0 0 80px 20px; float:left;}
 .sub_news .story_list ul li:nth-child(odd) {position:relative; top:57px;}
 .sub_news .story_list ul li a {display:block;}
 .sub_news .story_list ul li a span {display:block;}
 .sub_news .story_list ul li a span.img {margin-bottom:20px;}
-.sub_news .story_list ul li a span.tit {margin-bottom:10px; font-size:20px; line-height:28px; font-weight:900;}
+.sub_news .story_list ul li a span.tit {max-height:84px; overflow:hidden; margin-bottom:10px; font-size:20px; line-height:28px; font-weight:900;}
 .sub_news .story_list ul li a span.date {font-size:16px; color:#a3a3a3;}
 .sub_news .btn_more {text-align:center;}
 .sub_news .btn_more button {display:inline-block; width:200px; height:64px; line-height:64px; color:#fff; font-weight:900; font-size:20px; background-color:#1c1c1b;}
@@ -316,7 +316,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	#main_contents .section_02 .list ul li a span.img {width:100%; height:auto; margin-bottom:10px;}
 	#main_contents .section_02 .list ul li a span.img img {width:100%;}
 	#main_contents .section_02 .list ul li a:hover span.img img {transform:scale(1);}
-	#main_contents .section_02 .list ul li a span.tit {margin-bottom:5px; font-size:13px; line-height:19px;}
+	#main_contents .section_02 .list ul li a span.tit {max-height: 48px;  height: 48px;  margin-bottom: 5px;  font-size: 12px;  line-height: 16px;}
 	#main_contents .section_02 .list ul li a span.date {font-size:12px;}
 	#main_contents .section_03 {margin-bottom:20px;}
 	#main_contents .section_03 .title {padding:0 15px; margin-bottom:25px; font-size:12px;}
@@ -416,11 +416,11 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	.sub_news .tab_box a.on:nth-child(2) span {border-bottom:solid 2px #03b5aa;}
 	.sub_news .story_list {margin-bottom:0;}
 	.sub_news .story_list ul {width:100%; padding:0 10px 0 15px; box-sizing:border-box;}
-	.sub_news .story_list ul li {width:50%; margin:0 0 40px 0; padding:0 5px 0 0; box-sizing:border-box;}
+	.sub_news .story_list ul li {width:50%; height:auto; margin:0 0 40px 0; padding:0 5px 0 0; box-sizing:border-box;}
 	.sub_news .story_list ul li:nth-child(odd) {top:10px;}
 	.sub_news .story_list ul li a span.img {margin-bottom:10px;}
 	.sub_news .story_list ul li a span.img img {width:100%;}
-	.sub_news .story_list ul li a span.tit {margin-bottom:5px; font-size:12px; line-height:16px;}
+	.sub_news .story_list ul li a span.tit {max-height:48px; height:48px; margin-bottom:5px; font-size:12px; line-height:16px;}
 	.sub_news .story_list ul li a span.date {font-size:12px;}
 	.sub_news .btn_more button {width:100px; height:32px; line-height:32px; font-size:12px;}
 

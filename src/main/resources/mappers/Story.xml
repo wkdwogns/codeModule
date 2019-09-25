@@ -119,8 +119,7 @@
             ,s.TITLE
             ,s.IMG_GRP_SEQ
             ,s.ORDER_NO
-            ,DATE_FORMAT(s.CRE_DT, '%Y.%m.%d') CRE_DT
-            ,DATE_FORMAT(s.UPD_DT, '%Y.%m.%d') UPD_DT
+            , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
             TB_STORY s
         WHERE

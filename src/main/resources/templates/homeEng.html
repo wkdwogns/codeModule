@@ -7,6 +7,23 @@
                 width:315px;
             }
         }
+
+        .two-line{
+            /* 한 줄 자르기 */
+            width: 100%;
+            overflow: hidden !important;
+            text-overflow: ellipsis;
+
+            /* 여러 줄 자르기 추가 스타일 */
+            white-space: normal;
+            line-height: 1.2;
+
+            text-align: left;
+            word-wrap: break-word;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
     </style>
     <script th:src="@{/front/js/page/index.js}"></script>
 </head>
