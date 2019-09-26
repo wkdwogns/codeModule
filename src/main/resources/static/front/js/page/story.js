@@ -1,3 +1,7 @@
+var ln = tms.getCookie('lang');
+if(ln=='eng'){
+    location.href='/';
+}
 $(function() {
     basicList(1);
 
@@ -114,7 +118,7 @@ var getDetail = function(no,viewStDt,p,n) {
                     '</li></ul></div>');
             }
             $('#popup_all .popup_view .cont').append(contents);
-
+console.log(rs.data);
             var prevS = rs.data.prevStory;
             var nextS = rs.data.nextStory;
 
@@ -122,19 +126,23 @@ var getDetail = function(no,viewStDt,p,n) {
             var BtnNext = $('#popup_all .popup_view .control .btn_next');
             if(prevS==null){
                 BtnPrev.hide()
+                $('.prevS').attr('onclick','');
             }else{
                 $('.prevS .img img').attr('src',prevS.filePath);
                 $('.prevS .name').text(prevS.title);
                 $('.prevS .date').text(prevS.viewStDt);
-                BtnPrev.attr('onclick','getDetail2('+prevS.storySeq+')').show();
+                $('.prevS').attr('onclick','getDetail2('+prevS.storySeq+')');
+                BtnPrev.show();
             }
             if(nextS==null){
                 BtnNext.hide()
+                $('.nextS').attr('onclick','');
             }else{
                 $('.nextS .img img').attr('src',nextS.filePath);
                 $('.nextS .name').text(nextS.title);
                 $('.nextS .date').text(nextS.viewStDt);
-                BtnNext.attr('onclick','getDetail2('+nextS.storySeq+')').show();
+                $('.nextS').attr('onclick','getDetail2('+nextS.storySeq+')');
+                BtnNext.show();
             }
         }
 
@@ -146,5 +154,6 @@ var getDetail = function(no,viewStDt,p,n) {
 
 var getDetail2 = function(no){
     $('#story'+no).parent().click();
+    return ;
 }
 

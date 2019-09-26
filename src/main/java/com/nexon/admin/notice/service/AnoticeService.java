@@ -13,6 +13,7 @@ import com.nexon.common.file.dto.req.FileListReq;
 import com.nexon.common.file.service.FileService;
 import com.nexon.common.type.ReturnType;
 import com.nexon.common.util.CommonUtil;
+import com.nhncorp.lucy.security.xss.XssPreventer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -173,6 +174,10 @@ public class AnoticeService {
                 List fList = fileService.getFileList(fReq);
                 res.setIList(fList);
             }
+
+            String clean = res.getTitle();
+            String origin = XssPreventer.unescape(clean);
+            res.setTitle(origin);
 
             result.setData(res);
             result.setReturnCode(ReturnType.RTN_TYPE_OK);

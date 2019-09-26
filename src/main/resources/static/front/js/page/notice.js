@@ -1,4 +1,10 @@
+var ln = tms.getCookie('lang');
+if(ln=='eng'){
+    location.href='/';
+}
+
 $(function() {
+
     getList(1);
 
     //상세이동
@@ -118,19 +124,23 @@ var getDetail = function(no,p,n) {
             var BtnNext = $('#popup_all .popup_view .control .btn_next');
             if(prevS==null){
                 BtnPrev.hide()
+                $('.prevS').attr('onclick','');
             }else{
                 //$('.prevS .img img').attr('src',prevS.filePath);
                 $('.prevS .name').text( prevS.title );
                 $('.prevS .date').text(prevS.viewStDt);
-                BtnPrev.attr('onclick','getDetail2('+prevS.noticeSeq+')').show();
+                $('.prevS').attr('onclick','getDetail2('+prevS.noticeSeq+')')
+                BtnPrev.show();
             }
             if(nextS==null){
                 BtnNext.hide()
+                $('.nextS').attr('onclick','');
             }else{
                 //$('.nextS .img img').attr('src',nextS.filePath);
                 $('.nextS .name').text( nextS.title );
                 $('.nextS .date').text(nextS.viewStDt);
-                BtnNext.attr('onclick','getDetail2('+nextS.noticeSeq+')').show();
+                $('.nextS').attr('onclick','getDetail2('+nextS.noticeSeq+')');
+                BtnNext.show();
             }
         }
 

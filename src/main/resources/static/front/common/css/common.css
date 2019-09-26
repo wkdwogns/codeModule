@@ -109,7 +109,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #main_contents .section_03 .list ul li {width:650px; float:left; margin-right:20px; margin-bottom:65px;}
 #main_contents .section_03 .list ul li:nth-child(even) {margin-top:35px;}
 #main_contents .section_03 .list ul li .tit {margin-bottom:20px; font-size:36px; font-weight:900; word-break:break-all;}
-#main_contents .section_03 .list ul li .tit .no {display:inline-block; width:37px; height:37px; line-height:38px; text-align:center; color:#fff; font-size:24px; margin-left:10px; position:relative; top:-6px;}
+#main_contents .section_03 .list ul li .tit .no {display:inline-block; width:37px; height:37px; line-height:44px; text-align:center; color:#fff; font-size:24px; margin-left:10px; position:relative; top:-6px;}
 #main_contents .section_03 .list ul li .tit .no.blue {background-color:#00a0e0;}
 #main_contents .section_03 .list ul li .tit .no.mint {background-color:#03b5aa;}
 #main_contents .section_03 .list ul li .tit .no.lime {background-color:#c2d502;}
