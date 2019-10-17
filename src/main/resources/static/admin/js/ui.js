@@ -126,6 +126,12 @@ function setMenu(obj){
 
 function fileCheck(obj,isImg) {
     var files= obj.files;
+    var fLen= $('#attach .file').length;
+    if( (files.length+fLen)>5 ){
+        alert('5개 이하로 첨부할 수 있습니다.');
+        $(obj).val('');
+        return ;
+    }
 
     var exp_file = false;
     var exp_fileNm = false;

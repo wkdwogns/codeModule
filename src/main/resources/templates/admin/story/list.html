@@ -1,4 +1,7 @@
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/admin/layout/layout">
+<head>
+
+</head>
 <div class="content" layout:fragment="contents">
 
     <div id="list">
@@ -56,8 +59,93 @@
     <div class="btnList">
         <div id="paging" class="paging"></div>
         <button type="button" class="btn mainBtn floatRight devCssBtnAdd">새 스토리 등록</button>
+        <button id="viewimg_sort" type="button" class="btn grayBtn floatRight" style="margin-right: 5px;">순서변경</button>
     </div>
+
+    <div id="viewimgSortDialog" class="dialog" style="display: none">
+        <div class="sort_header">
+            <span>순서</span><span>이미지</span><span>제목</span>
+        </div>
+        <div class="sort_area"></div>
+    </div>
+
     <script>
+        $('#viewimg_sort').click(function () {
+            tms.ajaxGetHelper('/mapi/story/TopStory',{},null,function (rs) {
+                console.log(rs);
+                if(rs.code == 0) {
+                    var list = rs.data.list;
+                    var html = "";
+
+                    list.sort(function (a,b) {
+                        if(tms.isEmpty(a.orderNo))
+                            return 1;
+
+                        if(tms.isEmpty(b.orderNo))
+                            return -1;
+
+                        return a.orderNo < b.orderNo ? -1 : 1;
+                    });
+
+                    for(var i=0; i<list.length; i++) {
+                        var filePath = list[i].filepath;
+                        var orderNo = (list[i].orderNo)?list[i].orderNo:'';
+                        var storySeq = list[i].storySeq;
+                        var title = list[i].title;
+                        title=(title.length>15)?title.substring(0,15)+'..':title;
+                        html += '<div data-id="'+storySeq+'">';
+                        html += '<span>'+orderNo+'</span><span><img src="'+filePath+'" width="50px;"></span><span class="txt_ellipsis">'+title+'</span>';
+                        html += '</div>';
+                    }
+                }
+                $("#viewimgSortDialog .sort_area").html(html);
+                $("#viewimgSortDialog").dialog("open");
+                // 순서변경 초기화
+                $("#viewimgSortDialog .sort_area").sortable({
+                    axis: "y", placeholder: "highlight"
+                });
+            })
+        })
+
+
+        $("#viewimgSortDialog").dialog({
+            modal:true,
+            resizable:false,
+            autoOpen: false,
+            maxWidth:500,
+            maxHeight:600,
+            title:"노출(정렬)순서 변경",
+            buttons : {
+                "저장" : function() {
+
+                    var list=[];
+                    $("#viewimgSortDialog .sort_area > div").each(function(k, v){
+                        var seq = k+1;
+                        if(seq>4){return false;}
+                        list.push({order:(seq),seq:$(this).data("id")});
+                    });
+
+                    var param={
+                        list:list
+                    }
+
+                    tms.ajaxPostHelper('/mapi/story/TopStory',JSON.stringify(param),null,function (rs) {
+                        if(rs.code==0){
+                            alert('변경되었습니다.');
+                            $("#viewimgSortDialog").dialog("close");
+                        }
+                    });
+
+                },
+                "닫기" : function() { $(this).dialog("close"); }
+            },
+            close : function(event, ui) {
+                $("#viewimgSortDialog .sort_area").empty();
+            }
+        });
+
+        $('.ui-dialog-buttonset button').addClass('btn grayBtn');
+
         $('.devCssBtnAdd').click(function () {
             location.href='/page/admin/story/add';
         });
@@ -96,7 +184,7 @@
                 }}
                 , {no: 5, col: 'viewStDt', name: '노출일자', width:"400px;"}
                 , {no: 6, col: 'viewYn', name: '첨부파일',custom:function (obj) {
-                    if(obj.fileGrpSeq ==null || obj.fileGrpSeq==''){
+                    if(obj.fileGrpSeq==0){
                         return '';
                     }
                     return 'Y';

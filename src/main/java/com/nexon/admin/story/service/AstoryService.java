@@ -3,6 +3,7 @@ package com.nexon.admin.story.service;
 import com.nexon.admin.AdminFile.AdminFileService;
 import com.nexon.admin.story.dao.AstoryDao;
 import com.nexon.admin.story.model.StoryListVO;
+import com.nexon.admin.story.model.TopStoryVO;
 import com.nexon.admin.story.req.*;
 import com.nexon.admin.story.res.SelectStoryDetailRes;
 import com.nexon.admin.story.res.SelectStoryRes;
@@ -17,7 +18,9 @@ import com.nhncorp.lucy.security.xss.XssPreventer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AstoryService {
@@ -58,13 +61,13 @@ public class AstoryService {
 
         try{
 
-            if( req.getViewYn().equals("Y")
-                    && req.getImportantYn().equals("Y")
-                    && req.getOrderNo()>4 ){
-                result.setMessage("4 이하의 숫자만 입력해주세요.");
-                result.setReturnCode(ReturnType.RTN_TYPE_NG);
-                return result;
-            }
+//            if( req.getViewYn().equals("Y")
+//                    && req.getImportantYn().equals("Y")
+//                    && req.getOrderNo()>4 ){
+//                result.setMessage("4 이하의 숫자만 입력해주세요.");
+//                result.setReturnCode(ReturnType.RTN_TYPE_NG);
+//                return result;
+//            }
 
             //대표이미지
             if(req.getImg()!=null) {
@@ -73,7 +76,7 @@ public class AstoryService {
             }
 
             if(req.getFile()!=null) {
-                int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory4());
+                int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory4());
                 req.setFileGrpSeq(fgs);
             }
 
@@ -97,13 +100,13 @@ public class AstoryService {
 
         try{
 
-            if( req.getViewYn().equals("Y")
-                    && req.getImportantYn().equals("Y")
-                    && req.getOrderNo()>4 ){
-                result.setMessage("4 이하의 숫자만 입력해주세요.");
-                result.setReturnCode(ReturnType.RTN_TYPE_NG);
-                return result;
-            }
+//            if( req.getViewYn().equals("Y")
+//                    && req.getImportantYn().equals("Y")
+//                    && req.getOrderNo()>4 ){
+//                result.setMessage("4 이하의 숫자만 입력해주세요.");
+//                result.setReturnCode(ReturnType.RTN_TYPE_NG);
+//                return result;
+//            }
 
             if(req.getImg()!=null) {
                 if(req.getImgSeq()!=null){
@@ -115,12 +118,16 @@ public class AstoryService {
             }
 
             if(req.getFile()!=null) {
-                if(req.getAttachSeq()!=null){
-                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getAttachSeq(),configFile.getSelectCategory4());
-                    fileService.deleteFiles(fr);
+                int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory4());
+                if(req.getFileGrpSeq()!=null){
+                    Map map =new HashMap();
+                    map.put("newFgs",fgs);
+                    map.put("fgs",req.getFileGrpSeq());
+                    aStoryDao.updateFileGrpSeq(map);
+                    aStoryDao.deleteFileGrpSeq(map);
+                }else{
+                    req.setFileGrpSeq(fgs);
                 }
-                int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory4());
-                req.setFileGrpSeq(fgs);
             }
 
             if(CommonUtil.isNotEmpty(req.getEditorDelImg())){
@@ -162,17 +169,8 @@ public class AstoryService {
 
             Integer fgs= res.getFileGrpSeq();
             if(fgs!=null){
-                FileListReq fReq = new FileListReq();
-                fReq.setFileGrpSeq(fgs);
-                List fList = fileService.getFileList(fReq);
+                List fList = fileService.getFileList(new FileListReq(fgs));
                 res.setFList(fList);
-            }
-            Integer igs = res.getImgGrpSeq();
-            if(igs!=null){
-                FileListReq fReq = new FileListReq();
-                fReq.setFileGrpSeq(igs);
-                List fList = fileService.getFileList(fReq);
-                res.setIList(fList);
             }
 
             String clean = res.getTitle();
@@ -207,7 +205,7 @@ public class AstoryService {
             FileDeleteReq fr = adminFileService.setDeleteFile(req.getFileSeq(),configFile.getSelectCategory4());
             fileService.deleteFiles(fr);
 
-            aStoryDao.deleteFile(req);
+            //aStoryDao.deleteFile(req);
 
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
         } catch (Exception e) {
@@ -218,4 +216,41 @@ public class AstoryService {
         return result;
     }
 
+    public ResponseHandler<?> getTopStory(SelectTopStoryReq req) {
+        ResponseHandler<Map> result = new ResponseHandler<>();
+
+        try{
+            Map map  = new HashMap<>();
+            List<TopStoryVO> list = aStoryDao.getTopStory(req);
+            map.put("list",list);
+
+            result.setData(map);
+            result.setReturnCode(ReturnType.RTN_TYPE_OK);
+        } catch (Exception e) {
+            result.setReturnCode(ReturnType.RTN_TYPE_NG);
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public ResponseHandler<?> setTopStory(UpdateTopStoryReq req) {
+        ResponseHandler<Map> result = new ResponseHandler<>();
+
+        try{
+
+            aStoryDao.deleteTopStory();
+            List<Map> list = req.getList();
+            for(Map map :list){
+                aStoryDao.setTopStory(map);
+            }
+
+            result.setReturnCode(ReturnType.RTN_TYPE_OK);
+        } catch (Exception e) {
+            result.setReturnCode(ReturnType.RTN_TYPE_NG);
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Mapper
@@ -27,4 +28,8 @@ public interface AdminNoticeDao {
     int selectViewLimitCnt();
 
     void deleteFile(DeleteNoticeImgReq req);
+
+    void updateFileGrpSeq(Map map);
+
+    void deleteFileGrpSeq(Map map);
 }

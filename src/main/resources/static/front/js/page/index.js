@@ -15,6 +15,7 @@ tms.ajaxGetHelper('/api/story/topStory',{},null,function (rs) {
                 '<span class="date">'+viewStDt+'</span>'+
                 '</a></li>';
             $('#main_contents .section_02 ul').append(html);
+
         }
     }
 });

@@ -65,4 +65,18 @@ public class AstoryController {
         return  result;
     }
 
+    @ApiOperation(value = "탑스토리가져오기")
+    @GetMapping("/TopStory")
+    public ResponseHandler<?> getTopStory(SelectTopStoryReq req) {
+        ResponseHandler<?> result = aStoryService.getTopStory(req);
+        return  result;
+    }
+
+    @ApiOperation(value = "탑스토리순서변경")
+    @PostMapping("/TopStory")
+    public ResponseHandler<?> setTopStory(@RequestBody(required = false) UpdateTopStoryReq req) {
+        ResponseHandler<?> result = aStoryService.setTopStory(req);
+        return  result;
+    }
+
 }

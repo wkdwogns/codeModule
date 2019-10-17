@@ -69,8 +69,7 @@
             s.STORY_SEQ
             , s.TITLE
             , s.CONTENTS
-            , (SELECT FILE_SEQ FROM TB_FILE WHERE FILE_GRP_SEQ= s.FILE_GRP_SEQ LIMIT 1) FILE_SEQ
-            , (SELECT ORG_FILE_NM FROM TB_FILE WHERE FILE_GRP_SEQ= s.FILE_GRP_SEQ LIMIT 1) ORG_FILE_NM
+            , s.FILE_GRP_SEQ
             , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
             TB_STORY s

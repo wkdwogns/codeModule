@@ -13,7 +13,9 @@ public class SelectStoryDetailRes {
     private String viewStDt;
     private String fileSeq;
     private String orgFileNm;
+    private Integer fileGrpSeq;
 
+    private List fList;
     private StoryDetailPrevNextVO prevStory;
     private StoryDetailPrevNextVO nextStory;
 }

@@ -55,10 +55,10 @@
                 <div>
                     <input type="checkbox" class="fullWidth" id="importantYn"><label for="importantYn">Top story 지정</label>
                 </div>
-                <div>
-                    <input type="text" id="orderNo" style="margin-left: 30px;width: 45px;margin-right: 10px;" maxlength="1" disabled><label for="orderNo">Top story 표시순서</label>
-                </div>
-                <div style="margin-left: 20px;font-size: 12px;color: red;">* 기존 순서의 게시물은 순서가 변경됩니다.</div>
+                <!--<div>-->
+                    <!--<input type="text" id="orderNo" style="margin-left: 30px;width: 45px;margin-right: 10px;" maxlength="1" disabled><label for="orderNo">Top story 표시순서</label>-->
+                <!--</div>-->
+                <!--<div style="margin-left: 20px;font-size: 12px;color: red;">* 기존 순서의 게시물은 순서가 변경됩니다.</div>-->
             </td>
         </tr>
 
@@ -88,7 +88,7 @@
         </tr>
 
         <tr>
-            <th>대표이미지<br>(315x267)<span class="required">*</span></th>
+            <th>대표이미지<br>(316x293)<span class="required">*</span></th>
             <td id="repImg">
                 <input type="hidden" id="imgSeq">
                 <input type="file" id="devIdTxtImg">
@@ -98,8 +98,8 @@
         <tr>
             <th>파일첨부</th>
             <td id="attach">
-                <input type="hidden" id="attachSeq">
-                <input type="file" id="devIdTxtAttach">
+                <input type="hidden" id="fileGrpSeq">
+                <input type="file" id="devIdTxtAttach" multiple="multiple">
             </td>
         </tr>
 
@@ -125,27 +125,6 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <script>
-
-        $('[name=viewYn]').click(function () {
-            if( $(this).val() == 'N' ){
-                $("input:checkbox[id='importantYn']").prop("checked", false );
-                $('#orderNo').val('').attr('disabled',true);
-            }
-        })
-
-        $("#importantYn").click(function(){
-
-
-            var viewYn = $(":input:radio[name=viewYn]:checked").val();
-            if(viewYn=='N'){return false;}
-
-            var chk = $(this).is(":checked");
-            $('#orderNo').attr('disabled',!chk);
-            if(!chk){
-                $('#orderNo').val('');
-            }
-
-        });
 
         $('#orderNo').keyup(function () {
             var regexp = /^[0-9]*$/
@@ -189,8 +168,8 @@
                 img.onload = function() {
                     var w = img.width;
                     var h = img.height;
-                    if(w!=315&&h!=267){
-                        alert('315x267 사이즈로 올려주세요.');
+                    if(w!=316&&h!=293){
+                        alert('316x293 사이즈로 올려주세요.');
                         $(et).val('');
                     }
                 };
@@ -239,9 +218,9 @@
 
             var chk = $('#importantYn').is(":checked")
             var ord = $('#orderNo').val();
-            if(chk && (ord==null||ord=='') ){
-                alert('Top Story표시순서를 입력해주세요');
-                return ;
+            if(chk){
+                //alert('Top Story표시순서를 입력해주세요');
+                //return ;
             }
 
             if(!confirm("해당 내용으로 저장하시겠습니까?")) {
@@ -270,13 +249,15 @@
 
             var iYn = ($("input:checkbox[id='importantYn']").is(":checked"))?'Y':'N';
             data.append('importantYn', iYn );
-            data.append("orderNo", $('#orderNo').val() );
+
             data.append("viewUnlimitYn", "N" );
             data.append("editorDelImg", editorDelImg);
 
-            var f1 = $('#devIdTxtAttach')[0].files[0];
-            if(f1 != null && f1 != ''){
-                data.append("file", f1 );
+            var f1 = $('#devIdTxtAttach')[0].files;
+            if(f1.length>0) {
+                for (var ii in f1) {
+                    data.append("file", f1[ii]);
+                }
             }
 
             var imgF = $('#devIdTxtImg')[0].files[0];
@@ -284,9 +265,11 @@
                 data.append("img", imgF );
             }
 
-            if(tms.isNotEmpty($('#attachSeq').val())){
-                data.append("attachSeq", $('#attachSeq').val() );
+            var fileGrpSeq  = $('#fileGrpSeq').val();
+            if( tms.isNotEmpty(fileGrpSeq) ){
+                data.append( "fileGrpSeq" , fileGrpSeq );
             }
+
             if(tms.isNotEmpty($('#imgSeq').val())){
                 data.append("imgSeq", $('#imgSeq').val() );
             }
@@ -335,7 +318,7 @@
             }
 
             tms.ajaxGetHelper('/mapi/story/detail', params, null, function(rs) {
-
+                console.log(rs);
                 if(rs.code==0){
                     var d = rs.data;
 
@@ -347,11 +330,11 @@
                     $("input:checkbox[id='importantYn']").prop("checked", (d.importantYn=='Y') );
                     $('#orderNo').attr('disabled', !(d.importantYn=='Y') );
                     $('#orderNo').val(d.orderNo);
+                    $('#fileGrpSeq').val(d.fileGrpSeq);
                     if(d.flist!=null){
                         var fl =d.flist;
                         for(var i in fl){
                             $('#devIdTxtAttach').after(setFileDOM(fl[i],'attach'));
-                            $('#attachSeq').val(fl[i].fileSeq);
                         }
                     }
 
@@ -374,7 +357,7 @@
             var html = ''+
                 '<div id="fileNo'+fl.fileSeq+'" class="file">' +
                 '<input type="hidden" class="fileSeq" value="'+fl.fileSeq+'"/>'+
-                '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=3" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' ;
+                '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=4" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' ;
             if(type=='attach'){
                 html+='<a onclick="deleteFile('+fl.fileSeq+',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>';
             }

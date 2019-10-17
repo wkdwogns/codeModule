@@ -69,6 +69,11 @@ public class StoryService {
 
         try{
             SelectStoryDetailRes res = storyDao.selectStoryDetail(req);
+            Integer fgs= res.getFileGrpSeq();
+            if(fgs!=null){
+                List fList = fileService.getFileList(new FileListReq(fgs));
+                res.setFList(fList);
+            }
 
             StoryDetailPrevNextVO prevVO = storyDao.selectPrevStory(req);
             StoryDetailPrevNextVO nextVO = storyDao.selectNextStory(req);

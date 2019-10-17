@@ -82,13 +82,10 @@
                 }}
                 , {no: 5, col: 'viewStDt', name: '노출일자', width:"400px;"}
                 , {no: 6, col: 'attach', name: '첨부파일',custom:function(obj){
-                    var a = obj.fileGrpSeq;
-
-                    if(a!=null&&a!=''){
-                        a='Y';
-                    }else{a='';}
-
-                    return a;
+                    if(obj.fileGrpSeq==0){
+                        return '';
+                    }
+                    return 'Y';
                 }}
                 , {no: 7, col: 'viewYn', name: '노출여부'}
             ];

@@ -14,7 +14,7 @@
                 , (SELECT USER_NAME FROM TB_USER_PROFILE WHERE USER_SEQ = s.CRE_ID) CRE_ID
                 , (SELECT USER_NAME FROM TB_USER_PROFILE WHERE USER_SEQ = s.UPD_ID) UPD_ID
                 , s.TITLE
-                , s.FILE_GRP_SEQ
+                , (SELECT count(*) FROM TB_FILE WHERE FILE_GRP_SEQ=s.FILE_GRP_SEQ AND IFNULL(DEL_YN, 'N') = 'N') FILE_GRP_SEQ
                 , s.VIEW_YN
                 , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
 
@@ -165,5 +165,48 @@
         WHERE
             STORY_SEQ=#{seq}
     </update>
+
+    <select id="getTopStory" parameterType="com.nexon.admin.story.req.SelectTopStoryReq" resultType="com.nexon.admin.story.model.TopStoryVO">
+        SELECT
+            s.STORY_SEQ
+            , s.TITLE
+            , s.ORDER_NO
+            ,  (SELECT FILE_PATH FROM TB_FILE WHERE FILE_GRP_SEQ = s.IMG_GRP_SEQ LIMIT 1) FILE_PATH
+        FROM
+            TB_STORY s
+        WHERE
+            s.DEL_YN='N'
+            AND s.IMPORTANT_YN = 'Y'
+          ORDER BY ORDER_NO ASC
+    </select>
+
+    <update id="deleteTopStory">
+        UPDATE
+            TB_STORY
+        SET
+            ORDER_NO = NULL
+    </update>
+
+    <update id="setTopStory" parameterType="map">
+        UPDATE
+            TB_STORY
+        SET
+            ORDER_NO =#{order}
+        WHERE
+            STORY_SEQ=#{seq}
+    </update>
+
+    <update id="updateFileGrpSeq" parameterType="map">
+        UPDATE
+            TB_FILE
+        SET
+            FILE_GRP_SEQ =#{fgs}
+        WHERE
+            FILE_GRP_SEQ=#{newFgs}
+    </update>
+
+    <delete id="deleteFileGrpSeq" parameterType="map">
+        DELETE FROM TB_FILE_GRP WHERE FILE_GRP_SEQ=#{newFgs}
+    </delete>
 
 </mapper>

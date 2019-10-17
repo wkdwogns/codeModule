@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 @Service
 public class AdminFileService {
@@ -31,6 +32,16 @@ public class AdminFileService {
         fileSaveReq.setIsSaveInfos(true);
         fileSaveReq.setCheckExtCategory(configFile.getExtCategory3());
         FileInfoRes fileInfoRes = fileService.storeFiles(files, fileSaveReq);
+        return fileInfoRes.getFileGrpSeq();
+    }
+
+    public int setFile(MultipartFile[] file, int cate) throws Exception{
+
+        FileSaveReq fileSaveReq = new FileSaveReq();
+        fileSaveReq.setCategory(cate);
+        fileSaveReq.setIsSaveInfos(true);
+        fileSaveReq.setCheckExtCategory(configFile.getExtCategory3());
+        FileInfoRes fileInfoRes = fileService.storeFiles(file, fileSaveReq);
         return fileInfoRes.getFileGrpSeq();
     }
 

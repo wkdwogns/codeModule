@@ -12,7 +12,7 @@
             ,n.VIEW_YN
             ,n.VIEW_UNLIMIT_YN
             ,n.NOTICE_TYPE
-            ,n.FILE_GRP_SEQ
+            , (SELECT count(*) FROM TB_FILE WHERE FILE_GRP_SEQ=n.FILE_GRP_SEQ AND IFNULL(DEL_YN, 'N') = 'N') FILE_GRP_SEQ
             ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
             ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
         FROM
@@ -151,6 +151,19 @@
         WHERE
             NOTICE_SEQ=#{seq}
     </update>
+
+    <update id="updateFileGrpSeq" parameterType="map">
+        UPDATE
+        TB_FILE
+        SET
+        FILE_GRP_SEQ =#{fgs}
+        WHERE
+        FILE_GRP_SEQ=#{newFgs}
+    </update>
+
+    <delete id="deleteFileGrpSeq" parameterType="map">
+        DELETE FROM TB_FILE_GRP WHERE FILE_GRP_SEQ=#{newFgs}
+    </delete>
 
 
 

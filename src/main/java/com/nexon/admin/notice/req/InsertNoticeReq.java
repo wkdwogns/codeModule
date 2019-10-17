@@ -21,7 +21,7 @@ public class InsertNoticeReq extends CommonReq{
 
     private Integer fileGrpSeq;
     private Integer imgGrpSeq;
-    private MultipartFile file;
+    private MultipartFile[] file;
     private MultipartFile img;
 
     private ArrayList<String> editorDelImg;

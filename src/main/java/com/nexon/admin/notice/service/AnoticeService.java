@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AnoticeService {
@@ -71,7 +73,7 @@ public class AnoticeService {
 //            }
 
             if(req.getFile()!=null) {
-                int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory3());
+                int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory3());
                 req.setFileGrpSeq(fgs);
             }
 
@@ -114,12 +116,19 @@ public class AnoticeService {
 //            }
 
             if(req.getFile()!=null) {
-                if(req.getAttachSeq()!=null){
-                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getAttachSeq(),configFile.getSelectCategory3());
-                    fileService.deleteFiles(fr);
+                int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory4());
+
+                if(req.getFileGrpSeq()!=null){
+                    Map map =new HashMap();
+                    map.put("newFgs",fgs);
+                    map.put("fgs",req.getFileGrpSeq());
+
+
+                    adminNoticeDao.updateFileGrpSeq(map);
+                    adminNoticeDao.deleteFileGrpSeq(map);
+                }else{
+                    req.setFileGrpSeq(fgs);
                 }
-                int fgs = adminFileService.setImg(req.getFile() , configFile.getSelectCategory3());
-                req.setFileGrpSeq(fgs);
             }
 
             if(CommonUtil.isNotEmpty(req.getEditorDelImg())){
