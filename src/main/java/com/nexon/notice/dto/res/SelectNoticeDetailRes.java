@@ -13,6 +13,9 @@ public class SelectNoticeDetailRes {
     private String contents;
     private String fileSeq;
     private String orgFileNm;
+    private Integer fileGrpSeq;
+
+    private List fList;
     private NoticeDetailPrevNextVO prevNotice;
     private NoticeDetailPrevNextVO nextNotice;
 }

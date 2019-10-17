@@ -65,6 +65,11 @@ public class NoticeService {
 
         try{
             SelectNoticeDetailRes res = noticeDao.selectNoticeDetail(req);
+            Integer fgs= res.getFileGrpSeq();
+            if(fgs!=null){
+                List fList = fileService.getFileList(new FileListReq(fgs));
+                res.setFList(fList);
+            }
 
             NoticeDetailPrevNextVO prevVo = noticeDao.selectPrevNotice(req);
             NoticeDetailPrevNextVO nextVo = noticeDao.selectNextNotice(req);

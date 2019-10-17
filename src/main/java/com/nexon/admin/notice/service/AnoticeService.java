@@ -116,7 +116,7 @@ public class AnoticeService {
 //            }
 
             if(req.getFile()!=null) {
-                int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory4());
+                int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory3());
 
                 if(req.getFileGrpSeq()!=null){
                     Map map =new HashMap();

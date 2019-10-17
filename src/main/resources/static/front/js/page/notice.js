@@ -100,20 +100,23 @@ var getDetail = function(no,p,n) {
     };
 
     tms.ajaxGetHelper('/api/notice/detail', params, null, function(rs) {
-
+console.log(rs);
         if(rs.code==0){
             var title = rs.data.title;
             var viewStDt =rs.data.viewStDt;
             var contents = rs.data.contents;
-            var fileSeq = rs.data.fileSeq;
-            var orgFileNm = rs.data.orgFileNm;
+            var flist = rs.data.flist;
+
             $('#popup_all .popup_view .cont').html('');
             $('#popup_all .popup_view .cont').append('<h2 class="name">'+title+'</h2>');
             $('#popup_all .popup_view .cont').append('<p class="date">'+viewStDt+'</p>');
-            if(fileSeq!=null&&fileSeq!=''){
-                $('#popup_all .popup_view .cont').append('<div class="file_list"><ul><li>'+
-                    '<a href="/api/file/download?fileSeq='+fileSeq+'&category=3"><strong>'+orgFileNm+'</strong></a>'+
-                    '</li></ul></div>');
+            $('#popup_all .popup_view .cont').append('<div class="file_list"><ul></ul></div>');
+            for(var ii in flist){
+                $('#popup_all .popup_view .cont .file_list ul').append('<li>'+
+                    '<a href="/api/file/download?fileSeq='+flist[ii].fileSeq+'&category=3">' +
+                    '<strong>'+flist[ii].orgFileNm+'</strong>' +
+                    '</a>'+
+                    '</li>');
             }
             $('#popup_all .popup_view .cont').append( tms.convertHtml(contents) );
 

@@ -59,8 +59,7 @@
             n.NOTICE_SEQ
             ,n.TITLE
             ,n.CONTENTS
-            , (SELECT FILE_SEQ FROM TB_FILE WHERE FILE_GRP_SEQ= n.FILE_GRP_SEQ LIMIT 1) FILE_SEQ
-            , (SELECT ORG_FILE_NM FROM TB_FILE WHERE FILE_GRP_SEQ= n.FILE_GRP_SEQ LIMIT 1) ORG_FILE_NM
+            ,n.FILE_GRP_SEQ
             ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
         FROM
             TB_NOTICE n
