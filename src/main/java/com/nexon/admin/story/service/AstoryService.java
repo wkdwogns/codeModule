@@ -173,6 +173,12 @@ public class AstoryService {
                 res.setFList(fList);
             }
 
+            Integer igs= res.getImgGrpSeq();
+            if(igs!=null){
+                List iList = fileService.getFileList(new FileListReq(igs));
+                res.setIList(iList);
+            }
+
             String clean = res.getTitle();
             String origin = XssPreventer.unescape(clean);
             res.setTitle(origin);
