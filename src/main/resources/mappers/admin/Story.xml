@@ -6,10 +6,10 @@
     <select id="selectStory" parameterType="com.nexon.admin.story.req.SelectStoryReq" resultType="com.nexon.admin.story.model.StoryListVO">
         SELECT
             A.*
-            , @rownum:=@rownum+1 no
         FROM (
             SELECT
-                s.STORY_SEQ
+                @rownum :=@rownum+1 AS no
+                , s.STORY_SEQ
                 , s.CATEGORY
                 , (SELECT USER_NAME FROM TB_USER_PROFILE WHERE USER_SEQ = s.CRE_ID) CRE_ID
                 , (SELECT USER_NAME FROM TB_USER_PROFILE WHERE USER_SEQ = s.UPD_ID) UPD_ID
@@ -17,19 +17,22 @@
                 , (SELECT count(*) FROM TB_FILE WHERE FILE_GRP_SEQ=s.FILE_GRP_SEQ AND IFNULL(DEL_YN, 'N') = 'N') FILE_GRP_SEQ
                 , s.VIEW_YN
                 , DATE_FORMAT(s.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-
-            FROM TB_STORY s
-            WHERE IFNULL(s.DEL_YN, 'N') = 'N'
-            <if test="keyField=='title'">
-                and s.TITLE LIKE concat('%',#{keyword},'%')
-            </if>
-            <if test="keyField=='Content'">
-                and s.CONTENTS LIKE concat('%',#{keyWord},'%')
-            </if>
-            ORDER BY s.CRE_DT DESC
-        ) A,
-        (SELECT @rownum:=0) rn
-        ORDER BY no
+            FROM
+                TB_STORY s, (SELECT @rownum := 0 ) rn
+            WHERE
+                IFNULL(s.DEL_YN, 'N') = 'N'
+                <if test="keyField==''and keyword!=null">
+                    and (s.TITLE LIKE concat('%',#{keyword},'%') or s.CONTENTS LIKE concat('%',#{keyword},'%') )
+                </if>
+                <if test="keyField=='title'">
+                    and s.TITLE LIKE concat('%',#{keyword},'%')
+                </if>
+                <if test="keyField=='Content'">
+                    and s.CONTENTS LIKE concat('%',#{keyword},'%')
+                </if>
+                ORDER BY s.VIEW_ST_DT
+        ) A
+        ORDER BY no DESC
         LIMIT ${startRow}, ${cntPerPage}
     </select>
 
@@ -40,6 +43,9 @@
             TB_STORY s
         WHERE
             s.DEL_YN='N'
+            <if test="keyField==''and keyword!=null">
+                and (s.TITLE LIKE concat('%',#{keyword},'%') or s.CONTENTS LIKE concat('%',#{keyword},'%') )
+            </if>
             <if test="keyField=='title'">
                 and s.TITLE LIKE concat('%',#{keyword},'%')
             </if>
@@ -68,7 +74,7 @@
             and s.DEL_YN='N'
     </select>
 
-    <insert id="insertStory" parameterType="com.nexon.admin.story.req.InsertStoryReq">
+    <insert id="insertStory" parameterType="com.nexon.admin.story.req.InsertStoryReq" useGeneratedKeys="true" keyProperty="storySeq">
         INSERT INTO TB_STORY
         (
             CATEGORY
@@ -191,7 +197,10 @@
         UPDATE
             TB_STORY
         SET
-            ORDER_NO =#{order}
+            ORDER_NO =#{order,jdbcType=VARCHAR}
+            <if test="order==null">
+                , IMPORTANT_YN='N'
+            </if>
         WHERE
             STORY_SEQ=#{seq}
     </update>
@@ -208,5 +217,9 @@
     <delete id="deleteFileGrpSeq" parameterType="map">
         DELETE FROM TB_FILE_GRP WHERE FILE_GRP_SEQ=#{newFgs}
     </delete>
+
+    <select id="getMaxTopStory" resultType="int">
+      SELECT MAX(ORDER_NO) from TB_STORY
+    </select>
 
 </mapper>

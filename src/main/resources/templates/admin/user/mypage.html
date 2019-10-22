@@ -26,10 +26,10 @@
                     return false;
                 }
             } else {
-                console.log(123);
+
                 return false;
             }
-            console.log(456);
+
             tms.ajaxPostHelper("/membership/change/pwd", JSON.stringify(data), null, function(result){
                 if(result.code === 0){
                     alert("변경되었습니다");

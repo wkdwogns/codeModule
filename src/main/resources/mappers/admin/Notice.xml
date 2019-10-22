@@ -5,29 +5,33 @@
 
     <select id="selectNotice" parameterType="com.nexon.admin.notice.req.SelectNoticeReq" resultType="com.nexon.admin.notice.model.NoticeListVO">
         SELECT
-            @rownum:=@rownum+1 no
-            ,n.NOTICE_SEQ
-            ,n.TITLE
-            ,n.IMPORTANT_YN
-            ,n.VIEW_YN
-            ,n.VIEW_UNLIMIT_YN
-            ,n.NOTICE_TYPE
-            , (SELECT count(*) FROM TB_FILE WHERE FILE_GRP_SEQ=n.FILE_GRP_SEQ AND IFNULL(DEL_YN, 'N') = 'N') FILE_GRP_SEQ
-            ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
-            ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
-        FROM
-            TB_NOTICE n,
-            (SELECT @rownum:=0) rn
-        WHERE
-            n.DEL_YN='N'
-            <if test="keyField=='Title'">
-                and n.TITLE LIKE concat('%',#{keyWord},'%')
-            </if>
-            <if test="keyField=='Content'">
-                and n.CONTENTS LIKE concat('%',#{keyWord},'%')
-            </if>
-            ORDER BY no DESC
-            LIMIT ${startRow}, ${cntPerPage}
+            A.*
+        FROM (
+            SELECT
+                @rownum :=@rownum+1 AS no
+                ,n.NOTICE_SEQ
+                ,n.TITLE
+                ,n.IMPORTANT_YN
+                ,n.VIEW_YN
+                ,n.VIEW_UNLIMIT_YN
+                ,n.NOTICE_TYPE
+                , (SELECT count(*) FROM TB_FILE WHERE FILE_GRP_SEQ=n.FILE_GRP_SEQ AND IFNULL(DEL_YN, 'N') = 'N') FILE_GRP_SEQ
+                ,DATE_FORMAT(n.VIEW_ST_DT, '%Y.%m.%d') VIEW_ST_DT
+                ,DATE_FORMAT(n.VIEW_END_DT, '%Y.%m.%d') VIEW_END_DT
+            FROM
+                TB_NOTICE n, (SELECT @rownum := 0 ) rn
+            WHERE
+                n.DEL_YN='N'
+                <if test="keyField=='Title'">
+                    and n.TITLE LIKE concat('%',#{keyWord},'%')
+                </if>
+                <if test="keyField=='Content'">
+                    and n.CONTENTS LIKE concat('%',#{keyWord},'%')
+                </if>
+            ORDER BY n.VIEW_ST_DT
+        )A
+        ORDER BY no DESC
+        LIMIT ${startRow}, ${cntPerPage}
     </select>
 
     <select id="selectNoticeCnt" parameterType="com.nexon.admin.notice.req.SelectNoticeReq" resultType="int">

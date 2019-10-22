@@ -61,14 +61,6 @@ public class AstoryService {
 
         try{
 
-//            if( req.getViewYn().equals("Y")
-//                    && req.getImportantYn().equals("Y")
-//                    && req.getOrderNo()>4 ){
-//                result.setMessage("4 이하의 숫자만 입력해주세요.");
-//                result.setReturnCode(ReturnType.RTN_TYPE_NG);
-//                return result;
-//            }
-
             //대표이미지
             if(req.getImg()!=null) {
                 int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory4());
@@ -85,6 +77,8 @@ public class AstoryService {
             }
 
             aStoryDao.insertStory(req);
+
+            this.updateOrderNo("insert",req.getImportantYn(),req.getStorySeq());
 
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
         } catch (Exception e) {
@@ -135,6 +129,8 @@ public class AstoryService {
             }
 
             aStoryDao.updateStory(req);
+
+            this.updateOrderNo("update",req.getImportantYn(),req.getSeq());
 
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
         } catch (Exception e) {
@@ -258,5 +254,75 @@ public class AstoryService {
         }
 
         return result;
+    }
+
+    private void updateOrderNo(String flag,String Yn,String seq){
+
+        List<TopStoryVO> list = aStoryDao.getTopStory(new SelectTopStoryReq());
+
+        if(Yn.equals("Y")){
+            if ( list.size()>4 ){
+
+                this.setOrderNo(1,seq);
+
+                for(TopStoryVO vo : list ){
+                    if(CommonUtil.isEmpty(vo.getOrderNo())){
+                        continue;
+                    }
+                    if( vo.getOrderNo().equals("4") ){
+                        this.setOrderNo(null,vo.getStorySeq()+"");
+                    }else{
+                        String ord = vo.getOrderNo();
+                        this.setOrderNo(Integer.parseInt(ord)+1,vo.getStorySeq()+"");
+                    }
+                }
+
+            }else{
+                int i=1;
+                while(i<5){
+
+                    boolean f=true;
+                    for(TopStoryVO vo : list ){
+                        if(vo.getOrderNo()==null){
+                            continue;
+                        }
+                        int ord = Integer.parseInt(vo.getOrderNo());
+                        if(i==ord){
+                            f=false;
+                            break;
+                        }
+                    }
+
+                    if(f){
+                        this.setOrderNo(i,seq);
+                        break;
+                    }else{
+                        i++;
+                    }
+                }
+            }
+        }else{
+            if(flag.equals("update")){
+
+                //삭제되고 기존게 앞으로 정렬
+                int ord=1;
+                for(TopStoryVO vo : list ){
+                    if( vo.getStorySeq()==Integer.parseInt(seq) ){
+                        this.setOrderNo(null,seq);
+                    }else{
+                        this.setOrderNo(ord,vo.getStorySeq()+"");
+                        ord++;
+                    }
+                }
+
+            }
+        }
+    }
+
+    private void setOrderNo(Integer ord,String seq){
+        Map map = new HashMap();
+        map.put("order", ord );
+        map.put("seq", seq );
+        aStoryDao.setTopStory(map);
     }
 }

@@ -59,7 +59,7 @@
     <div class="btnList">
         <div id="paging" class="paging"></div>
         <button type="button" class="btn mainBtn floatRight devCssBtnAdd">새 스토리 등록</button>
-        <button id="viewimg_sort" type="button" class="btn grayBtn floatRight" style="margin-right: 5px;">순서변경</button>
+        <button id="viewimg_sort" type="button" class="btn grayBtn floatRight" style="margin-right: 5px;width: 130px;">탑스토리 순서변경</button>
     </div>
 
     <div id="viewimgSortDialog" class="dialog" style="display: none">
@@ -72,7 +72,7 @@
     <script>
         $('#viewimg_sort').click(function () {
             tms.ajaxGetHelper('/mapi/story/TopStory',{},null,function (rs) {
-                console.log(rs);
+
                 if(rs.code == 0) {
                     var list = rs.data.list;
                     var html = "";

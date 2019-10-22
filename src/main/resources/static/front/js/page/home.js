@@ -1,19 +1,3 @@
-$(function(){
-    var ln = tms.getCookie('lang');
-    if((ln=='eng')){
-        $('#header .logo a').css({
-            'background': 'url(/front/images/common/logo_eng.png) 0 center no-repeat'
-            ,'background-size': '185px auto'
-        })
-        $('#footer .logo_box ul li .logo_01').css({
-            'background-image': 'url(/front/images/common/footer_logo_01_eng.png)'
-        })
-        $('#footer .logo_box ul li .logo_02').css({
-            'background-image': 'url(/front/images/common/footer_logo_02_eng.png)'
-        })
-    }
-});
-
 var setLang = function (lang) {
     tms.ajaxPostHelper('/api/lang',JSON.stringify({lang:lang}), null, function(rs) {
         setLangUI();

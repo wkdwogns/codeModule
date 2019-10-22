@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 @Data
 public class InsertStoryReq extends CommonReq {
+    private String storySeq;
     private Integer category;
     private String storyNm;
     private String title;

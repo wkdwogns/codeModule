@@ -28,11 +28,13 @@
                 $('#popup_all .popup_view .cont').append('<h2 class="name">'+title+'</h2>');
                 $('#popup_all .popup_view .cont').append('<p class="date">'+dStr+'</p>');
 
+                $('#popup_all .popup_view .cont').append('<div class="file_list"><ul></ul></div>');
+
                 var fl =rs.data.flist;
                 for(var i in fl){
-                    $('#popup_all .popup_view .cont').append('<div class="file_list"><ul><li>'+
+                    $('#popup_all .popup_view .cont .file_list ul').append('<li>'+
                         '<a href="/api/file/download?fileSeq='+fl[i].fileSeq+'&category=4"><strong>'+fl[i].orgFileNm+'</strong></a>'+
-                        '</li></ul></div>');
+                        '</li>');
                 }
                 $('#popup_all .popup_view .cont').append(contents);
             }

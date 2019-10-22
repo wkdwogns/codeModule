@@ -128,7 +128,7 @@ function fileCheck(obj,isImg) {
     var files= obj.files;
     var fLen= $('#attach .file').length;
     if( (files.length+fLen)>5 ){
-        alert('5개 이하로 첨부할 수 있습니다.');
+        alert('5개 이상은 첨부할 수 없습니다.');
         $(obj).val('');
         return ;
     }

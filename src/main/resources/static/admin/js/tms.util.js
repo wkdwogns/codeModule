@@ -312,7 +312,7 @@ var tms = (function ($, win, doc) {
             return false;
         }
 
-        console.log(url)
+
 
         // var idx = $.inArray(url, aFlagArray);
         // if(idx != -1) {

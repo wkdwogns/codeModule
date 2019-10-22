@@ -104,7 +104,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #main_contents .section_03 .list ul li {width:480px; float:left; margin-right:60px; margin-bottom:30px; word-break:break-all;}
 #main_contents .section_03 .list ul li:nth-child(even) {margin-top:35px;}
 #main_contents .section_03 .list ul li .tit {margin-bottom:20px; font-size:36px; font-weight:900;}
-#main_contents .section_03 .list ul li .tit .no {display:inline-block; width:37px; height:37px; line-height:38px; text-align:center; color:#fff; font-size:24px; margin-left:10px; position:relative; top:-6px;}
+#main_contents .section_03 .list ul li .tit .no {display:inline-block; width:37px; height:37px; line-height:42px; text-align:center; color:#fff; font-size:24px; margin-left:10px; position:relative; top:-6px;}
 #main_contents .section_03 .list ul li .tit .no.blue {background-color:#00a0e0;}
 #main_contents .section_03 .list ul li .tit .no.mint {background-color:#03b5aa;}
 #main_contents .section_03 .list ul li .tit .no.lime {background-color:#c2d502;}
@@ -300,7 +300,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	#main_contents .section_02 {margin-bottom:50px;}
 	#main_contents .section_02 .title {padding:0 15px; margin-bottom:25px; font-size:12px;}
 	#main_contents .section_02 .list {margin-left:15px;}
-	#main_contents .section_02 .list ul li {width:50%; margin-left:0; margin-bottom:25px;}
+	#main_contents .section_02 .list ul li {width:50%; margin-left:0; margin-bottom:25px;min-height: 224px;}
 	#main_contents .section_02 .list ul li:nth-child(odd) {margin-top:0;}
 	#main_contents .section_02 .list ul li a {padding-right:15px;}
 	#main_contents .section_02 .list ul li a span.img {width:100%; height:auto; margin-bottom:10px;}
@@ -314,7 +314,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	#main_contents .section_03 .list ul li {width:100%; margin-right:0; margin-bottom:40px;}
 	#main_contents .section_03 .list ul li:nth-child(even) {margin-top:0;}
 	#main_contents .section_03 .list ul li .tit {padding:0 15px; margin-bottom:10px; font-size:25px;}
-	#main_contents .section_03 .list ul li .tit .no {width:30px; height:30px; line-height:31px; font-size:18px; margin-left:5px; top:-3px;}
+	#main_contents .section_03 .list ul li .tit .no {width:30px; height:30px; line-height:35px; font-size:18px; margin-left:5px; top:-3px;}
 	#main_contents .section_03 .list ul li .txt {padding:0 15px; margin-bottom:15px; font-size:12px; line-height:18px;}
 	#main_contents .section_03 .list ul li .txt br {display:none;}
 	#main_contents .section_03 .list ul li .img {width:100%; height:auto; margin-bottom:15px;}
