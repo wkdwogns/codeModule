@@ -1,12 +1,3 @@
-.notice_list_wrap .notice_list td.article .important {position:relative; margin-left: 5px; display:inline-block; width: 21px; height: 10px; background:url(../../images/common/ico_important.gif) 0 0 no-repeat; }
-.notice_list_wrap .notice_list td.article .notice {position:relative; margin-left: 5px; display:inline-block; width: 21px; height: 10px; background:url(../../images/common/ico_notice.gif) 0 0 no-repeat; }
-.notice_list_wrap .notice_list td.article .new{position: relative;margin-left: 5px;margin-top: 0;top:0;right:0}
-.faq_list_wrap .faq_list_box .faq_list li:first-child {border-top: solid 1px #e1e1e1}
-.popup_all .popup_main{height: auto}
-
-
-.story_view_wrap .view_section5 .img_box {position:absolute; left:10px; top:0px; }
-.story_view_wrap .view_section5 .img_box .img_mobile {display:none; }
-
-.sub_about_02 .section_03 .list ul li {width:49%;}
-.sub_about_02 .section_03 .list ul li:nth-child(2) {background:url(../../images/sub/about_02_ico_02.png) 177px 0 no-repeat;}
+@media screen and (max-width: 750px) {
+	.popup_view img{width: 100% !important;}
+}

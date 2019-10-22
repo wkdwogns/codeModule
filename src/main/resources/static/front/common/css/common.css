@@ -140,12 +140,12 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 }
 
 /* Common */
-.article_story_tamplete1 {font-size:18px; line-height:32px; color:#2e2e2e; text-align:center; }
+/*.article_story_tamplete1 {font-size:18px; line-height:32px; color:#2e2e2e; text-align:center; }
 .article_story_tamplete1 .txt1 {padding: 0 10px; font-size:40px; line-height:60px; font-family:'NotoSerif'; font-weight:500; font-style:italic; color:#fff; display:inline-block; background-color:#4b89dc;}
 .article_story_tamplete1 .txt2 {font-size:30px; line-height:46px; font-family:'NotoSerif'; font-weight:600; font-style:italic; color:#4b89dc; display:inline-block; text-decoration:underline; }
 .article_story_tamplete1 .txt3 {font-size:26px; line-height:42px; font-family:'NotoSerif'; font-weight:600; font-style:italic; color:#4b89dc; display:inline-block;}
 .article_story_tamplete1 .img_box1 {padding: 50px 0; }
-.article_story_tamplete1 .img_box1 img {margin: 0 3px;}
+.article_story_tamplete1 .img_box1 img {margin: 0 3px;}*/
 
 /* Sub */
 .sub_about .navi {display:inline-block; padding:10px 0; border-radius:5px; background-color:#f8f9fa; position:absolute; right:0px; top:80px; box-shadow:4px 4px 11px rgba(0, 0, 0, 0.1); z-index:1;}
@@ -382,12 +382,12 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	}
 
 	/* Common */
-	.article_story_tamplete1 {font-size:12px; line-height:22px;}
+	/*.article_story_tamplete1 {font-size:12px; line-height:22px;}
 	.article_story_tamplete1 .txt1 {padding:0 5px; font-size:20px; line-height:40px;}
 	.article_story_tamplete1 .txt2 {font-size:15px; line-height:20px;}
 	.article_story_tamplete1 .txt3 {font-size:13px; line-height:21px;}
 	.article_story_tamplete1 .img_box1 {padding:25px 0;}
-	.article_story_tamplete1 .img_box1 img {width:100%; margin:0 0px; margin-bottom:10px;}
+	.article_story_tamplete1 .img_box1 img {width:100%; margin:0 0px; margin-bottom:10px;}*/
 
 	/* Sub */
 	.sub_about .navi {border-radius:3px; right:15px; top:20px;}
