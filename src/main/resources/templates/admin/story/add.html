@@ -122,8 +122,8 @@
 
 
     <!-- summernote 관련 JS -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
     <script>
 
         $('#orderNo').keyup(function () {
@@ -146,12 +146,41 @@
                 minHeight:300,
                 placeholder: '텍스트 입력 가능하며, 문자 제한 없습니다.\n' +
                 '글자수 제한 없습니다.\n',
+                fontNames: ['Gothic A1'],
+                fontNamesIgnoreCheck: ['Gothic A1'],
+                lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0'],
+                popover: {
+                    image: [
+                        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter']],
+                        ['remove', ['removeMedia']]
+                    ],
+                    link: [
+                        ['link', ['linkDialogShow', 'unlink']]
+                    ],
+                    table: [
+                        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+                    ]
+                },
+                toolbar: [
+                    ['font', ['bold', 'underline', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['height', ['height']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
                 callbacks: {
                     onImageUpload: function(files, editor, welEditable) {
                         sendFile(files, this, welEditable); //에디터 이미지 업로드 처리
                     }
-                }
+                },
             });
+
+            $('#summernote').summernote('fontName', 'Gothic A1');
+            $('#summernote').summernote('lineHeight', 1);
         }
 
         $('#devIdTxtAttach').change(function (e) {
