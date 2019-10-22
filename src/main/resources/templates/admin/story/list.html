@@ -92,7 +92,7 @@
                         var orderNo = (list[i].orderNo)?list[i].orderNo:'';
                         var storySeq = list[i].storySeq;
                         var title = list[i].title;
-                        title=(title.length>15)?title.substring(0,15)+'..':title;
+                        title=(title.length>15)?title.substring(0,10)+'..':title;
                         html += '<div data-id="'+storySeq+'">';
                         html += '<span>'+orderNo+'</span><span><img src="'+filePath+'" width="50px;"></span><span class="txt_ellipsis">'+title+'</span>';
                         html += '</div>';

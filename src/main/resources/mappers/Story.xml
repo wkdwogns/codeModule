@@ -122,9 +122,10 @@
         FROM
             TB_STORY s
         WHERE
-            DEL_YN='N'
-            and VIEW_YN='Y'
-            and IMPORTANT_YN='Y'
+            s.DEL_YN='N'
+            and s.VIEW_YN='Y'
+            and s.IMPORTANT_YN='Y'
+            and s.ORDER_NO IS NOT NULL
             and date(s.VIEW_ST_DT) <![CDATA[ < ]]> now()
         ORDER BY s.ORDER_NO ASC
         limit 4
