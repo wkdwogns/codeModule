@@ -124,6 +124,14 @@ public class AstoryService {
                 }
             }
 
+            if( CommonUtil.isNotEmpty( req.getDelete() )){
+                for( String i : req.getDelete() ){
+                    int fileSeq = Integer.parseInt(i);
+                    DeleteStoryImgReq dReq = new DeleteStoryImgReq(fileSeq,"attach");
+                    this.deleteFile(dReq);
+                }
+            }
+
             if(CommonUtil.isNotEmpty(req.getEditorDelImg())){
                 adminFileService.setDeleteFileByEditor(req.getEditorDelImg(),configFile.getSelectCategory5());
             }

@@ -29,6 +29,8 @@ public class UpdateNoticeReq extends CommonReq {
     private Integer imgSeq;
 
     private MultipartFile[] file;
+    private ArrayList<String> delete;
+
     private MultipartFile img;
     private ArrayList<String> editorDelImg;
 }

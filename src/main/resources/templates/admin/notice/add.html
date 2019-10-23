@@ -106,8 +106,26 @@
             });
         }
 
+        var fileArr=[];
+        var deletedArr=[];
         $('#devIdTxtAttach').change(function (e) {
             fileCheck(e.target);
+            var files = e.target.files;
+
+            for(var i in files){
+                if (typeof files[i] != 'object') { continue; }
+                var rd = Math.floor(Math.random() * 100000) + 1;
+                var obj={
+                    fileSeq: 'T'+rd
+                    ,orgFileNm: files[i].name
+                }
+                $('#devIdTxtAttach').after(setFileDOM(obj,'attach'));
+                files[i].fileSeq=obj.fileSeq;
+                fileArr.push(files[i]);
+            }
+
+            $(e.target).val('');
+            console.log(fileArr);
         });
 
         $('.devCssBtnCancel').click(function(){
@@ -125,7 +143,6 @@
                 stat = 'update';
                 url = "/mapi/notice/edit";
                 data.append("seq", info );
-
             }
 
             var vi = [
@@ -165,10 +182,15 @@
             data.append("viewUnlimitYn", 'N' );
             data.append("editorDelImg", editorDelImg);
 
-            var f1 = $('#devIdTxtAttach')[0].files;
-            if(f1.length>0) {
-                for (var ii in f1) {
-                    data.append("file", f1[ii]);
+            if(fileArr.length>0) {
+                for (var ii in fileArr) {
+                    data.append("file", fileArr[ii]);
+                }
+            }
+
+            if(deletedArr.length>0) {
+                for (var ii in deletedArr) {
+                    data.append("delete", deletedArr[ii]);
                 }
             }
 
@@ -251,9 +273,10 @@
             var html = ''+
                 '<div id="fileNo'+fl.fileSeq+'" class="file">' +
                     '<input type="hidden" class="fileSeq" value="'+fl.fileSeq+'"/>'+
-                        '<a href="/api/file/download?fileSeq='+fl.fileSeq+'&category=3" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' ;
+                        '<a href="#self" style="margin-right: 30px;">'+fl.orgFileNm+'</a>' ;
+                        //api/file/download?fileSeq='+fl.fileSeq+'&category=3
                         if(type=='attach'){
-                            html+='<a onclick="deleteFile('+fl.fileSeq+',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>';
+                            html+='<a onclick="deleteFile(\''+fl.fileSeq+'\',\''+type+'\')"><img src="/front/images/common/btn_close_01.png" style="height: 15px;vertical-align: middle;"></a>';
                         }
                  html+='</div>';
 
@@ -262,23 +285,20 @@
 
         function deleteFile(no,type) {
             if(confirm('삭제하시겠습니까?')){
-                var info = tms.getParameterByName("info");
-                var params = {
-                    type:type
-                    , seq : info
-                    ,fileSeq:no
+
+                if(no.indexOf('T')==-1){
+                    deletedArr.push(no);
+                }else{
+                    fileArr=fileArr.filter(function(v){
+                        if(v.fileSeq==no){
+                            return false;
+                        }
+                        return true;
+                    })
                 }
 
-                tms.ajaxDeleteHelper('/mapi/notice/deleteFile', JSON.stringify(params), null, function(rs) {
-                    if(rs.code==0){
-                        alert('삭제되었습니다.');
-                        $('#fileNo'+no).remove();
-                        if( $('#repImg .file').length==0 ){$('#imgSeq').val('');}
-                        if( $('#attach .file').length==0 ){$('#attachSeq').val('');}
-                    }else{
-                        alert('오류가 있습니다.')
-                    }
-                });
+                $('#fileNo'+no).remove();
+                console.log(deletedArr);
             }
         }
 

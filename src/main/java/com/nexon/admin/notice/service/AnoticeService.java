@@ -95,25 +95,6 @@ public class AnoticeService {
         ResponseHandler<?> result = new ResponseHandler<>();
 
         try{
-/*
-            SelectNoticeDetailReq dtlReq = new SelectNoticeDetailReq();
-            dtlReq.setSeq(req.getSeq());
-            SelectNoticeDetailRes res = adminNoticeDao.selectNoticeDetail(dtlReq);
-
-            //중요 여부 2개 제한 : 노출 2개이고 파라미터 및 상세데이터 체크
-            if(checkNoticeViewCnt() && "Y".equals(req.getViewYn()) && "Y".equals(req.getImportantYn()) && !req.getViewYn().equals(res.getViewYn())) {
-                result.setReturnCode(ReturnType.RTN_TYPE_DATA_EXISTS);
-                return result;
-            }*/
-
-//            if(req.getImg()!=null) {
-//                if(req.getImgSeq()!=null){
-//                    FileDeleteReq fr = adminFileService.setDeleteFile(req.getImgSeq(),configFile.getSelectCategory3());
-//                    fileService.deleteFiles(fr);
-//                }
-//                int igs = adminFileService.setImg(req.getImg() , configFile.getSelectCategory3());
-//                req.setImgGrpSeq(igs);
-//            }
 
             if(req.getFile()!=null) {
                 int fgs = adminFileService.setFile(req.getFile() , configFile.getSelectCategory3());
@@ -128,6 +109,14 @@ public class AnoticeService {
                     adminNoticeDao.deleteFileGrpSeq(map);
                 }else{
                     req.setFileGrpSeq(fgs);
+                }
+            }
+
+            if( CommonUtil.isNotEmpty( req.getDelete() )){
+                for( String i : req.getDelete() ){
+                    int fileSeq = Integer.parseInt(i);
+                    DeleteNoticeImgReq dReq = new DeleteNoticeImgReq(fileSeq,"attach");
+                    this.deleteFile(dReq);
                 }
             }
 
