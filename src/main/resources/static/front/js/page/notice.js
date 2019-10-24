@@ -100,7 +100,7 @@ var getDetail = function(no,p,n) {
     };
 
     tms.ajaxGetHelper('/api/notice/detail', params, null, function(rs) {
-console.log(rs);
+
         if(rs.code==0){
             var title = rs.data.title;
             var viewStDt =rs.data.viewStDt;
@@ -118,7 +118,8 @@ console.log(rs);
                     '</a>'+
                     '</li>');
             }
-            $('#popup_all .popup_view .cont').append( tms.convertHtml(contents) );
+            $('#popup_all .popup_view .contentHtml').html( contents );
+            //$('#popup_all .popup_view .contentHtml').html( tms.convertHtml(contents) );
 
             var prevS = rs.data.prevNotice;
             var nextS = rs.data.nextNotice;

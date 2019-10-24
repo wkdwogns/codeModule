@@ -120,8 +120,8 @@ var getDetail = function(no,viewStDt,p,n) {
                     '</a>'+
                     '</li>');
             }
-
-            $('#popup_all .popup_view .cont').append(contents);
+            $('#popup_all .popup_view .contentHtml').html( contents );
+            //$('#popup_all .popup_view .cont').html(contents);
 
             var prevS = rs.data.prevStory;
             var nextS = rs.data.nextStory;
