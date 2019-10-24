@@ -19,6 +19,11 @@
 	background-size: 134px auto;
 }
 
+.sub_about .section_03 .map iframe{
+	width: 670px;
+	height: 510px;
+}
+
 @media screen and (max-width: 750px) {
 	.popup_view img{width: 100% !important;}
 	#wrap.en #header .logo a{
@@ -39,5 +44,9 @@
 	}
 	#main_contents .section_02 .list ul {display: flex;flex-wrap: wrap}
 	#main_contents .section_02 .list ul li{float: none;}
-}
 
+	.sub_about .section_03 .map iframe{
+		width: 100%;
+		height: 255px;
+	}
+}

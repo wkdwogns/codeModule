@@ -133,17 +133,17 @@ var getDetail = function(no,viewStDt,p,n) {
                 $('.prevS').attr('onclick','');
             }else{
                 $('.prevS .img img').attr('src',prevS.filePath);
-                $('.prevS .name').text(prevS.title);
+                $('.prevS .name').html(prevS.title);
                 $('.prevS .date').text(prevS.viewStDt);
                 $('.prevS').attr('onclick','getDetail2('+prevS.storySeq+')');
                 BtnPrev.show();
             }
             if(nextS==null){
-                BtnNext.hide()
+                BtnNext.hide();
                 $('.nextS').attr('onclick','');
             }else{
                 $('.nextS .img img').attr('src',nextS.filePath);
-                $('.nextS .name').text(nextS.title);
+                $('.nextS .name').html(nextS.title);
                 $('.nextS .date').text(nextS.viewStDt);
                 $('.nextS').attr('onclick','getDetail2('+nextS.storySeq+')');
                 BtnNext.show();
