@@ -269,46 +269,21 @@ public class AstoryService {
         List<TopStoryVO> list = aStoryDao.getTopStory(new SelectTopStoryReq());
 
         if(Yn.equals("Y")){
-            if ( list.size()>4 ){
 
-                this.setOrderNo(1,seq);
+            this.setOrderNo(1,seq);
 
-                for(TopStoryVO vo : list ){
-                    if(CommonUtil.isEmpty(vo.getOrderNo())){
-                        continue;
-                    }
-                    if( vo.getOrderNo().equals("4") ){
-                        this.setOrderNo(null,vo.getStorySeq()+"");
-                    }else{
-                        String ord = vo.getOrderNo();
-                        this.setOrderNo(Integer.parseInt(ord)+1,vo.getStorySeq()+"");
-                    }
+            for(TopStoryVO vo : list ){
+                if(CommonUtil.isEmpty(vo.getOrderNo())){
+                    continue;
                 }
-
-            }else{
-                int i=1;
-                while(i<5){
-
-                    boolean f=true;
-                    for(TopStoryVO vo : list ){
-                        if(vo.getOrderNo()==null){
-                            continue;
-                        }
-                        int ord = Integer.parseInt(vo.getOrderNo());
-                        if(i==ord){
-                            f=false;
-                            break;
-                        }
-                    }
-
-                    if(f){
-                        this.setOrderNo(i,seq);
-                        break;
-                    }else{
-                        i++;
-                    }
+                if( vo.getOrderNo().equals("4") ){
+                    this.setOrderNo(null,vo.getStorySeq()+"");
+                }else{
+                    String ord = vo.getOrderNo();
+                    this.setOrderNo(Integer.parseInt(ord)+1,vo.getStorySeq()+"");
                 }
             }
+
         }else{
             if(flag.equals("update")){
 
