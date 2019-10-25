@@ -73,7 +73,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #popup_all .popup_view .control > div:nth-child(1) .tit {color:#fa7921; border-top:solid 3px #fa7921;}
 #popup_all .popup_view .control > div:nth-child(2) .tit {color:#03b5aa; border-top:solid 3px #03b5aa; text-align:right;}
 #popup_all .popup_view .btn_close {display:block; width:64px; height:64px; position:absolute; right:-30px; top:-30px; background:url(../../images/common/btn_close_02.png) 0 0 no-repeat;}
-#popup_all .popup_view .article_contents {padding: 50px 0 80px 0; font-size:18px; line-height:28px; color:#2e2e2e;}
+#popup_all .popup_view .article_contents {padding: 50px 0 80px 0; font-size:18px; line-height:28px; color:#2e2e2e;} 
 #popup_all .popup_view .article_contents .img_box {margin-bottom:25px;}
 #popup_all .popup_view .article_contents .img_box img {width:100%;}
 
@@ -113,7 +113,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #main_contents .section_03 .list ul li {width:480px; float:left; margin-right:60px; margin-bottom:30px;}
 #main_contents .section_03 .list ul li:nth-child(even) {margin-top:35px;}
 #main_contents .section_03 .list ul li .tit {margin-bottom:10px; font-size:36px; font-weight:900; word-break:break-all;}
-#main_contents .section_03 .list ul li .tit .no {display:inline-block; width:37px; height:37px; line-height:38px; text-align:center; color:#fff; font-size:24px; margin-left:10px; position:relative; top:-6px;}
+#main_contents .section_03 .list ul li .tit .no {display:inline-block; width:37px; height:37px; padding:10px 0 0 0; text-align:center; color:#fff; font-size:24px; margin-left:10px; position:relative; top:-6px; box-sizing:border-box;}
 #main_contents .section_03 .list ul li .tit .no.blue {background-color:#00a0e0;}
 #main_contents .section_03 .list ul li .tit .no.mint {background-color:#03b5aa;}
 #main_contents .section_03 .list ul li .tit .no.lime {background-color:#c2d502;}
@@ -123,20 +123,20 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 #main_contents .section_03 .list ul li .btn_more {display:block; width:150px; height:48px; line-height:50px; border:solid 1px #1c1c1b; text-align:center; font-size:14px;}
 #main_contents .section_03 .list ul li .btn_more span {display:inline-block; padding-right:40px; background:url(../../images/common/ico_01.png) right center no-repeat;}
 @keyframes character_ani_01 {
-	from {right:-1000px;}
-	to {right:450px;}
+  from {right:-1000px;}
+  to {right:450px;}
 }
 @keyframes character_ani_02 {
-	from {right:-1000px;}
-	to {right:285px;}
+  from {right:-1000px;}
+  to {right:285px;}
 }
 @keyframes character_ani_03 {
-	from {right:-1000px;}
-	to {right:137px;}
+  from {right:-1000px;}
+  to {right:137px;}
 }
 @keyframes character_ani_04 {
-	from {right:-1000px;}
-	to {right:0px;}
+  from {right:-1000px;}
+  to {right:0px;}
 }
 
 /* Common */
@@ -147,7 +147,6 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 .article_story_tamplete1 .img_box1 {padding: 50px 0; }
 .article_story_tamplete1 .img_box1 img {margin: 0 3px;}
 
-.article_story_tamplete1 {}
 .article_story_tamplete1 .temp_head {font-size:20px; line-height:26px; color:#1c1c1b; text-align:center; margin-bottom: 40px; }
 .article_story_tamplete1 .temp_title {font-size:32px; line-height:40px; color:#1c1c1b; font-weight:bold; text-align:center; margin-bottom: 10px; }
 .article_story_tamplete1 .temp_title_date {font-size:22px; line-height:28px; color:#1c1c1b; text-align:center; margin-bottom: 40px; }
@@ -162,6 +161,8 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 .article_story_tamplete1 .temp_table tbody td {padding: 10px 20px; border: solid 1px #d3d3d3; text-align:right; font-size:16px; line-height:20px; color:#1c1c1b; font-weight:normal; }
 .article_story_tamplete1 .temp_table tbody td strong {font-weight:bold; }
 .article_story_tamplete1 .temp_comment {font-size:16px; line-height:30px; color:#999999; text-align:center; text-align:left; }
+
+
 
 
 /* Sub */
@@ -254,14 +255,14 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 
 .sub_view {width:100%;}
 .sub_view .inner_box {width:100%; max-width:1020px; padding:100px 0; margin: 0 auto; position:relative;}
-.sub_view .article_top {padding-bottom:25px; padding-right:120px; position:relative; border-bottom: solid 2px #2e2e2e;}
+.sub_view .article_top {padding-bottom:25px; padding-right:120px; position:relative; border-bottom: solid 2px #2e2e2e;} 
 .sub_view .article_top .date {position:absolute; right:0px; top:0px; font-size:20px; line-height:24px; color:#999999;}
 .sub_view .article_top .date em {display:inline-block; margin-left:6px; padding-left:12px; position:relative;}
 .sub_view .article_top .date em:after {content:""; display:block; width:1px; height:22px; background-color:#d5d5d5; position:absolute; left:0px; top:50%; margin-top:-11px;}
 .sub_view .article_top .cate {display:inline-block; padding-right:20px; margin-right:14px; font-size:24px; line-height:30px; font-weight:bold; color:#4b89dc; position:relative;}
 .sub_view .article_top .cate:after {content:""; display:block; width:1px; height:22px; background-color:#d5d5d5; position:absolute; right:0px; top:50%; margin-top:-11px;}
 .sub_view .article_top .title {display:inline-block; font-size:24px; line-height:30px; font-weight:bold; color:#2e2e2e;}
-.sub_view .article_contents {border-bottom: solid 1px #2e2e2e;}
+.sub_view .article_contents {border-bottom: solid 1px #2e2e2e;} 
 .sub_view .article_contents .question_box {font-size:18px; line-height:28px; color:#2e2e2e; padding-top: 30px; padding-bottom: 80px;  border-bottom: solid 1px #eaeaea; min-height:320px; position:relative; }
 .sub_view .article_contents .question_box .btns {text-align:right; position:absolute; left:0px; bottom:20px; width: 100%; }
 .sub_view .article_contents .question_box .btns a {display:inline-block; width: 100px; height: 40px; background-color:#4b89dc; font-size:16px; font-weight:700; line-height:40px; color:#fff; text-align:center; }
@@ -340,7 +341,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	#popup_all .popup_view .control > div:nth-child(1) .tit {border-top:solid 2px #fa7921;}
 	#popup_all .popup_view .control > div:nth-child(2) .tit {border-top:solid 2px #03b5aa;}
 	#popup_all .popup_view .btn_close {width:32px; height:32px; right:-10px; top:-10px; background-size:32px 32px;}
-	#popup_all .popup_view .article_contents {padding:15px 0 30px 0; font-size:12px; line-height:20px;}
+	#popup_all .popup_view .article_contents {padding:15px 0 30px 0; font-size:12px; line-height:20px;} 
 	#popup_all .popup_view .article_contents .img_box {margin-bottom: 12px;}
 	#popup_all .popup_view .article_contents .img_box img {width:100%;}
 
@@ -375,27 +376,27 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	#main_contents .section_03 .list ul li {width:100%; margin-right:0; margin-bottom:40px;}
 	#main_contents .section_03 .list ul li:nth-child(even) {margin-top:0;}
 	#main_contents .section_03 .list ul li .tit {padding:0 15px; margin-bottom:10px; font-size:25px;}
-	#main_contents .section_03 .list ul li .tit .no {width:30px; height:30px; line-height:31px; font-size:18px; margin-left:5px; top:-3px;}
+	#main_contents .section_03 .list ul li .tit .no {width:30px; height:30px; font-size:18px; padding:8px 0 0 0; margin-left:5px; top:-3px;}
 	#main_contents .section_03 .list ul li .txt {padding:0 15px; margin-bottom:15px; font-size:12px; line-height:18px;}
 	#main_contents .section_03 .list ul li .img {width:100%; height:auto; margin-bottom:15px;}
 	#main_contents .section_03 .list ul li .img img {width:100%;}
 	#main_contents .section_03 .list ul li .btn_more {margin-left:15px; width:125px; height:40px; line-height:42px; font-size:12px;}
 	#main_contents .section_03 .list ul li .btn_more span {padding-right:23px; background-size:12px auto;}
 	@keyframes character_ani_01_m {
-		from {right:-1000px;}
-		to {right:220px;}
+	  from {right:-1000px;}
+	  to {right:220px;}
 	}
 	@keyframes character_ani_02_m {
-		from {right:-1000px;}
-		to {right:142px;}
+	  from {right:-1000px;}
+	  to {right:142px;}
 	}
 	@keyframes character_ani_03_m {
-		from {right:-1000px;}
-		to {right:69px;}
+	  from {right:-1000px;}
+	  to {right:69px;}
 	}
 	@keyframes character_ani_04_m {
-		from {right:-1000px;}
-		to {right:0px;}
+	  from {right:-1000px;}
+	  to {right:0px;}
 	}
 
 	/* Common */
@@ -505,7 +506,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 
 	.sub_view {width:100%;}
 	.sub_view .inner_box {padding:25px 15px; box-sizing:border-box;}
-	.sub_view .article_top {padding-bottom:12px; padding-right:0px; position:relative; border-bottom:solid 2px #2e2e2e;}
+	.sub_view .article_top {padding-bottom:12px; padding-right:0px; position:relative; border-bottom:solid 2px #2e2e2e;} 
 	.sub_view .article_top .date {position:static; font-size:11px; line-height:18px;}
 	.sub_view .article_top .date em {margin-left:3px; padding-left:6px;}
 	.sub_view .article_top .date em:after {height:10px; margin-top:-5px;}
