@@ -104,6 +104,9 @@ var getDetail = function(no,viewStDt,p,n) {
     tms.ajaxGetHelper('/api/story/detail', params, null, function(rs) {
 
         if(rs.code==0){
+            layer_CLOSE('.popup_view');
+            $('.popup_view').scrollTop(0);
+
             var title = rs.data.title;
             var viewStDt =rs.data.viewStDt;
             var contents = rs.data.contents;
