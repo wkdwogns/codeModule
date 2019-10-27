@@ -692,7 +692,7 @@ box-sizing:border-box;
 }
 
 .ell{
-    width: 120px;
+    width: 350px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
