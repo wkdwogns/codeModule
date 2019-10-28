@@ -8,7 +8,7 @@
 		<element name="body" disable="true" />
 		<element name="form" disable="true" />
 		<element name="html" disable="true" />
-		<element name="iframe" disable="true" />
+		<element name="iframe" disable="false" />
 		<element name="meta" disable="true" />
 		<element name="script" disable="true" />
 		<element name="style" disable="true" />
