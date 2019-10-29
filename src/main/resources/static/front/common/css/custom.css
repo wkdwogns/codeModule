@@ -6,17 +6,15 @@
 	background-size: 185px auto;
 }
 #wrap.en #footer .logo_box ul li .logo_01 {
-	width: 234px;
+	width: 260px;
 	height: 41px;
 	background: url(../../images/common/footer_logo_01_eng.png) 0 0 no-repeat;
-	background-size: 234px auto;
 }
 
 #wrap.en #footer .logo_box ul li .logo_02 {
 	width: 134px;
 	height: 47px;
 	background: url(../../images/common/footer_logo_02_eng.png) 0 0 no-repeat;
-	background-size: 134px auto;
 }
 
 .sub_about .section_03 .map iframe{
@@ -28,19 +26,19 @@
 	.popup_view img{width: 100% !important;}
 	#wrap.en #header .logo a{
 		display: block;
-		width: 130px;
+		width: 160px;
 		height: 50px;
-		background-size: 130px auto;
+		background-size: 160px auto;
 	}
 	#wrap.en #footer .logo_box ul li .logo_01 {
 		width: 154px;
 		height: 27px;
-		background-size: 154px 27px;
+		background-size: 154px auto;
 	}
 	#wrap.en #footer .logo_box ul li .logo_02 {
 		width: 88px;
 		height: 32px;
-		background-size: 88px 32px;
+		background-size: 88px auto;
 	}
 	#main_contents .section_02 .list ul {display: flex;flex-wrap: wrap}
 	#main_contents .section_02 .list ul li{float: none;}
