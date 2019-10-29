@@ -441,7 +441,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 	.sub_about .section_02 .img_03:after {width:399px; height:342px; right:-169px; top:auto; bottom:0; background-size:399px 342px;}
 	.sub_about .section_02 .img_04:after {width:398px; height:340px; right:-15px; top:auto; bottom:0; background-size:398px 340px;}
 	.sub_about .section_02 .list ul li .date {font-size:12px;}
-	.sub_about .section_02 .list ul li ul li {margin-bottom:20px; font-size:12px; line-height:18px;}
+	.sub_about .section_02 .list ul li ul li {margin-bottom:20px; font-size:12px; line-height:16px;}
 	.sub_about .section_02 .list ul li ul li br {display:none;}
 	.sub_about .section_03 {min-height:auto; padding-top:0; margin-bottom:55px;}
 	.sub_about .section_03 .title {padding:0 15px; margin-bottom:25px; font-size:12px;}
