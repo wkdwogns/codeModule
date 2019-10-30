@@ -9,12 +9,14 @@
 	width: 260px;
 	height: 41px;
 	background: url(../../images/common/footer_logo_01_eng.png) 0 0 no-repeat;
+	background-size: 260px 41px;
 }
 
 #wrap.en #footer .logo_box ul li .logo_02 {
-	width: 134px;
-	height: 47px;
+	width: 129px;
+	height: 40px;
 	background: url(../../images/common/footer_logo_02_eng.png) 0 0 no-repeat;
+	background-size: 129px 40px;
 }
 
 .sub_about .section_03 .map iframe{
