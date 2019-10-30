@@ -57,7 +57,7 @@ var getList = function(params) {
             } else {
                 tableType2("#story_list", result.data.list, contents, {})
                 var len = $('.sub_news .story_list ul li').length;
-                if( (len % 4) == 1 ){
+                if( (len % 3) == 1 ){
                     $('.sub_news .story_list ul li:last-child').css({'float':'none'});
                 }
             }
