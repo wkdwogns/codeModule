@@ -156,7 +156,7 @@ button {border:none; outline:none; background-color:transparent; cursor:pointer;
 .sub_about .section_02 .img_02:after {width:743px; height:636px; right:-445px; top:110px; background:url(../../../images/sub/about_02.png) 0 0 no-repeat;}
 .sub_about .section_02 .img_03:after {width:711px; height:638px; right:-445px; top:-180px; background:url(../../../images/sub/about_03.png) 0 0 no-repeat;}
 .sub_about .section_02 .img_04:after {width:651px; height:636px; right:-445px; top:-225px; background:url(../../../images/sub/about_04.png) 0 0 no-repeat;}
-.sub_about .section_02 .list ul li .date {margin-bottom:10px; font-size:20px; font-weight:900;}
+.sub_about .section_02 .list ul li .date {margin: 40px 0px 10px 0px; font-size:20px; font-weight:900;}
 .sub_about .section_02 .list ul li ul li {margin-bottom:20px; font-size:20px; line-height:24px;}
 .sub_about .section_03 {min-height:510px; padding-top:20px; margin-bottom:110px; position:relative; box-sizing:border-box;}
 .sub_about .section_03 .title {margin-bottom:35px; font-size:14px; font-weight:400; letter-spacing:0.25em;}

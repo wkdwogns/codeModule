@@ -141,6 +141,7 @@ var setting = {
 }
 
 function pagingType1(info) {
+    defineAssign();
     var obj = Object.assign(setting, info);
 
     var totalData = obj.totalCnt;           // 총 데이터 수
@@ -198,6 +199,7 @@ function pagingType1(info) {
 }
 
 function pagingType2(info) {
+    defineAssign();
     var obj = Object.assign(setting, info);
 
     var totalData = obj.totalCnt;           // 총 데이터 수
@@ -334,7 +336,6 @@ function tableType3(id, data, info, colspan, noMessage, tableWidth) {
         });
     }
 
-
     //paging
     if (info.paging != null && info.paging != undefined) {
         var type = info.paging.type;
@@ -343,6 +344,7 @@ function tableType3(id, data, info, colspan, noMessage, tableWidth) {
 }
 
 function pagingType3(info) {
+    defineAssign();
     var obj = Object.assign(setting, info);
 
     var totalData = obj.totalCnt;           // 총 데이터 수
@@ -387,4 +389,36 @@ function pagingType3(info) {
         html += '<a href="#self" class="page_next" onclick="' + fn + '(' + next + ')"><span class="hide">Next</span></a>';
 
     $(id).html(html);
+}
+
+function defineAssign() {
+    if (typeof Object.assign != 'function') {
+        // Must be writable: true, enumerable: false, configurable: true
+        Object.defineProperty(Object, "assign", {
+            value: function assign(target, varArgs) { // .length of function is 2
+                'use strict';
+                if (target == null) { // TypeError if undefined or null
+                    throw new TypeError('Cannot convert undefined or null to object');
+                }
+
+                var to = Object(target);
+
+                for (var index = 1; index < arguments.length; index++) {
+                    var nextSource = arguments[index];
+
+                    if (nextSource != null) { // Skip over if undefined or null
+                        for (var nextKey in nextSource) {
+                            // Avoid bugs when hasOwnProperty is shadowed
+                            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                                to[nextKey] = nextSource[nextKey];
+                            }
+                        }
+                    }
+                }
+                return to;
+            },
+            writable: true,
+            configurable: true
+        });
+    }
 }
