@@ -280,7 +280,9 @@ public class AstoryService {
         if(Yn.equals("Y")){
             boolean updateYn=false;
 
+            //n에서 y으로 바뀔때
             if(flag.equals("update_1")){ updateYn=true; }
+            //등록시
             if(flag.equals("insert")){ updateYn=true; }
 
             if(updateYn){
@@ -301,6 +303,7 @@ public class AstoryService {
 
         }else{
 
+            //y에서 n으로 바뀔때
             if(flag.equals("update_1")){
                 this.setOrderNo(null,seq);
                 //삭제되고 기존게 앞으로 정렬
