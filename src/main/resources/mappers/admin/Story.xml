@@ -124,7 +124,6 @@
             , VIEW_YN=#{viewYn}
             , VIEW_UNLIMIT_YN=#{viewUnlimitYn}
             , VIEW_ST_DT=#{viewStDt}
-            , ORDER_NO=#{orderNo}
             <if test="fileGrpSeq!=null and fileGrpSeq!=''">
                 , FILE_GRP_SEQ=#{fileGrpSeq}
             </if>

@@ -136,9 +136,18 @@ public class AstoryService {
                 adminFileService.setDeleteFileByEditor(req.getEditorDelImg(),configFile.getSelectCategory5());
             }
 
+            String update = "update";
+
+            SelectStoryDetailReq sReq = new SelectStoryDetailReq();
+            sReq.setSeq(req.getSeq());
+            SelectStoryDetailRes res = aStoryDao.selectStoryDetail(sReq);
+            if ( !res.getImportantYn().equals( req.getImportantYn() ) ){
+                update="update_1";
+            }
+
             aStoryDao.updateStory(req);
 
-            this.updateOrderNo("update",req.getImportantYn(),req.getSeq());
+            this.updateOrderNo(update ,req.getImportantYn() ,req.getSeq());
 
             result.setReturnCode(ReturnType.RTN_TYPE_OK);
         } catch (Exception e) {
@@ -269,29 +278,36 @@ public class AstoryService {
         List<TopStoryVO> list = aStoryDao.getTopStory(new SelectTopStoryReq());
 
         if(Yn.equals("Y")){
+            boolean updateYn=false;
 
-            this.setOrderNo(1,seq);
+            if(flag.equals("update_1")){ updateYn=true; }
+            if(flag.equals("insert")){ updateYn=true; }
 
-            for(TopStoryVO vo : list ){
-                if(CommonUtil.isEmpty(vo.getOrderNo())){
-                    continue;
-                }
-                if( vo.getOrderNo().equals("4") ){
-                    this.setOrderNo(null,vo.getStorySeq()+"");
-                }else{
-                    String ord = vo.getOrderNo();
-                    this.setOrderNo(Integer.parseInt(ord)+1,vo.getStorySeq()+"");
+            if(updateYn){
+                this.setOrderNo(1,seq);
+
+                for(TopStoryVO vo : list ){
+                    if(CommonUtil.isEmpty(vo.getOrderNo())){
+                        continue;
+                    }
+                    if( vo.getOrderNo().equals("4") ){
+                        this.setOrderNo(null,vo.getStorySeq()+"");
+                    }else{
+                        String ord = vo.getOrderNo();
+                        this.setOrderNo(Integer.parseInt(ord)+1,vo.getStorySeq()+"");
+                    }
                 }
             }
 
         }else{
-            if(flag.equals("update")){
 
+            if(flag.equals("update_1")){
+                this.setOrderNo(null,seq);
                 //삭제되고 기존게 앞으로 정렬
                 int ord=1;
                 for(TopStoryVO vo : list ){
                     if( vo.getStorySeq()==Integer.parseInt(seq) ){
-                        this.setOrderNo(null,seq);
+
                     }else{
                         this.setOrderNo(ord,vo.getStorySeq()+"");
                         ord++;
@@ -299,6 +315,7 @@ public class AstoryService {
                 }
 
             }
+
         }
     }
 
