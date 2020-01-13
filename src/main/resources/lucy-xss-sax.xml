@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<config xmlns="http://www.nhncorp.com/lucy-xss"
-	extends="lucy-xss-superset-sax.xml">
+<config xmlns="http://www.nhncorp.com/lucy-xss" extends="lucy-xss-superset-sax.xml">
 	<elementRule>
 		<element name="applet" disable="true" />
 		<element name="base" disable="true" />

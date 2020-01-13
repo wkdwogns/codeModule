@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>투도스</title>
+<title></title>
 <meta name="generator" content="">
 <meta name="author" content="">
 <meta name="keywords" content="">
@@ -30,7 +30,6 @@
 								<td height="50" bgcolor="#e8e8e8" style="padding:0 10px; font-size:16px; font-weight:bold">이메일 인증 번호</td>
 								<td valign="top" style="padding:15px; line-height:1.4;">${emailVerify}</td>
 							</tr>
-
 						</tbody>
 					</table>
 				</td>

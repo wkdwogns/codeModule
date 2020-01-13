@@ -1,39 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nexon.comCode.dao.ComDao">
-    <select id="selectComDtl" parameterType="com.nexon.comCode.dto.req.ComCodeReq" resultType="com.nexon.comCode.dto.model.ComCodeVO">
-      select MST_CD
-          , DTL_CD
-          , DTL_NM
-          , USE_VAL1
-          , USE_VAL2
-      from TB_COM_DTL
-     where MST_CD IN
-        <foreach collection="mstCdArr" item="mstCd"  open="(" close=")" separator=",">
-          #{mstCd}
-        </foreach>
-      and IFNULL(DEL_YN, 'N') = 'N'
-      and IFNULL(USE_YN, 'Y') = 'Y'
-    ORDER BY SORT_NO, DTL_CD
-    </select>
-
-    <select id="selectComDtlList" parameterType="com.nexon.comCode.dto.req.ComCodeListReq" resultType="com.nexon.comCode.dto.model.ComCodeVO">
-        SELECT MST_CD
-            , DTL_CD
-            , DTL_NM
-            , USE_VAL1
-            , USE_VAL2
-        FROM TB_COM_DTL
-        WHERE MST_CD = #{mstCd}
-        <if test="@com.nexon.common.CheckData@isNotEmpty(dtlCdList)">
-            AND DTL_CD IN
-            <foreach collection="dtlCdList" item="dtlCd"  open="(" close=")" separator=",">
-                #{dtlCd}
-            </foreach>
-        </if>
-        AND IFNULL(DEL_YN, 'N') = 'N'
-        AND IFNULL(USE_YN, 'Y') = 'Y'
-    </select>
+<mapper namespace="com.jjh.comCode.dao.ComDao">
 
 </mapper>

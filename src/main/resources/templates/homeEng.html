@@ -1,96 +1,15 @@
 <!DOCTYPE html>
 <html xml:lang="ko" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/eng/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        @media screen and (min-width: 750px){
-            #main_contents .section_02 .list ul li a span.tit{
-                width:315px;
-            }
-        }
 
-        .two-line{
-            /* 한 줄 자르기 */
-            width: 100%;
-            overflow: hidden !important;
-            text-overflow: ellipsis;
-
-            /* 여러 줄 자르기 추가 스타일 */
-            white-space: normal;
-            line-height: 1.2;
-
-            text-align: left;
-            word-wrap: break-word;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-    </style>
     <script th:src="@{/front/js/page/index.js}"></script>
 </head>
 <body>
 <div class="content" layout:fragment="contents">
 
-    <section id="container">
+    <section>
 
-        <div id="main_contents">
-            <div class="inner_box">
-                <div class="section_01">
-                    <h2 class="title">A <strong>head<span>start</span></strong> <br/>
-                        for our future <br/>
-                        generation</h2>
-                    <p class="txt">Enabling youth to learn, create, and dream</p>
-                    <div class="character">
-                        <span class="c_01"></span>
-                        <span class="c_02"></span>
-                        <span class="c_03"></span>
-                        <span class="c_04"></span>
-                    </div>
-                </div>
-
-                <div class="section_03">
-                    <h2 class="title">OUR INITIATIVES</h2>
-                    <div class="list">
-                        <ul>
-                            <li>
-                                <p class="tit">Technology <span class="no blue">1</span></p>
-                                <p class="txt">Nexon Foundation is building the groundwork for future generations to
-                                    grow into creative talents in the field of software and will continue to
-                                    identify outstanding youths with potential in this very realm.</p>
-                                <span class="img"><img src="/front/images/main/business_01.jpg" alt="" /></span>
-                                <a href="/page/eng/business1?info=Tech" class="btn_more"><span>See projects</span></a>
-                            </li>
-                            <li>
-                                <p class="tit">Health <span class="no mint">1</span></p>
-                                <p class="txt">Nexon Foundation supports the establishment of rehabilitation hospitals
-                                    and backing long-term self-reliance so that children who are in need of
-                                    rehabilitation can properly receive the right treatment in a timely manner.​</p>
-                                <span class="img"><img src="/front/images/main/business_02.jpg" alt="" /></span>
-                                <a href="/page/eng/business1?info=Health" class="btn_more"><span>See projects</span></a>
-                            </li>
-                            <li>
-                                <p class="tit">Culture <span class="no lime">3</span></p>
-                                <p class="txt">Nexon Foundation helps children to gain knowledge and let them
-                                    understand the joy of learning through books. In addition,
-                                    Nexon Foundation introduces various cultural content to our society and
-                                    help children and teenagers to easily access those materials. </p>
-                                <span class="img"><img src="/front/images/main/business_03.jpg" alt="" /></span>
-                                <a href="/page/eng/business1?info=Culture" class="btn_more"><span>See projects</span></a>
-                            </li>
-                            <li>
-                                <p class="tit">Play <span class="no orange">1</span></p>
-                                <p class="txt">Nexon Foundation helps children around the globe to develop their
-                                    creativity through ‘play’, and nurture them to grow into changemakers.
-                                    Children are invited to the world beyond their imagination via brick,
-                                    the toy that can make anything out of nothing.</p>
-                                <span class="img"><img src="/front/images/main/business_04.jpg" alt="" /></span>
-                                <a href="/page/eng/business1?info=Play" class="btn_more"><span>See projects</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div><!-- id : main_contents -->
-    </section><!-- id : main_container -->
+    </section>
 
     <section id="popup_all">
         <div class="popup_view" style="display: none">

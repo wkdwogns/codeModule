@@ -6,4 +6,5 @@ mvnw
 mvnw.cmd
 target/
 nexonfoundation.iml
+main.iml
 .DS_Store
